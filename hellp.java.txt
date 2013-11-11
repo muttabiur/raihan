@@ -4,7 +4,7 @@ public class Test {
 public static void main(String args[]){
 
 
-   System.out.println("Sucking git does not work !!! ) ;
+   System.out.println("Sucking git does  work !!! ) ;
 }
 
 }
