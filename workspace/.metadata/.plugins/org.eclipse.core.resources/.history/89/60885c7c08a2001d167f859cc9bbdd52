@@ -1,0 +1,245 @@
+package AliLowerUpper;
+
+import java.io.*;
+import java.util.*;
+
+public class Orthogonal_List {
+
+	// public Element element = new Element();
+	public ArrayList<Integer> costs = new ArrayList<Integer>();
+	public ArrayList<ArrayList<Integer>> columns = new ArrayList<ArrayList<Integer>>();
+	public ArrayList<ArrayList<Element>> OrthogonalList = new ArrayList<ArrayList<Element>>();
+
+	public Orthogonal_List() {
+		// TODO Auto-generated constructor stub
+
+	}
+
+	public void buildList(String fileName) {
+		String fName = fileName;
+		FileInputStream finStream;
+		String strLine;
+		int numberOfRows = 0;
+		int numberOfColumns = 0;
+
+		try {
+			// create the streams required to read from the input file
+
+			finStream = new FileInputStream(fName);
+			DataInputStream in = new DataInputStream(finStream);
+			BufferedReader buffer = new BufferedReader(
+					new InputStreamReader(in));
+			// read the first line that contains the number of rows and columns
+			strLine = buffer.readLine().trim();
+			System.out.println(strLine);
+			// extract the number of rows and save it in numberOfRows
+			numberOfRows = Integer.valueOf((strLine.substring(0, strLine
+					.indexOf(' '))));
+			// extract the number of columns and save it in numberOfCoulmns
+			numberOfColumns = Integer.valueOf((strLine.substring((strLine
+					.indexOf(' ')) + 1, strLine.length())));
+			/*
+			 * read the cost of all the variables from the file and store them
+			 * in an arraylist (costs). The number of variables and accordingly
+			 * the number of their costs is equal to the number of columns.
+			 */
+			int readSoFar = 0;
+			int value = 0;
+			while (readSoFar < numberOfColumns) {
+				strLine = buffer.readLine().trim();
+				strLine = strLine + ' ';
+				while (strLine.length() > 0) {
+					value = Integer.valueOf((strLine.substring(0, strLine
+							.indexOf(' '))));
+					costs.add(value);
+					++readSoFar;
+					strLine = strLine.substring((strLine.indexOf(' ')) + 1,
+							strLine.length());
+
+				}
+
+			}
+
+			/*
+			 * Now read the n elements that cover each of the m rows of the
+			 * orthogonal list. List "columns" is also built simultaneously for
+			 * creating vertical links afterwards
+			 */
+			/*
+			 * Initialize the arralist "columns"
+			 */
+			for (int i = 0; i < numberOfColumns; ++i) {
+				ArrayList<Integer> dummy = new ArrayList<Integer>();
+				columns.add(dummy);
+			}
+			int numberOfElements = 0;
+			int incidentColumn = 0;
+			Element e;
+
+			for (int i = 0; i < numberOfRows; ++i) {
+				strLine = null;
+				readSoFar = 0;
+				ArrayList<Element> row = new ArrayList<Element>();
+				strLine = buffer.readLine().trim();
+				numberOfElements = Integer.valueOf(strLine);
+				while (readSoFar < numberOfElements) {
+					strLine = buffer.readLine().trim();
+					strLine = strLine + ' ';
+					while (strLine.length() > 0) {
+
+						incidentColumn = Integer.valueOf((strLine.substring(0,
+								strLine.indexOf(' '))));
+
+						++readSoFar;
+						strLine = strLine.substring((strLine.indexOf(' ')) + 1,
+								strLine.length());
+						// set the left pointer of the first element of a row to
+						// null
+						if (readSoFar == 1) {
+							e = new Element(costs.get(incidentColumn - 1),
+									incidentColumn, null, null, null, null);
+							e.setRow(i);
+							columns.get(incidentColumn - 1).add(i);
+						} else {
+							Element prevElement = row.get((row.size()) - 1);
+							e = new Element(costs.get(incidentColumn - 1),
+									incidentColumn, prevElement, null, null,
+									null);
+							e.setRow(i);
+							row.get((row.size()) - 1).setRight(e);
+							columns.get(incidentColumn - 1).add(i);
+						}
+						row.add(e);
+					}
+
+				}
+				// Set the right pointer of the last element of a row to null
+				row.get((row.size()) - 1).setRight(null);
+				// Row is ready to be added to our orthogonal list
+				OrthogonalList.add(row);
+			}
+			/*
+			 * By now, all the elements have been constructed and placed in the
+			 * corresponding rows in the orthogonal list. Furthermore, all the
+			 * horizontal links have been established and the necessary
+			 * information to establish vertical links are stored in "columns"
+			 * arraylist. Using the "columns" arraylist, we can figure out on
+			 * which row(s) a given column is located and set the vertical links
+			 * accordingly.
+			 */
+			for (int i = 0; i < columns.size(); ++i) {
+				Element predecessor;
+				Element successor;
+				int j = 0;
+				int prevRow = 0;
+				int nextRow = 0;
+				int prevRowSize = 0;
+				int nextRowSize = 0;
+				for (j = 0; j < columns.get(i).size()-1; ++j) {
+					prevRow = columns.get(i).get(j);
+					nextRow = columns.get(i).get(j+1);
+					prevRowSize = OrthogonalList.get(prevRow).size();
+					nextRowSize = OrthogonalList.get(nextRow).size();  
+					predecessor = retrieveElement(prevRow, prevRowSize, i + 1);
+					successor = retrieveElement(nextRow, nextRowSize, i + 1);
+					if (j == 0) {
+						predecessor.setTop(null);
+						predecessor.setBottom(successor);
+						successor.setTop(predecessor);
+					} else {
+						predecessor.setBottom(successor);
+						successor.setTop(predecessor);
+					}
+					if (j == (columns.get(i).size()) - 1)
+						successor.setBottom(null);
+					replaceElement(predecessor, prevRow, prevRowSize, i+1);
+					replaceElement(successor, nextRow, nextRowSize, i+1);
+				}
+				if (j == 0) {
+					prevRow = columns.get(i).get(j);
+					prevRowSize = OrthogonalList.get(prevRow).size();				
+					predecessor = retrieveElement(prevRow, prevRowSize, i + 1);
+					predecessor.setTop(null);
+					predecessor.setBottom(null);
+					replaceElement(predecessor, prevRow, prevRowSize, i+1);
+
+				}
+
+			}
+			
+			// test the orthogonal list
+			//ArrayList<Element> testrow1 = OrthogonalList.get(31);
+			
+			ArrayList<Element> testrow1 = OrthogonalList.get(2);
+			String output = "";
+			for (int i = 0; i < testrow1.size(); ++i) {
+				output = output + Integer.toString(testrow1.get(i).getColumn())
+						+ ' ';
+			}
+			System.out.println(output);
+			//testing horizontal links		
+			int f = testrow1.get(12).getRight().getColumn();
+			int fc = testrow1.get(12).getRight().getCost();
+			int g = testrow1.get(12).getLeft().getColumn();
+			int gc = testrow1.get(12).getLeft().getCost();
+			System.out.println("previous:" + g + "  its cost:" + gc);
+			System.out.println("next:" + f + "  its cost:" + fc);
+			//test vertical links
+			System.out.println("////////test vertical links////////");
+			//we need a colum header to be able to retrieve the first elements
+			//of each column. We can use arrayList "columns" to build this header!
+			Element e1 = OrthogonalList.get(columns.get(0).get(0)).get(0);
+			System.out.println(e1.getRow());
+			while (e1.getBottom()!= null)
+			{
+				System.out.println(e1.getBottom().getRow());
+				e1 = e1.getBottom();
+			}
+			
+			System.out.println("////////test vertical links////////");
+			// test arraylist columns
+
+			for (int i = 0; i < columns.size(); ++i)
+				System.out
+						.println("col " + i + ":" + columns.get(i).toString());
+
+		} catch (IOException e) {
+			System.err.println("Error:" + e.getMessage());
+		}
+
+	}
+
+	public Element retrieveElement(int rowNumber, int rowLength, int column) {
+		Element e = null;
+		int i = 0;
+		for (i = 0; i < rowLength; ++i) {
+			e = OrthogonalList.get(rowNumber).get(i);
+			if (e.getColumn() == column)
+				break;			
+		}
+		if (i < rowLength) return (e);
+		else return (null);
+	}
+
+	public void replaceElement(Element e, int rowNumber, int rowLength,
+			int column) {
+		int pos = 0;
+		for (int i = 0; i < rowLength; ++i)
+			if (OrthogonalList.get(rowNumber).get(i).getColumn() == column) {
+				pos = i;
+				break;
+			}
+		OrthogonalList.get(rowNumber).set(pos, e);
+	}
+/*
+	public static void main(String[] args) {
+
+		Scanner keyboard = new Scanner(System.in);
+		System.out.print("Please enter the file name:");
+		String fileName = keyboard.next();
+
+		Orthogonal_List orthogonal = new Orthogonal_List();
+		orthogonal.buildList(fileName);
+	}
+*/
+}

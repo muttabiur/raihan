@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <HEAD>
+        <TITLE>jSNMP Enterprise Example Java Application - jSNMP Enterprise, the Java SNMP API/Java SNMP Library/Java SNMP SDK/Java SNMP Stack/SNMP Java for Network Management</TITLE>
+        <META name="description" content="jSNMP Enterprise Example Java SNMP Application"> 
+        <META name="keywords" content="Java,SNMP,Java SNMP,SNMP Java,jSNMP,jSNMP Enterprise,MIB,SNMP MIB,Agent,SNMP Agent,SNMPv1,SNMPv2c,SNMPv3,SNMP library,SNMP toolkit,SNMP SDK,SNMP API,SNMP utilities,Java library,Java toolkit,Java API,Java SDK,trap,SNMP trap,Network Management,Element Management,NMS,Web NMS,JMX,RMI,CORBA">
+        <META NAME="robots" CONTENT="index,follow">
+        <meta name="robots" content="all">
+        <meta name="distribution" content="Global">
+        <meta name="rating" content="General">
+        <meta name="language" content="English">
+        <meta name="doc-type" content="Web Page">
+        <meta http-equiv="pics-label" content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://www.jsnmp.com" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://www.jsnmp.com" r (n 0 s 0 v 0 l 0))'>
+        <META http-equiv="PICS-Label" content='(PICS-1.1 "http://www.classify.org/safesurf/" l gen true for "http://www.jsnmp.com/" r (SS~~000 1))'> 
+        <META NAME="COPYRIGHT" CONTENT="Copyright &#169; 2003 jSNMP Enterprises, All rights reserved.">
+        <META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+        <LINK href="http://www.jsnmp.com/styles/style.css" type=text/css rel=stylesheet>
+<SCRIPT language=JAVASCRIPT src="http://www.jsnmp.com/scripts/jsnmp.js" type=text/javascript>
+<!-- Hide script
+//<![CDATA[
+function PrintFeedBack() {}
+//]]> End script hiding -->
+</SCRIPT>
+
+<SCRIPT language=JAVASCRIPT src="http://www.jsnmp.com/scripts/jsnmp.js" type=text/javascript>
+<!-- Hide script
+//<![CDATA[
+function PrintCVSRevisionDate() {}
+//]]> End script hiding -->
+</SCRIPT>
+
+<SCRIPT language=JAVASCRIPT src="http://www.jsnmp.com/scripts/jsnmp.js" type=text/javascript>
+<!-- Hide script
+//<![CDATA[
+function noPolls() {}
+//]]> End script hiding -->
+</SCRIPT>
+
+<SCRIPT language=JAVASCRIPT src="http://www.jsnmp.com/scripts/jsnmp.js" type=text/javascript>
+<!-- Hide script
+//<![CDATA[
+        PreloadImages("http://www.jsnmp.com/images/navbar-default.gif","http://www.jsnmp.com/images/logo-examples.gif","http://www.jsnmp.com/images/border.gif","http://www.jsnmp.com/images/arrow-990099.gif");
+//]]> End script hiding -->
+</SCRIPT>
+    </HEAD>
+    <BODY text=#000000 vLink=#666666 aLink=#000099 link=#003399 bgColor=#ffffff leftMargin=0 topMargin=0 marginwidth="0" marginheight="0">
+        <MAP name=navbar>
+            <AREA title="jSNMP Enterprises' Home Page" onclick=noPolls(); tabIndex=1 shape=RECT target=_top alt="jSNMP Enterprises' Home Page" coords=7,6,70,28 href="http://www.jsnmp.com/home.html">
+            <AREA title="jSNMP Enterprises' Services" onclick=noPolls(); tabIndex=2 shape=RECT target=_top alt="jSNMP Enterprises' Services" coords=73,6,137,28 href="http://www.jsnmp.com/services.html">
+            <AREA title="jSNMP Enterprises' Products" onclick=noPolls(); tabIndex=3 shape=RECT target=_top alt="jSNMP Enterprises' Products" coords=140,6,204,28 href="http://www.jsnmp.com/products.html">
+            <AREA title="Purchase jSNMP Enterprises' Products" onclick=noPolls(); tabIndex=4 shape=RECT target=_top alt="Purchase jSNMP Enterprises' Products" coords=207,6,272,28 href="http://www.jsnmp.com/purchase.html">
+            <AREA title="Contact jSNMP Enterprises" onclick=noPolls(); tabIndex=5 shape=RECT target=_top alt="Contact jSNMP Enterprises" coords=275,6,339,28 href="http://www.jsnmp.com/contactus.html">
+        </MAP>
+        <IMG height=1 alt="" hspace=0 src="http://www.jsnmp.com/images/border.gif" width=1 align=right border=0>
+        <A name=top></A>
+        <TABLE cellSpacing=0 cellPadding=0 width=759 border=0>
+            <TBODY>
+                <TR>
+                <TD width=23>&nbsp;</TD>
+                <TD><IMG height=50 alt="jSNMP Enterprises" src="http://www.jsnmp.com/images/logo-examples.gif" width=340 border=0></TD>
+                <TD width=23>&nbsp;</TD>
+                <TD>&nbsp;</TD>
+            </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=759 border=0>
+            <TBODY>
+                <TR>
+                    <TD width=759 rowSpan=2><IMG height=30 alt="" src="http://www.jsnmp.com/images/navbar-default.gif" width=759 useMap=#navbar border=0></TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=759 border=0>
+            <TBODY>
+                <TR bgColor=#990099>
+                    <TD width=759><IMG height=15 alt="" src="http://www.jsnmp.com/images/border.gif" width=1></TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=6 border=0>
+            <TBODY>
+                <TR vAlign=top>
+                    <TD width=6 bgColor=#990099><IMG height=17 alt="" src="http://www.jsnmp.com/images/border.gif" width=1></TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=759 border=0>
+            <TBODY>
+                <TR vAlign=top>
+                    <TD vAlign=center width=5 bgColor=#990099><IMG height=31 alt="" src="http://www.jsnmp.com/images/border.gif" width=1></TD>
+                    <TD vAlign=center width=8><IMG height=13 alt="" src="http://www.jsnmp.com/images/arrow-990099.gif" width=7 vspace=9></TD>
+                    <TD width=715>
+                        <TABLE cellSpacing=0 cellPadding=1 border=0>
+                            <TBODY>
+                                <TR>
+                                    <TD height=31 vAlign=center class=subtitle>&nbsp; <SPAN class=color-default-990099>RmiV1GetSetGetNextApplet</SPAN></TD>
+                                </TR>
+                            </TBODY>
+                        </TABLE>
+                    </TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=759 border=0>
+            <TBODY>
+                <TR vAlign=top>
+                    <TD width=6 bgColor=#990099><IMG height=1 alt="" src="http://www.jsnmp.com/images/border.gif" width=6></TD>
+                    <TD width=28>&nbsp;</TD>
+                    <TD width=725>
+                        <DIV align=right>
+                            <TABLE cellSpacing=0 cellPadding=0 width=523 border=0>
+                                <TBODY>
+                                    <TR>
+                                        <TD class=smtext>&nbsp;</TD>
+                                    </TR>
+                                </TBODY>
+                            </TABLE>
+                            <TABLE cellSpacing=0 cellPadding=0 width=523 border=0>
+                                <TBODY>
+                                    <TR>
+                                        <TD class=smtext>
+                                            <p>
+                                                <SPAN class=text>
+                                                    <B class=color-default-990099>jSNMP Enterprise&#153; RMI SNMPv1 Get/Set/Get-Next Applet</B>
+                                                </SPAN> 
+                                                <BR>
+                                                <BR>
+                                                This page displays the jSNMP Enterprise&#153; sample applet RmiV1GetSetGetNextApplet below, which
+                                                demonstrates how to use jSNMP Enterprise&#153; and RMI from within a browser.
+                                                <BR>
+                                                <BR>
+                                                The example requires a fully JDK1.1-compliant browser, and has been
+                                                tested successfully using the Sun JDK AppletViewer, Netscape
+                                                Communicator 4.06, and Microsoft Internet Explorer 4.01.
+                                                To run the example use the following steps:
+                                                <ol>
+                                                    <li>
+                                                        Create a directory below <code>jSNMP/examples</code> called <code>classes</code>.
+                                                        Copy the files <code>jSNMP/examples/RmiV1GetSetGetNextApplet.java</code>, 
+                                                        <code>jSNMP/examples/RMIServer.java</code>, and
+                                                        <code>jSNMP/lib/jSNMPEnterprise.jar</code>
+                                                        into the <code>jSNMP/examples/classes</code> directory
+                                                    </li>
+                                                    <li>
+                                                        Take the following steps to compile the applet:
+                                                        <ul>
+                                                            <li>
+                                                                Launch a shell in the <code>jSNMP/examples/classes</code> directory.
+                                                            </li>
+                                                            <li>
+                                                                Ensure that the shell's CLASSPATH environment variable contains the <code>jSNMP/examples/classes/jSNMPEnterprise.jar</code>, as well as the <code>jSNMP/examples/classes</code> directory.
+                                                            </li>
+                                                            <li>
+                                                                Compile the applet as follows:
+                                                                <ul>
+                                                                    <code>javac RmiV1GetSetGetNextApplet.java</code>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        Take the following steps to create an RMI server for the applet to communicate with:
+                                                        <ul>
+                                                            <li>
+                                                                Launch a shell in the <code>jSNMP/examples/classes</code> directory.
+                                                            </li>
+                                                            <li>
+                                                                Ensure that the shell's CLASSPATH environment variable contains the <code>jSNMP/examples/classes/jSNMPEnterprise.jar</code>, as well as the <code>jSNMP/examples/classes</code> directory.
+                                                            </li>
+                                                            <li>
+                                                                Compile the jSNMP Enterprise&#153; RMI server as follows:
+                                                                <ul>
+                                                                    <code>javac RMIServer.java</code>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                Create the java security policy file <code>policy</code> with the following lines:
+                                                                <ul>
+                                                                    <code>
+                                                                        grant {<br>
+                                                                        // Allow everything for now<br>
+                                                                        permission java.security.AllPermission;<br>
+                                                                        };
+                                                                     </code>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                Launch the RMI registry server as follows:
+                                                                <ul>
+                                                                    <i>Windows</i> - <code>start rmiregistry</code><br>
+                                                                    <i>UNIX</i> - <code>rmiregistry&</code>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                Launch the jSNMP&#153; RMI server as follows:
+                                                                <ul>
+                                                                    <code>java -Djava.security.policy=policy RMIServer</code>
+                                                                </ul>
+      
+                                                            </li>
+                                                            <li>
+                                                            	<i>Browser-specific configuration</i>:
+                                                                <ul>
+                                                                    <li>
+                                                                        <i>Netscape</i> - In order to run the examples in Netscape Communicator, a
+                                                                        feature known as <i>Codebase Principals</i> must be used, which allows a codebase
+                                                                        to act as a principal for enabling privileges. You will need to gather all
+                                                                        classes required for the applet under the specified codebase. In this example
+                                                                        the codebase used is the <code>classes</code> directory underneath
+                                                                        <code>jSNMP/examples</code>. The following are detailed instructions:
+                                                                        <ol>
+                                                                            <li>
+                                                                                Ensure that <b>no</b> jSNMP&#153; classes are on your
+                                                                                CLASSPATH environment variable. Netscape uses the
+                                                                                CLASSPATH before any CODEBASE defined in the HTML
+                                                                                page. Any classes loaded from the CLASSPATH can not
+                                                                                be used to enable privileges.
+                                                                            </li>
+                                                                        </ol>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i>Internet Explorer</i> - If still available, you may install the RMI classes for Internet Explorer from Microsoft 
+                                                                        (<a href="ftp://ftp.microsoft.com/developr/MSDN/UnSup-ed/rmi.zip">ftp://ftp.microsoft.com/developr/MSDN/UnSup-ed/rmi.zip</a>)
+<!--                                                                    or IBM (<a href="http://www.alphaworks.ibm.com/formula/RMI">http://www.alphaworks.ibm.com/formula/RMI</a>) -->
+                                                                        and place them in your Windows Java directory. However, we recommend that you
+                                                                        install a <a href="http://java.sun.com/products/plugin/">Java Plug-in</a>
+                                                                        to run RMI applets within Internet Explorer.
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    <li>
+                                                        Take the following steps to run the applet:
+                                                        <ul>
+                                                            <li>
+                                                                Start the browser, and load <code>jSNMP/examples/RmiV1GetSetGetNextApplet.html</code> (this file).
+                                                            </li>
+                                                            <li>
+                                                                For Gets and GetNexts, fill in the jSNMP RMI Server Host, SNMP Agent Host, Read Community, and OID fields and click the Get or GetNext button to run the test.  For Sets, fill in the jSNMP RMI Server Host, SNMP Agent Host, Write Community, OID, and Value fields, select the object Type, and click the Set button to run the test.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+<br><br>
+<table border=1 width=725>
+  <tr><td>
+      <applet codebase="classes" code="RmiV1GetSetGetNextApplet.class" archive="jSNMPEnterprise.jar" width="725" height="800">
+      </applet>
+  </td></tr>
+</table>  
+                                            </p>
+                                        </TD>
+                                    </TR>
+                                </TBODY>
+                            </TABLE>
+                        </DIV>
+                    </TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=6 border=0>
+            <TBODY>
+                <TR vAlign=top>
+                    <TD width=6 bgColor=#990099><IMG height=17 alt="" src="http://www.jsnmp.com/images/border.gif" width=1></TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=759 bgColor=#990099 border=0>
+            <TBODY>
+                <TR>
+                    <TD width=12><IMG height=15 alt="" src="http://www.jsnmp.com/images/border.gif" width=12></TD>
+                    <TD align=left width=157>
+                        <A class=footer onclick=noPolls() href="RmiV1GetSetGetNextApplet.html#top">
+                            <FONT face=verdana,arial,helvetica color=#ffffff size=1>
+                                <B>
+                                    Back to Top
+                                </B>
+                            </FONT>
+                        </A>
+                    </TD>
+                    <TD align=middle width=177>&nbsp;</TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <TABLE cellSpacing=0 cellPadding=0 width=759 border=0>
+            <TBODY>
+                <TR vAlign=top>
+                    <TD vAlign=top align=middle>
+                        <div class=copyright align="center">
+                            <A title="jSNMP Enterprises' Home Page" onclick=noPolls() href="http://www.jsnmp.com/home.html"> 
+                                Home
+                            </A>
+                            &nbsp;
+                            <A title="jSNMP Enterprises' Services" onclick=noPolls() href="http://www.jsnmp.com/services.html"> 
+                                Services
+                            </A>
+                            &nbsp;
+                            <A title="jSNMP Enterprises' Products" onclick=noPolls() href="http://www.jsnmp.com/products.html"> 
+                                Products
+                            </A>
+                            &nbsp;
+                            <A title="Purchase jSNMP Enterprises' Products" onclick=noPolls() href="http://www.jsnmp.com/purchase.html"> 
+                                Purchase
+                            </A>
+                            &nbsp;
+                            <A title="Contact jSNMP Enterprises" onclick=noPolls() href="http://www.jsnmp.com/contactus.html"> 
+                                Contact Us
+                            </A>
+                            &nbsp;
+                            <A title="About jSNMP Enterprises" onclick=noPolls() href="http://www.jsnmp.com/aboutus.html"> 
+                                About Us
+                            </A>
+                            &nbsp;
+                            <A title="jSNMP Enterprises' Copyright, Trademarks, and Disclaimers" onclick=noPolls() href="http://www.jsnmp.com/copyright.html"> 
+                                Legal
+                            </A>
+                            <br>
+                            Copyright &#169; 2003,2004 jSNMP Enterprises All rights reserved.
+<SCRIPT language=JAVASCRIPT type=text/javascript>
+<!-- Hide script
+//<![CDATA[
+        PrintCVSRevisionDate("$Date: 2004/04/18 21:33:01 $");
+//]]> End script hiding -->
+</SCRIPT>
+                        </div>
+                    </TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+        <br>
+    </BODY>
+</HTML>
+
+<!--
+//****************************************************************************
+// Copyright (c) 2003 jSNMP Enterprises, All Rights Reserved Worldwide
+//****************************************************************************
+//
+//         File: RmiV1GetSetGetNextApplet.html
+//
+//****************************************************************************
+//
+//   Disclaimer: This software is provided AS IS, and without any warranty
+//               other than those which may be provided in a separate
+//               writing specifically referencing the software contained
+//               herein.  All other warranties, except those which may be
+//               provided separately in writing, are expressly disclaimed.
+//               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+//               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+//               PURPOSE which is given with respect to this software or the
+//               operability thereof.
+//
+//****************************************************************************
+-->

@@ -1,0 +1,311 @@
+package server;
+
+
+import Interface.*;
+import java.rmi.*;
+import java.rmi.server.*;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.Hashtable;
+import java.util.Vector;
+
+
+public class DETImpl extends UnicastRemoteObject implements DETInterface {
+   
+   Format df = new DecimalFormat("####.00");
+   Hashtable servers;  // Hashtable is Serializable 
+   Vector otherItems;
+  
+   Item itm;
+   Vector itemDetail;
+   AllMessage allMessage=new AllMessage();
+   
+    static public Object accItm=new Object();
+	static public Object accSell=new Object();
+	static public Object accBuy=new Object();
+	
+   /**
+    *  
+    * @param itemName : String Containing item Name 
+    * @param p : dobule Containing item price
+    * @param q : double Containing initial  quantity
+    * @param b : double Containing initial balance
+    * @throws RemoteException
+    */
+   
+  public DETImpl(String itemName, double p, int q, double b) throws RemoteException {
+      super( );
+	
+   itm = new Item(itemName,p,q,b);  
+      	
+	servers = new Hashtable() ; 
+	itemDetail= new Vector();  
+	
+	servers.put(item1,Server1);
+	servers.put(item2,Server2);
+	//servers.put(item3,Server3);
+		
+	
+   }
+  
+/**
+ *  @param item : String Containing item Name to buy
+ *  @param q : double Containing quantity to buy
+ */  
+  public int buyItem(String item, int q) throws RemoteException {
+		
+		
+		String serName;
+		
+		
+		if(itm.name.equalsIgnoreCase(item))  // local product
+		{
+			synchronized(accItm){
+				
+				if (itm.getQty()>=q) // have quanity then do all action other wise return feedback
+				{
+					itm.setQty(itm.getQty()-q);
+					itm.setBalance(itm.getBalance() + itm.getPrice() * q);
+					
+					System.out.println("SERVER LOG: BUY LOCAL : ITEM ("+item+") QTY ("+ q +") PRICE (" + itm.getPrice() + ") BAL("+ itm.getBalance() +")");
+															
+				}
+				else return allMessage.NOT_ENOUGH_QUANTITY;
+				
+			}//assitm 
+		}
+		
+		else // find on other servers
+		{
+					String ser=(String)servers.get(item); // find server deal with this item
+					
+					if (ser!=null)
+					{
+						
+						synchronized(accBuy)	
+						{			
+							
+							
+						 try{
+							serName=ser;
+							
+							// callServer method call remote server and its sellItem method
+							Vector res=(Vector) callServer(serName,item,q,itm.getBalance());
+														
+							Integer retVal=(Integer)res.elementAt(0);
+							
+							int resInt=retVal.intValue();
+																										
+							if (resInt==allMessage.SUCCESS) // if cellitem opertaion successfull
+							{
+								
+								Double pr= (Double)res.elementAt(1);
+								synchronized(accItm){	
+								
+									itm.setBalance( itm.getBalance()- q* pr.intValue());
+									
+									// item, qty, price, server;
+									String log= item+ "\t" + q +"\t" +res.elementAt(1).toString()+ "\t" + serName;
+									
+									itemDetail.add(new String(log));
+									
+									System.out.println("SERVER LOG: BUY FROM ("+ serName +") : ITEM ("+  item +") QTY ("+ q +")  PRICE (" + pr + ") BAL("+ itm.getBalance() +")");
+								
+								}//assitm syn
+								
+								return resInt; // success
+							}				
+							
+							else // if buy operation is not successfull then return error
+								{
+									return resInt; // error mess							
+								}
+							
+						 }catch(Exception e){
+							 System.out.println("BUY ITEM Error "+e);
+						 }
+						
+						}//sny accbuy
+					}else
+					{ // product is not found in server list as no server dealing with this product
+						return allMessage.PRODUCT_NOT_FOUND;
+					}
+				 
+		
+		}
+				
+		return allMessage.SUCCESS;
+	}
+	/**
+	 *  this method call remote server to sell this item
+	 * @param hostName : String containing houst name 
+	 * @param item : String containing item name
+	 * @param q : int containing quantity
+	 * @param bal : double containing balanace
+	 * @return
+	 */
+  
+	public Vector callServer(String hostName,String item,int q,double bal){
+						
+		try {
+	         int RMIPort=1399;         
+		     
+	         String registryURL =   "rmi://" + hostName+ ":" + RMIPort + "/DET";
+	         
+	         // find the remote object and cast it to an interface object
+	         DETInterface h = (DETInterface)Naming.lookup(registryURL);
+	       	 //  call remote method sellItem         
+	         Vector res = (Vector) h.sellItem(item,q,bal); 
+	         	         
+	         return res;
+	         
+	      } // end try 
+	      catch (Exception e) {
+	         System.out.println("Call Server Error: "+hostName+"   "+e);
+	         
+	         Vector vEr= new Vector();
+	         vEr.add(new Integer(allMessage.SERVER_NOT_FOUND));
+	         vEr.add(new String(hostName));
+	         vEr.add(new String(item));
+	         
+	         return vEr;
+	         
+	      } 
+		
+	}
+	
+	/**
+	 * remote sever will call this method to sell item
+	 * @param item : String containing item name
+	 * @param q : int containing quantity
+	 * @param bal : double containing balanace
+	 * @return
+	 */
+	public Vector sellItem(String item, int q,double bal) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+							
+		Vector v = new Vector () ;
+		
+			
+		if(itm.name.equalsIgnoreCase(item))  // local product
+		{
+		         	
+		synchronized(accSell){
+				
+			   double pr=itm.getPrice();
+				
+			   if (bal> q*pr) // buyer have balance to buy
+			   {
+				   synchronized(accItm){
+					
+					   if (itm.getQty()>=q)  // have quanity to sell
+						{					
+								
+							itm.setQty(itm.getQty()-q);
+							itm.setBalance(itm.getBalance() + pr * q);
+							
+							// return successfull response with selling price
+							v.add(new Integer(allMessage.SUCCESS));
+							v.add(new Double(pr));
+							
+							System.out.println("SERVER LOG:		SELL   : ITEM ("+  item +") QTY ("+ q +") PRICE (" + pr + ")   BAL("+ itm.getBalance() +")");
+														
+							return v;
+						}
+						else {
+							v.add(new Integer(allMessage.NOT_ENOUGH_QUANTITY));
+							return v;
+						}
+				   }// accitm syn
+			   }
+			  else {
+				  v.add(new Integer(allMessage.NOT_ENOUGH_FUNDS));
+				  return v;
+			  }
+		}//assSell sny  
+					
+		}
+		
+		else {
+			  v.add(new Integer(allMessage.PRODUCT_NOT_FOUND));
+			  
+			  return v;
+		}
+		
+			
+		
+	}
+	
+	/**
+	 *  Print Server side report
+	 */
+	
+	public String printReport() throws RemoteException {
+		
+		synchronized(accItm){
+			
+			String pr=df.format(Double.valueOf(itm.getPrice()));
+			String bl=df.format(Double.valueOf(itm.getBalance()));
+			System.out.println("");
+			System.out.println("*************************         REPORT         **************************");
+			System.out.println("===========================================================================");
+			System.out.println("Item: "+ itm.name +"		Qty:"+ itm.getQty() + "		Price: " + pr + "	Balance: "+ bl);
+			System.out.println("===========================================================================");
+		}//accItm syn
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("Item \t Qty \t Price \t Server");
+		System.out.println("============================================");
+		
+		for (int x=0;x<itemDetail.size();x++)
+			System.out.println(itemDetail.elementAt(x));
+			
+		
+		
+		return null;
+	}
+	 
+	/**
+	 *  Return Report to Client
+	 *  as Vector of strings
+	 */
+	
+	public Vector getReport() throws RemoteException {
+		
+		
+		Vector v=new Vector();
+		
+		synchronized(accItm){
+			
+		
+			String pr=df.format(Double.valueOf(itm.getPrice()));
+			String bl=df.format(Double.valueOf(itm.getBalance()));
+			
+			v.add("");
+			v.add("*************************         REPORT         **************************");
+			v.add("===========================================================================");
+			
+			v.add("Item: "+ itm.name +"		Qty:"+ itm.getQty() + "		Price: " + pr + "	Balance: "+ bl);
+			
+		}// accItm syn	
+			v.add("===========================================================================");
+			v.add("");
+			v.add("");
+			v.add("Item \t Qty \t Price \t Server");
+			v.add("============================================");
+		
+			
+			
+		for (int x=0;x<itemDetail.size();x++)
+			v.add(itemDetail.elementAt(x));
+			
+		
+		
+		return v;
+	}
+	
+
+   
+} // end class

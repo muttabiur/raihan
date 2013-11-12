@@ -1,0 +1,303 @@
+package DETServer;
+
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.*;
+
+import DETServer.ContainerManagedItem;
+import Interface.DisplayMessage;
+import Interface.ETrader_Interface;
+import Interface.* ;
+
+
+/**
+ * @author m_sk
+ */
+
+public class ImplementationEtraderServer extends UnicastRemoteObject implements ETrader_Interface {
+	
+	  //Define semaphore lock for each type of operation
+	
+	    static public Object lockItm = new Object();
+		static public Object lockSell = new Object();
+		static public Object lockBuy =  new Object();
+	   
+	  
+	   
+	   //Define an object for hashtable
+	   
+	    Hashtable s;  
+	    //Define a vector object otherItems
+	    Vector otherItems;
+	  
+	    
+	    //Create an object called itm for the item container class.
+	    ContainerManagedItem itm;
+	    
+	    //Define a vector object to store log information.
+	    Vector itemDetail;
+	   
+	   //Define an object at the runtime.
+	    MessageContainer allMessage= new MessageContainer();
+	   
+	    Format df = new DecimalFormat("####.00");
+		
+ public ImplementationEtraderServer(String itemName, double p, int q, double b) throws RemoteException {
+	      super( );
+		
+	   itm = new ContainerManagedItem(itemName,p,q,b);  
+	      	
+		s = new Hashtable() ; 
+		itemDetail= new Vector();  
+		
+		//Map item to particular server
+		s.put(item1,Server1);
+		s.put(item2,Server2);
+		//s.put(item3, Server3);
+		
+		//servers.put(item3,Server3);
+		//servers.put(item3,Server3);
+			
+		
+ }
+	
+/**
+ * Design By Contract
+ * Precondition: This function expects an input item and quantity from the user/client
+ * PostCondition: This function will illustrate buy operation, that client invokes buy method to
+ *                one of the server, and consequently E-trader performs buy and sell operation, in order to 
+ *                 complete that particular transaction. 
+ * 
+ */	
+public int buyItem(String item, int q) throws RemoteException {
+			
+			
+	String sName;
+			
+			//System.out.println("msf "+item);
+						String ser=(String)s.get(item); // find server that deals with this item
+						
+						
+						if (ser!=null)
+						{
+						
+							////Acquire semaphore lock
+							synchronized(lockBuy)	
+							{			
+								
+								
+							 try{
+								sName=ser;
+								//System.out.println("before");
+								// callServer method calls remote server and its sellItem method
+								Vector res=(Vector) callServer(sName,item,q,itm.getBalance());
+								
+								//System.out.println("serwrerere "+ser);							
+								Integer retVal=(Integer)res.elementAt(0);
+								
+								int resInt=retVal.intValue();
+																											
+								if (resInt==allMessage.SUCCESS) 
+								//If this operation successful  
+								{
+									
+									Double pr= (Double)res.elementAt(1);
+									////Acquire semaphore lock
+									synchronized(lockItm){	
+									
+										itm.setBalance( itm.getBalance()- q* pr.intValue());
+										
+										
+										String log= item+ "\t" + q +"\t" +res.elementAt(1).toString()+ "\t" +sName;
+										
+										itemDetail.add(new String(log));
+										
+										System.out.println("SERVER LOG: BUY FROM ("+sName +") : ITEM ("+  item +") QTY ("+ q +")  PRICE (" + pr + ") BAL("+ itm.getBalance() +")");
+									
+									} // Release semaphore lock
+									
+									return resInt; 
+								}				
+								
+								else // if buy operation is not successfull then return error
+									{
+										return resInt; // return an error message						
+									}
+								
+							 }catch(Exception e){
+								 System.out.println("BUY ITEM Error "+ e);
+							 }
+							
+							}// Release Semaphore lock
+						}else
+						{ // product is not found in server list as no server dealing with this product
+							return allMessage.PRODUCT_NOT_FOUND;
+						}
+					 
+			
+			
+					
+			return allMessage.SUCCESS;
+		}
+	
+/**
+ * Design By Contract
+ * Precondition: This function expects an input hostname, item, balance and quantity. 
+ * PostCondition: This function will illustrate call another e-trader server operation,  
+ *                buy or sell operation. It acts as a look up to search another e-trader. 
+ */			
+		
+ public Vector callServer(String hostName,String item,int q,double bal){
+							
+			try {
+		         int RMIPort=1399;         
+			     String mitem = item+"&"+bal;
+		         String registryURL =   "rmi://" + hostName+ ":" + RMIPort + "/Raihan";
+		         
+		         // find the remote object and cast it to an interface object
+		        ETrader_Interface h = ( ETrader_Interface)Naming.lookup(registryURL);
+		       	 //  call remote method sellItem         
+		         Vector res = (Vector) h.sellItem(mitem,q); 
+		        // System.out.println(mitem);	         
+		         return res;
+		         
+		      } 
+		      catch (Exception e) {
+		         System.out.println("Call Server Error: "+hostName+"   "+e);
+		         
+		         Vector vEr= new Vector();
+		         vEr.add(new Integer(allMessage.SERVER_NOT_FOUND));
+		         vEr.add(new String(hostName));
+		         vEr.add(new String(item));
+		         
+		         return vEr;
+		         
+		      } 
+			
+		}
+		
+		
+/**
+ * Design By Contract
+ * Precondition: This function expects an input item, balance and quantity 
+ * PostCondition: This function will illustrate sell operation, that client invokes buy method to
+ *                one of the server, and consequently E-trader performs sell operation, in order to 
+ *                 complete that particular transaction. 
+ * 
+ */			
+		
+public Vector sellItem(String item, int q) throws RemoteException {
+			// TODO Auto-generated method stub
+			
+								
+			Vector v = new Vector() ;
+			StringTokenizer st = new StringTokenizer(item,"&");
+			String gitem = st.nextToken();
+			double bal = Double.parseDouble(st.nextToken());
+			item = gitem.trim();
+			//System.out.println("pass bal: "+bal);	
+			if(itm.name.equalsIgnoreCase(item))  // local product
+			{
+			  
+			  ////Acquire semaphore lock
+			  
+			synchronized(lockSell){
+					
+				   double pr=itm.getPrice();
+					
+				   if (bal> q*pr) // buyer have balance to buy
+				   {
+				    ////Acquire semaphore lock
+					   synchronized(lockItm){
+						
+						// Check that e-trade has enough quantity to sell
+						   if (itm.getQty()>=q)  
+							{					
+									
+								itm.setQty(itm.getQty()-q);
+								itm.setBalance(itm.getBalance() + pr * q);
+								
+							
+								v.add(new Integer(allMessage.SUCCESS));
+								v.add(new Double(pr));
+								
+								System.out.println("SERVER LOG:		SELL   : ITEM ("+  item +") QUANTITY ("+ q +") PRICE (" + pr + ")   BALANCE("+ itm.getBalance() +")");
+															
+								return v;
+							}
+							else {
+								v.add(new Integer(allMessage.NOT_ENOUGH_QUANTITY));
+								return v;
+							}
+					   }// Release Lock
+				   }
+				  else {
+					  v.add(new Integer(allMessage.NOT_ENOUGH_FUNDS));
+					  return v;
+				  }
+			}//Release Lock  
+						
+			}
+			
+			else {
+				  v.add(new Integer(allMessage.PRODUCT_NOT_FOUND));
+				  
+				  return v;
+			}
+			
+				
+			
+		}
+		
+	
+/**
+ * Design By Contract
+ * Precondition: This function expects no input from the user.
+ * PostCondition: This function will illustrate print report for server side. 
+ * 
+ */			
+		
+public Vector printReport() throws RemoteException {
+			
+
+			Vector v=new Vector();
+			
+			////Acquire semaphore lock
+			synchronized(lockItm){
+				
+				String pr=df.format(Double.valueOf(itm.getPrice()));
+				String bl=df.format(Double.valueOf(itm.getBalance()));
+				v.add("");
+				v.add("***************  DISTRIBUTED ELECTRONIC TRADER   **************************");
+				v.add("");
+				v.add("===========================================================================");
+				
+				v.add("ITEM: "+ itm.name +"	 QUANTITY:"+ itm.getQty() + "		PRICE: " + pr + "	BALANCE: "+ bl);
+				
+				v.add("");
+				
+				v.add("============================================================================") ;
+				
+			}//Release semaphore lock 
+			
+			System.out.println();
+			System.out.println();
+			//System.out.println("Item \t Qty \t Price \t Server");
+			//System.out.println("============================================");
+			
+			for (int x=0;x<itemDetail.size();x++)
+				v.add(itemDetail.elementAt(x));
+				
+			
+			
+			return v;
+		}
+		 
+		
+		
+
+	   
+	} // end of class

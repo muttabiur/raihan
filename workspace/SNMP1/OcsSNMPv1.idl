@@ -1,0 +1,192 @@
+/* ----------------------------------------------------------------------------
+ Copyright (c) 1997, 1998 OutBack Resource Group, Inc., All Rights Reserved Worldwide
+ ------------------------------------------------------------------------------
+
+      Product:
+
+      Package: IDL  
+
+         File: OcsSNMPv1.idl
+
+  Description:
+
+   Disclaimer: This software is provided AS IS, and without any warranty
+               other than those which may be provided in a separate
+               writing specifically referencing the software contained
+               herein.  All other warranties, except those which may be
+               provided separately in writing, are expressly disclaimed.
+               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+               PURPOSE which is given with respect to this software or the
+               operability thereof.
+
+               ------------------------------------------------------------
+
+   $Archive: /OutBack/jSNMPEnterprise/src/idl/OcsSNMPv1.idl $
+   $Revision: 1.1.1.1 $
+   $Date: 2003/08/18 03:23:05 $
+   $Author: cvsuser $
+
+   ------------------------------------------------------------------------ */
+
+module OcsSNMPv1
+{
+	typedef sequence<string> StringSeq;
+	typedef sequence<octet> OctetSeq;
+	typedef sequence<unsigned long> UnsignedLongSeq;
+
+	typedef short ASNType;
+
+	const ASNType ASN_INTEGER	= 0x02;
+	const ASNType ASN_OCTSTR	= 0x04;
+	const ASNType ASN_NULL		= 0x05;
+	const ASNType ASN_OID		= 0x06;
+	const ASNType ASN_IPADDRESS	= 0x40;
+	const ASNType ASN_COUNTER	= 0x41;
+	const ASNType ASN_GAUGE		= 0x42;
+	const ASNType ASN_TIMETICKS	= 0x43;
+	const ASNType ASN_OPAQUE	= 0x44;
+
+	enum RequestType {SNMP_GET, SNMP_GET_NEXT};
+
+	union ASNValue switch (ASNType)
+	{
+            case ASN_NULL	: octet			empty;
+            case ASN_INTEGER	: OctetSeq		integer;
+            case ASN_OCTSTR	: OctetSeq		octstr;
+            case ASN_OPAQUE	: OctetSeq		opaq;
+                /* case ASN_IPADDRESS	: OctetSeq		ipaddress; */
+            case ASN_IPADDRESS	: string		ipaddress;
+            case ASN_OID	: string		oid;
+            case ASN_COUNTER	: unsigned long counter;
+            case ASN_GAUGE	: unsigned long gauge;
+            case ASN_TIMETICKS	: unsigned long timeticks;
+	};
+
+	typedef sequence<ASNValue> ASNValueSeq;
+
+	struct SnmpVarBind
+	{
+		string name;
+		ASNValue value;
+	};
+
+	typedef sequence<SnmpVarBind> SnmpVarBindSeq;
+
+	struct SnmpTrapEvent
+	{
+	    string address;
+	    unsigned long port;
+	    string enterpriseOID;
+	    unsigned long timestamp;
+	    boolean isGeneric;
+	    unsigned long genericType;
+	    unsigned long specificType;
+	    SnmpVarBindSeq varbinds;
+	};
+
+	interface SnmpCustomer
+	{
+		void deliverSuccessfulOrder(in long orderNum,
+									in SnmpVarBind vb);
+
+		void deliverFailedOrder(in long orderNum,
+								in unsigned long errorStatus);
+	};
+
+	interface SnmpTrapListener
+	{
+		void trapReceived(in SnmpTrapEvent evt);
+	};
+
+    exception NoSuchElement{};
+    exception SocketProblem{};
+
+	interface SnmpTrapProfile
+	{
+	    unsigned long getPort();
+
+	    boolean addAgentAddress(in string address);
+	    boolean removeAgentAddress(in string address)
+	        raises (NoSuchElement);
+	    StringSeq listAgentAddresses();
+
+	    boolean addEnterpriseOID(in string oid);
+	    boolean removeEnterpriseOID(in string oid)
+	        raises (NoSuchElement);
+	    StringSeq listEnterpriseOIDs();
+
+	    boolean addGenericTrapType(in unsigned long type);
+	    boolean removeGenericTrapType(in unsigned long type)
+	        raises (NoSuchElement);
+	    UnsignedLongSeq listGenericTrapTypes();
+
+	    boolean addSpecificTrapType(in unsigned long type);
+	    boolean removeSpecificTrapType(in unsigned long type)
+	        raises (NoSuchElement);
+	    UnsignedLongSeq listSpecificTrapTypes();
+
+	    void destroy();
+	};
+
+	interface SnmpTrapProfileFactory
+	{
+	    SnmpTrapProfile createProfile(in unsigned long port);
+	};
+
+	typedef sequence<SnmpTrapProfile> SnmpTrapProfileSeq;
+
+	interface SnmpService
+	{
+		void placeInspectionOrder(in string host,
+                                  in unsigned long port,
+								  in unsigned long retries,
+								  in unsigned long timeout,
+								  in unsigned long cacheThreshold,
+								  in RequestType type,
+								  in string readCommunity,
+								  in StringSeq oids,
+								  in SnmpCustomer customer,
+								  in long orderNumStart);
+
+		void placeModificationOrder(in string host,
+									in unsigned long port,
+									in unsigned long retries,
+									in unsigned long timeout,
+                                    in string writeCommunity,
+                                    in boolean atomic,
+                                    in SnmpVarBindSeq varbinds,
+                                    in SnmpCustomer customer,
+                                    in long orderNumStart);
+
+		boolean addTrapListenerProfile(in SnmpTrapListener listener,
+                                       in SnmpTrapProfile profile)
+            raises (SocketProblem);
+
+		boolean removeTrapListenerProfile(in SnmpTrapListener listener,
+                                          in SnmpTrapProfile profile)
+            raises (NoSuchElement);
+
+		SnmpTrapProfileSeq listTrapListenerProfiles(in SnmpTrapListener listener)
+		    raises (NoSuchElement);
+
+		void removeTrapListener(in SnmpTrapListener listener)
+		    raises (NoSuchElement);
+	};
+
+	
+  interface DET
+  {
+	long buyItem(in string item,in long qty);
+	long printReport();
+    //long sellItem(int String item, in long qty,in double bal);
+
+	long sellItem(in long qty,in double bal);
+	long tradeItems(in string item1,in long qty1,in string item2,in long qty2,in string etrader);
+
+  };
+};
+
+
+
+

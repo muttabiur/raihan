@@ -1,0 +1,21 @@
+package AliLowerUpper;
+
+import Orthogonal_List;
+
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		//Scanner keyboard = new Scanner(System.in);
+		//System.out.print("Please enter the file name:");
+		//String fileName = keyboard.next();
+		String fileName = "constraints.txt";
+		Orthogonal_List orthogonal = new Orthogonal_List();
+		orthogonal.buildList(fileName);
+		
+	}
+}

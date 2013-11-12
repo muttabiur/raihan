@@ -1,0 +1,12 @@
+itemName:
+Shoe
+.
+price:
+50
+.
+quantity:
+100
+.
+balance:
+77000
+.

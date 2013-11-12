@@ -1,0 +1,89 @@
+/* ----------------------------------------------------------------------------
+ Copyright (c) 2003 jSNMP Enterprises, All Rights Reserved Worldwide
+ ------------------------------------------------------------------------------
+
+   Disclaimer: This software is provided AS IS, and without any warranty
+               other than those which may be provided in a separate
+               writing specifically referencing the software contained
+               herein.  All other warranties, except those which may be
+               provided separately in writing, are expressly disclaimed.
+               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+               PURPOSE which is given with respect to this software or the
+               operability thereof.
+
+   ------------------------------------------------------------------------
+ */
+
+
+// ------------------------------ Package -------------------------------------
+
+// ------------------------------ Imports -------------------------------------
+import java.io.*;
+import com.outbackinc.services.protocol.snmp.corba.*;
+
+/**
+ * Sample which illustrates a sample CORBA server for jSNMP.
+ * The server starts and writes the object references to
+ * user supplied files.
+ */
+public class CORBAServer
+{
+    // ------------------------------ Constants ---------------------------------
+
+    // ------------------------------ Class variables ---------------------------
+
+    // ------------------------------ Member (instance) variables ---------------
+
+    // ------------------------------ Methods -----------------------------------
+
+    /**
+     *
+     */
+    public static void main(String[] args)
+    {
+        try
+        {
+            if (args.length < 2)
+            {
+                usage();
+                return;
+            }
+            //Open IOR files
+            RandomAccessFile factoryIORFile = new RandomAccessFile(args[0], "rw");
+            RandomAccessFile serviceIORFile = new RandomAccessFile(args[1], "rw");
+            System.out.println("Successfully opened files to hold IORs...");
+
+            //Start the Server
+            CORBASnmpServer server = new CORBASnmpServer();
+            System.out.println("Successfully started SNMP service...");
+
+            //Write IORs to files
+            factoryIORFile.writeBytes(server.getSnmpTrapProfileFactoryIOR());
+            factoryIORFile.close();
+
+            serviceIORFile.writeBytes(server.getServiceIOR());
+            serviceIORFile.close();
+            System.out.println("Successfully wrote IORs to files...");
+
+            System.out.println("Awaiting requests...");
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * Displays correct usage
+     */
+    public static void usage()
+    {
+        System.out.println("Usage : java CORBAServer <factoryIORfile> <serviceIORfile>");
+        System.out.println("\tfactoryIORfile : file in which to write the IOR of the SnmpTrapProfileFactory");
+        System.out.println("\tserviceIORfile : file in which to write the IOR of the SnmpService");
+    }
+}
+

@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//Min_Max_Heap h = new Min_Max_Heap();
+		
+		
+		int min=15, max=30;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list = getRandomList(min,max);
+
+		
+		Min_Max_Heap_Interface h = new Min_Max_Heap(list);
+		Scanner keyboard = new Scanner(System.in);
+		int next;
+		
+		
+		
+		System.out.print("This is the heap: ");
+		h.showHeap();
+		do
+		{
+		  
+		System.out.print("Enter You choice (1=insert, 2=delete min, 3=delete max, 4=exit)\n" );
+		//System.out.println("\n") ;
+		
+		next  = keyboard.nextInt();
+		switch(next)
+		{
+		case 1: 
+			     System.out.print("Enter Element:"); next = keyboard.nextInt(); h.insert(next);
+		         h.showHeap();	break;
+		         
+		case 2: 
+			    h.removeMinimum(); System.out.print("This is the new heap after removal of element from min level:\n"); h.showHeap(); break ;
+		
+		case 3: 
+			   h.removeMaximum(); System.out.print("This is the new heap after removal of element from max level:\n ");h.showHeap(); break ;
+		
+	
+		case 4: System.exit(0);
+		
+		default:
+			System.out.println("");
+			System.out.println("Please choose a number between 1-3 only\n");       
+		}
+		
+		}while(true); 
+	   
+	    	
+	}//main
+
+	
+	public static ArrayList<Integer> getRandomList(int min, int max)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		Random generator = new Random(19580427);
+		int size = generator.nextInt(max-min)+min;
+		//System.out.println("size in getRandomList " + size);
+		Random generator2 = new Random(19580427);
+		for(int i=0; i<size; i++)
+			list.add(generator2.nextInt(100)+1);
+		return list;
+	}
+	
+}//Main

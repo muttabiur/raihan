@@ -1,0 +1,14 @@
+package DETInterface;
+
+public interface MessageContainer {
+	
+	public static final int INVALIDACCOUNT = 1;
+	public static final int INSUFFICIENT_BALANCE = 2;
+	public static final int SUCCESS = 3;
+	public static final int INSUFFICIENTQUANTITY = 4;
+	public static final int PRODUCTNOTFOUND = 5;
+	public static final int INSUFFICIENTFUNDS = 6;
+	public static final int SERVERNOTFOUND = 7;
+}
+
+

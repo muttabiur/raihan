@@ -1,0 +1,78 @@
+package DETClient;
+
+import DETClient.NewThread;
+import Interface.ETrader_Interface;
+import Interface.DisplayMessage;
+import Interface.MessageContainer;
+import java.rmi.Naming;
+import java.util.Vector;
+import java.util.concurrent.*;
+
+/**
+ * @author m_sk
+ */
+
+
+public class DETTestClient {
+
+	/**
+	 * Design By Contract
+	 * Precondition: This function expects no input from the user
+	 * PostCondition: This function will create new threads.
+	 * 
+	 */
+	public static final CyclicBarrier cb = new CyclicBarrier(20);
+	public static void main(String args[]) {
+	
+		
+		String url="";
+		String itm1="computer";
+		String itm2="shoe";
+		String itm3="watch";
+		
+		int qty=1;
+		
+		int RMIPort=1399;         
+        String hostName="localhost";
+     
+        url = "rmi://" + hostName+ ":" + RMIPort + "/Raihan";  
+        
+        try{
+				
+		Thread[] t1= new NewThread[100];
+	
+		for (int x=0; x<10 ;x++)
+		{		
+				t1[x]=new NewThread(url,itm1,qty);
+				t1[x].start();
+				
+				t1[x]=new  NewThread(url,itm2,qty);
+				t1[x].start();
+				
+				t1[x]=new  NewThread(url,itm3,qty);
+				t1[x].start();
+		}	
+		
+		Thread.sleep(5000);
+		
+		Vector v=new Vector();
+		
+		
+		ETrader_Interface h =  (ETrader_Interface)Naming.lookup(url);
+	    	 
+			
+	    	// v = h.printReport(); 
+	    	 for (int x=0;x<v.size();x++)
+	 		 System.out.println(v.elementAt(x));
+	    	 
+		}
+        catch(Exception e){
+        	
+			System.out.println("Exception in testClient: " + e);
+		}
+		
+		
+	}
+} //End of Class
+
+

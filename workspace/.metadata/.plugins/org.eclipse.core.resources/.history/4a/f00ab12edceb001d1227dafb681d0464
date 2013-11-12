@@ -1,0 +1,180 @@
+/* ----------------------------------------------------------------------------
+ Copyright (c) 2003 jSNMP Enterprises, All Rights Reserved Worldwide
+ ------------------------------------------------------------------------------
+
+   Disclaimer: This software is provided AS IS, and without any warranty
+               other than those which may be provided in a separate
+               writing specifically referencing the software contained
+               herein.  All other warranties, except those which may be
+               provided separately in writing, are expressly disclaimed.
+               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+               PURPOSE which is given with respect to this software or the
+               operability thereof.
+
+   ------------------------------------------------------------------------
+ */
+
+
+// ------------------------------ Package -------------------------------------
+
+// ------------------------------ Imports -------------------------------------
+import com.outbackinc.services.protocol.snmp.*;
+import com.outbackinc.services.protocol.snmp.corba.*;
+import java.net.*;
+import java.io.*;
+
+/**
+ * Sample which illustrates how to use the SnmpService to place
+ * inspection orders.  In this case, the walker walks the remote
+ * agent's MIB until the end is reached.
+ */
+public class CORBAWalkerTest
+    implements SnmpCustomer
+{
+    // ------------------------------ Constants ---------------------------------
+
+    // ------------------------------ Class variables ---------------------------
+
+    // ------------------------------ Member (instance) variables ---------------
+
+    private SnmpService m_cSnmpService;
+    private String[] m_szLastOID;
+    private InetAddress m_iaHost;
+    private String m_szReadCommunity;
+    private int m_iNumRetrieved;
+
+    // ------------------------------ Methods -----------------------------------
+
+    /**
+     * Constructor
+     */
+    public CORBAWalkerTest(SnmpService cSnmpService, InetAddress iaHost, String szReadCommunity)
+        throws SocketException
+    {
+        //Sets the initial OID to something which should be before the table
+        m_szLastOID = new String[1];
+        m_szLastOID[0] = "1.3.6";
+        m_iaHost = iaHost;
+        m_szReadCommunity = szReadCommunity;
+
+        //Initializes the Snmp Service
+        m_cSnmpService = cSnmpService;
+    }
+
+    /**
+     * Main method to start execution
+     *
+     * @param szArgs contains cmdline args, first of which must be the host
+     *
+     */
+    public static void main(String[] szArgs)
+    {
+        try
+        {
+            if (szArgs.length < 4)
+            {
+                usage();
+                return;
+            }
+
+            //Read IORs
+            RandomAccessFile cRandomAccessFileFactory = new RandomAccessFile(szArgs[0], "r");
+            String szFactoryIOR = cRandomAccessFileFactory.readLine();
+            cRandomAccessFileFactory.close();
+
+            RandomAccessFile cRandomAccessFileService = new RandomAccessFile(szArgs[1], "r");
+            String szServiceIOR = cRandomAccessFileService.readLine();
+            cRandomAccessFileService.close();
+
+            //Connect the CORBA communications
+            CORBASnmpClient client = new CORBASnmpClient(szFactoryIOR,szServiceIOR);
+            InetAddress iaHost = InetAddress.getByName(szArgs[2]);
+            String szReadCommunity = szArgs[3];
+            System.out.println("Walking MIB Tree of " + iaHost + " with " + szReadCommunity);
+
+            //Creates new walker
+            CORBAWalkerTest test = new CORBAWalkerTest(client.getService(), iaHost, szReadCommunity);
+
+            //Starts the walker walking
+            test.getNext();
+
+            while (true)
+            {
+                Thread.currentThread().sleep(10000);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * Displays correct usage
+     */
+    public static void usage()
+    {
+        System.out.println("Usage : java CORBAWalkerTest <factoryIORfile> <serviceIORfile> <hostname> <readcommunity>");
+        System.out.println("\tfactoryIORfile : file from which to read the IOR of the SnmpTrapProfileFactory");
+        System.out.println("\tserviceIORfile : file from which to read the IOR of the SnmpService");
+        System.out.println("\thostname : host on which agent resides to walk");
+        System.out.println("\treadcommunity : read community on host on which agent resides to walk");
+    }
+
+
+    //SnmpCustomer Implementation
+
+    /**
+     * callback for delivering successes.  In this case the implementation
+     * is to print out the Object ID received and then use it for the basis
+     * for the get-next request
+     */
+    public void deliverSuccessfulOrder(int iOrderNum,
+                                       SnmpVarBind cSnmpVarBind)
+    {
+        System.out.println(cSnmpVarBind.getName());
+        if (m_szLastOID[0] != cSnmpVarBind.getName())
+        {
+            m_szLastOID[0] = cSnmpVarBind.getName();
+            getNext();
+        }
+        else
+        {
+            System.out.println("Finished");
+            m_cSnmpService.stop();
+            System.exit(0);
+        }
+    }
+
+    /**
+     * callback for failures.  In this case if a failure is received,
+     * stop walking the MIB
+     */
+    public void deliverFailedOrder(int iOrderNum, int iErrorStatus)
+    {
+        System.out.println("WalkerTest.deliveredFailedOrder(" + iOrderNum + "," + iErrorStatus + ")");
+        System.out.println("Ending MIB Walk");
+        m_cSnmpService.stop();
+        System.exit(1);
+   }
+
+    /**
+     * gets the next object from the remote agent.  Demonstrates
+     * placing orders with the snmp service
+     */
+    public void getNext()
+    {
+        m_cSnmpService.placeInspectionOrder(m_iaHost, //Agent Address
+                                       161, //Agent port
+                                       3, //Retries
+                                       2, //Timeout (secs)
+                                       0, //Caching Interval (no caching)
+                                       SnmpConstants.SNMP_GET_NEXT, //type
+                                       m_szReadCommunity, //Read community
+                                       m_szLastOID, //Object IDs
+                                       this, //callback interface
+                                       ++m_iNumRetrieved); //order number
+    }
+}

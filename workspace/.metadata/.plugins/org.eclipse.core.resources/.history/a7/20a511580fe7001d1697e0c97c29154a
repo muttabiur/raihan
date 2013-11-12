@@ -1,0 +1,161 @@
+
+import java.util.*;
+
+
+public class StudentRecord {
+
+	 public final double quizPercentage = 25.0;
+	 public final double midtermPercentage = 35.0 ;
+	 public final double finalPercentage = 40.0 ;
+	 
+	 public ArrayList<Double> numericScore = new ArrayList<Double>(100);
+	 public ArrayList<String> letterGrade  = new ArrayList<String>(5);
+	 
+	 public ArrayList<Double>TotalQuizMark = new ArrayList<Double>();
+	 public ArrayList<Double>TotalMidtermMark = new ArrayList<Double>();
+	 public ArrayList<Double>TotalFinalMark = new ArrayList<Double>();
+	 
+	 public ArrayList<Double> totalMark = new ArrayList<Double>();
+	 
+	 
+
+
+ public StudentRecord( double quiz, double midterm, double fMark ) {
+	 this.setQuizMark(quiz);
+	 this.setMidtermMark ( midterm );
+	 this.setFinalMark(fMark) ;
+	 
+	 
+ }
+ 
+ public void setQuizMark(double quiz) {
+	 
+	 double quizMark = 0.0 ;
+	 quizMark =(quiz/30)* quizPercentage ;
+	 TotalQuizMark.add(quizMark);	 
+	 
+ }
+ 
+ public void setMidtermMark(double midterm ) {
+	 
+	double midtermMark = 0.0 ;
+	midtermMark = (midterm/100)* midtermPercentage ;
+	TotalMidtermMark.add(midtermMark);
+ }
+ 
+ public void setFinalMark(double fMark) {
+	 double finalMark = 0.0 ;
+	 finalMark = (fMark/100)* finalPercentage ;
+	 TotalFinalMark.add(finalMark);
+	 
+ }
+ 
+ public void numericScoreRange() {
+	 for( double i = 0.0 ; i < numericScore.size(); i++)
+	 {
+		 numericScore.add(i);
+	 }
+		 
+ }
+ 
+ public void letterGradeRange() {
+	 
+		 letterGrade.add("A");
+		 letterGrade.add("B");
+		 letterGrade.add("C");
+		 letterGrade.add("D");
+		 letterGrade.add("F");
+	 
+ }
+ public void calculateFinalGrade() {
+	 
+	 
+	 
+	  for (Iterator<Double> iter1 = TotalQuizMark.iterator(); iter1.hasNext();  ) {
+  	                double quizMark = iter1.next();
+  	                
+  	                System.out.println("The quiz mark is :" +  quizMark);
+  	       for(Iterator<Double>iter2 = TotalMidtermMark.iterator();  iter2.hasNext(); ) {
+  		                double midtermMark = iter2.next();
+  		                
+  		              System.out.println("The mid mark is :" +  midtermMark );
+  		         for(Iterator<Double>iter3 = TotalFinalMark.iterator();  iter3.hasNext(); ) {
+    		                double finalMark = iter3.next();
+    		                System.out.println("The FinalExam mark is :" +  finalMark );
+    		                
+    		                double totalMarkObtained = quizMark + midtermMark + finalMark ;
+    		                
+    		                System.out.println("The final mark has obtained in total is :" +  totalMarkObtained);
+    		                totalMark.add(totalMarkObtained);
+  		         }
+  	   }
+  	}
+	 
+ }
+ public void equalsChecking() {
+	 
+	
+	  for (Iterator<Double> iter = totalMark.iterator(); iter.hasNext();) {
+		 
+		   double totalMarkObtained = iter.next();
+	
+		  
+		   if ((totalMarkObtained >=90) && (totalMarkObtained <= 100)) {
+			           String StudentObtained = letterGrade.get(0);
+			           toString(StudentObtained);
+			           
+			           
+		       }
+		       else if ((totalMarkObtained >=80) && (totalMarkObtained <= 89)) {
+			           String StudentObtained = letterGrade.get(1);
+			           toString(StudentObtained);
+			          // System.out.println("The Mark for this student is:" + StudentObtained ) ;
+		         }
+			     else if ((totalMarkObtained >=70) && (totalMarkObtained <= 79)) {
+			             String StudentObtained = letterGrade.get(2);
+			             toString(StudentObtained);
+			          }
+		             else if ((totalMarkObtained >=60) && (totalMarkObtained <= 69)) {
+			                String StudentObtained = letterGrade.get(3);
+			                toString(StudentObtained);
+			              }
+		                  else if (totalMarkObtained <= 59) {
+			                      String StudentObtained = letterGrade.get(4);
+			                      toString(StudentObtained);
+			                     }
+			       		 
+		   
+	           }
+ }
+ 
+ 
+ public void toString( String mark) {
+	 
+	 System.out.println(" ");
+	 System.out.println("The Student has obtained the finalGrade :" + mark);
+	 System.out.println("");
+	 
+ }
+ 
+ public static void main(String []args) {
+	 
+	 StudentRecord sr = new StudentRecord(30, 98, 9, 8);
+	              // sr= new StudentRecord(23, 93, 90);
+	 
+	 sr.numericScoreRange();
+	 
+	 sr.letterGradeRange();
+	
+
+	 sr.calculateFinalGrade();
+	 
+	 sr.equalsChecking();
+
+	
+	 //This is a Static method, because the invocation is used the class name
+	 System.exit(0);
+	 
+ }
+ 
+ 
+}

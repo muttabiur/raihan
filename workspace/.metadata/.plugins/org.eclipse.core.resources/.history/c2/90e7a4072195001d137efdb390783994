@@ -1,0 +1,85 @@
+package InterFace;
+
+import java.rmi.*;
+import java.util.Vector;
+
+/**
+ * @author  mo_iqba
+ */
+public interface DETInterface extends Remote {
+
+/**
+ * buyItem remote method returns a message.
+ * @param  item - a String containing a item name.
+ * @param  qty - a int containing a quantity.
+ * @return a int feedback.
+ */
+	
+   public int buyItem(String item, int qty) throws java.rmi.RemoteException;
+
+   /**
+    * 
+    * @param item : String contatining item name
+    * @param qty : int contatining Quantity
+    * @param bal : double containg balance
+    * @return : Vector 
+    * @throws java.rmi.RemoteException
+    */
+   
+   public Vector sellItem(String item, int qty,double bal) throws java.rmi.RemoteException;
+
+   /**
+    * 
+    * @return String
+    * @throws java.rmi.RemoteException
+    */
+   
+   
+   public String printReport() throws java.rmi.RemoteException;
+   
+   /**
+    * 
+    * @return : Vector containing report
+    * @throws java.rmi.RemoteException
+    */
+   
+   public Vector getReport() throws java.rmi.RemoteException;
+
+   
+   /**
+    *  Define all Server name and Items 
+    *  server1 deal with item1
+    *  server2 deal with item2
+    *  server3 deal with item3
+    */
+   
+   public static final String Server1 = "localhost";
+   public static final String Server2 = "eastwood.encs.concordia.ca";
+   public static final String Server3 = "forman.encs.concordia.ca";
+   
+   
+   public static final String item1 = "cpu";
+   public static final String item2 = "ram";
+   //List down all the items
+   public static final String item3 = "shoe";
+   //public static final String item4 = "watch";
+   
+   //public static final String item3 = "hdd";
+   
+   
+   
+   /**
+    *  Item details for this e-trader
+    * 
+    */
+   
+   public static final String ITEM ="cpu";
+   public static final double PRICE=200;
+   public static final int QTY=241;
+   public static final double BALANCE=12456;
+   
+   
+   
+   
+   
+} //end interface

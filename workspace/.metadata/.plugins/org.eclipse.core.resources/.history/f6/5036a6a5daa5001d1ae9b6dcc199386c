@@ -1,0 +1,5 @@
+package DETServer;
+
+public interface AllMessage {
+
+}

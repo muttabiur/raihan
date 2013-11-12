@@ -1,0 +1,28 @@
+                                                                     
+                                             
+import java.util.ArrayList;
+
+/**
+ * Max_Min_Heap interface
+ */
+
+/**
+ * @author Yasmin
+ *
+ */
+public interface Min_Max_Heap_Interface {
+		
+	//returns the maximum and minimum element of the heap
+	public int getMaximum();
+	public int getMinimum();
+	
+	//insert a new element to the heap
+	public void insert (int a);
+	
+	//remove the maximum and minimum of the heap
+	public void removeMaximum(); 
+	public void removeMinimum();
+	
+	public void showHeap();
+	
+}

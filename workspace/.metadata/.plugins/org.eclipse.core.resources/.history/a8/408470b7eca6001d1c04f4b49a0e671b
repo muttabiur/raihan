@@ -1,0 +1,384 @@
+
+
+import java.util.ArrayList;
+//import AliLowerUpper.Orthogonal_List;
+ 
+public class Bound {
+
+	Orthogonal_List oList = null;
+	ArrayList< ArrayList<Integer> > J = new ArrayList();
+	ArrayList< ArrayList<Integer> > I = new ArrayList();
+	ArrayList<Integer> u = new ArrayList();
+	double lowerBound=0.0;
+	
+	public Bound(String fn)
+	{
+		oList = new Orthogonal_List();
+		oList.buildList(fn);
+	}
+	
+	
+	public double lowerBound()
+	{
+		System.out.println("OrthogonalList.size();= "+ oList.OrthogonalList.size());
+		
+		for(int i = 0 ; i < oList.OrthogonalList.size(); i++) {
+			u.add(0); 
+		}
+	     
+		// initialization of J
+		for(int row=0; row<oList.OrthogonalList.size(); row++)
+		{
+    	  	ArrayList<Element> testrow1 = oList.OrthogonalList.get(row);
+    	  	ArrayList<Integer> row2 = new ArrayList();
+    	  	for(int c=0; c<testrow1.size(); c++)
+    		  row2.add( (Integer) testrow1.get(c).getColumn() );
+    	  	J.add(row2);
+		}//for
+      
+		// initialization of J
+		for(int cols=0; cols<oList.costs.size(); cols++)
+		{
+			ArrayList<Integer> iRow = new ArrayList();
+			for(int rows=0; rows<oList.OrthogonalList.size(); rows++)
+			{
+				ArrayList<Element> row1 = oList.OrthogonalList.get(rows);
+    		  	for(int col=0; col<row1.size(); col++)
+    		  		if(row1.get(col).getColumn() == cols+1)
+    		  			{
+    		  				iRow.add(rows+1);
+    		  				break;
+    		  			}
+    	  }//for
+    	  I.add(iRow);
+		}//for
+    	  
+      
+      
+      //print u J and I
+      System.out.println("u = " + u);
+      System.out.println("J = " + J);
+      System.out.println("I = " + I);
+      
+      boolean flag = true;
+      do
+      {
+    	  ArrayList<Integer> Iofu = new ArrayList();
+    	  //Calculate the delta
+    	  ArrayList< ArrayList<Integer> > delta = new ArrayList();
+    	  for(int j=0; j<J.size(); j++)//access each J row
+    	  {
+    		 ArrayList< ArrayList<Integer> > redCost = new ArrayList();			
+    		 ArrayList<Integer> a = new ArrayList();
+    	   	 a = J.get(j);
+    	   	 for(int k=0; k<a.size(); k++) //access each column jth row of J
+    	   	 {
+    	   		 ArrayList<Integer> rCost = new ArrayList();
+    	   		 int col = a.get(k)-1;
+    		 	 int cost = oList.costs.get(col);
+    		 	 ArrayList<Integer> iRow = new ArrayList( I.get (col) );
+    		 	 for(int m=0; m<iRow.size(); m++)	
+    		 		 cost -= u.get( iRow.get(m)-1 );
+    		 	 rCost.add(cost);
+    		 	 rCost.add(a.get(k));/// error
+    		 	 redCost.add(rCost);
+    		 
+    	   	 }
+    	   	 delta.add(getMin(redCost)  );
+    	   	 System.out.print("Reduced cost=" + redCost + "\t");
+    	   	 System.out.println("delta" + (j+1) + " = " + delta.get(j).get(0));
+    	  }//for
+    	  //update I(u)
+    	  for(int d=0; d<delta.size(); d++)
+    		  if( delta.get(d).get(0) > 0)
+    			  Iofu.add(d);
+    	  //display u 
+    	  System.out.print("I(u) = " + Iofu);
+    	  if (Iofu.size()>0) // if I(u) is not empty
+    	  {
+    		  int iEstrik=0;
+    		  if (Iofu.size()==1)	// if no tie in the length of Ji
+    			  iEstrik = Iofu.get(0);
+    		  else //  if tie in the length of Ji 
+    		  {
+    			  ArrayList<Integer> mins = getMinsLen(Iofu);
+    			  iEstrik = getMaxValLoc(delta, mins);
+    		  }//else
+    		  System.out.println("iEstrik " + iEstrik);
+    		  u.set(iEstrik, u.get(iEstrik)+delta.get(iEstrik).get(0));
+    		  //u.set(iEstrik, u.get(iEstrik)+ delta.get(iEstrik).get(1));
+    	  }//if
+    	  else // I(u) empty
+    		  flag = false;
+    	 
+    	  System.out.println("u =" + u);
+       	
+      } while(flag==true); // && counter++<5); //orthogo.get col()
+     
+      //calculate lower bound on the values of u
+     lowerBound = 0;
+     for(int i=0; i<oList.OrthogonalList.size(); i++)
+    	 lowerBound += u.get(i);
+    	 
+      
+      return lowerBound;
+	}//lowerBound()
+	
+	
+	
+	private int getMaxValLoc(ArrayList< ArrayList<Integer> > delta, ArrayList<Integer> mins)
+	{
+		int location=mins.get(0);
+		//location = mins.get(0);
+		int value = delta.get(mins.get(0)).get(0);
+		for(int i=1; i<mins.size(); i++)
+		{
+			int loc = mins.get(i);
+			if(value < ( delta.get(loc).get(0) ) )
+			{
+				value = delta.get( mins.get(i)).get(0);
+				location = mins.get(i); //delta.get( mins.get(i)).get(1);
+			}
+		}
+		return location;
+	}
+	
+	
+	private ArrayList<Integer> getMinsLen(ArrayList<Integer> Iofu)
+	{
+		ArrayList<Integer> mins =  new ArrayList();
+			mins.add(0); //Iofu.get(0));
+			int minValue = J.get(Iofu.get(0)).size();
+			for(int i=1; i<Iofu.size(); i++)
+			{
+				if(minValue > J.get(Iofu.get(0)).size())
+				{
+					mins.clear();
+					mins.add(i); // Iofu.get(i));
+					minValue = J.get(Iofu.get(0)).size();
+				}
+				else if(minValue == J.get(Iofu.get(0)).size())
+					mins.add(i);// Iofu.get(i));
+			}		
+		return mins;
+	}
+	
+	
+	private ArrayList<Integer> getMin(ArrayList< ArrayList<Integer> > redCost)
+	{
+		//System.out.println("Reduced Cost in getMin()=" + redCost);
+		//int min = redCost.get(0).get(0);
+		//int value = redCost.get(0).get(0);
+		ArrayList<Integer> min = new ArrayList();
+			min.add(redCost.get(0).get(0));
+			min.add(redCost.get(0).get(1));
+			for( int i=1; i< redCost.size(); i++)
+				if(min.get(0) > redCost.get(i).get(0))
+				{
+					min.set(0, redCost.get(i).get(0) );
+					min.set(1, redCost.get(i).get(1) );	
+				}
+		return min;
+	}
+	
+	
+	
+	public double upperBound()
+	{
+		ArrayList<Integer> x = new ArrayList();	// variables or columns
+		ArrayList<Integer> U = new ArrayList();	// unsatisfied constraints U(x)
+		ArrayList<Integer> S = new ArrayList();	// satisfied constraints U(x)
+		ArrayList< ArrayList<Integer> > Iofx = new ArrayList();	// satisfied constraints I)
+		ArrayList<Integer> u2 = new ArrayList();	// dual variables u = u1, u2, ..., un
+		
+		int noOfVaribales = oList.costs.size();
+		int noOfConstraints = oList.getNumberOfRows();
+		
+		//	1.	INITIALIZATION
+		//set all variables as 0 x(x1,x2, .... xn)
+		for(int cols=0; cols<noOfVaribales; cols++)
+			x.add(0);
+		
+		//set constraints in U(x)
+		for(int rows=0; rows<noOfConstraints; rows++)
+			U.add(rows+1);
+		
+		//set I(x) common set on I and U(x)
+		for(int i=0; i<I.size(); i++)
+			Iofx.add( getComSet(I.get(i), U) );
+		
+		//print x, U, Iofx
+		System.out.println("x = " + x);
+		System.out.println("U = " + U);
+		System.out.println("Iofx = " + Iofx);
+		
+		//	2.	set dual variables (u) values based on lower bound
+		for(int dv=0; dv<noOfConstraints; dv++)
+		{
+			ArrayList<Integer> j = J.get(dv); 
+			u2.add(u.get(dv)* j.size() );
+		}
+		//Print u2
+		System.out.println("u2 = " + u2);
+		int iEstrik = getMaxValLoc(u2);
+		System.out.println("iEstrik = " + iEstrik);
+		
+		//	3.	set j* based on the iEstrik
+		ArrayList<Integer> j = J.get(iEstrik);
+		System.out.println("JiEstrik = " + j);
+		
+		//calculate reduced cost
+		ArrayList< ArrayList<Integer> > redCost = new ArrayList();			
+		for(int k=0; k<j.size(); k++) //access each column jth row of J
+	   	{
+	   		 ArrayList<Integer> rCost = new ArrayList();
+	   		 int col = j.get(k)-1;
+		 	 int cost = oList.costs.get(col);
+		 	 ArrayList<Integer> iRow = new ArrayList( I.get (col) );
+		 	 for(int m=0; m<iRow.size(); m++)	
+		 		 cost -= u.get( iRow.get(m)-1 );
+		 	 rCost.add(cost);
+		 	 rCost.add(j.get(k));/// error
+		 	 redCost.add(rCost);
+		 
+	   	}//for
+		ArrayList<Integer> mins = new ArrayList();
+		mins = getMinValLocs(redCost);
+		System.out.println("mins="+mins + ",  redCost="+redCost);
+		int jEstrik=0;
+	   	if( mins.size() == 1 )	//there is no ties in reduced cost to select j*
+	   		jEstrik = redCost.get(mins.get(0)).get(1);
+	   	else	// there is tie
+	   	{
+	   		jEstrik = getMinValLoc(redCost, mins);
+	   	}//else
+		System.out.println("jEstrik = " + jEstrik);
+		
+		//Set x_j* = 1;
+		x.set(jEstrik-1, 1);
+		System.out.println("x=" +x);
+		
+		//remove jEstrik from U(x)	// here we can implement binary search 
+		for(int i=0; i<U.size(); i++)
+			if(U.get(i)==jEstrik)
+			{
+				U.remove(i);
+				break;
+			}//if
+		System.out.println("U="+U);
+		
+		//add jEstrik into S(x)
+		S.add(jEstrik);
+		System.out.println("S="+S);
+		
+		//new code
+		//for(int i=0; i<oList.OrthogonalList.size(); i++)
+	    	// lowerBound += u.get(i);
+		double upperBound=0.0;
+		for(int i = 0; i < U.size(); i++)
+			upperBound += U.get(i);
+		
+		return upperBound;
+	}//upperBound()
+	
+	
+	private boolean logicalTests(ArrayList<Integer> x)
+	{
+		//logical test 1 & 2
+		for(int i=0; i<J.size(); i++)
+			if (J.get(i).size() ==0)
+				return false;
+			else if(J.get(i).size()==1)
+			{
+				int row = J.get(i).get(0)-1; 
+				x.set(row, 1);
+				for(int k=0; k<I.get(row).size(); k++)
+					oList.removeRow(I.get(row).get(k));
+			}//else
+		
+		//logical test 3
+		
+		return true;
+	}//logicalTests
+	
+	
+	private int getMinValLoc(ArrayList< ArrayList<Integer> > rCost, ArrayList<Integer> mins)
+	{
+		int location= rCost.get(mins.get(0)).get(1);
+		//location = mins.get(0);
+		int value = oList.getCost(rCost.get(mins.get(0)).get(1))/ I.get(rCost.get(0).get(1)-1).size(); //rCost.get(mins.get(0)).get(0);
+		for(int i=1; i<mins.size(); i++)
+		{
+			int loc = rCost.get(mins.get(i)).get(1);
+			int val2 = oList.getCost(loc)/ I.get(loc-1).size();
+			if(value > val2 ) //( delta.get(loc).get(0) ) )
+			{
+				value = val2; //delta.get( mins.get(i)).get(0);
+				location = loc; //delta.get( mins.get(i)).get(1);
+			}
+		}
+		return location;
+	}
+	
+	
+	
+	private ArrayList<Integer> getMinValLocs(ArrayList< ArrayList<Integer> > rCost)
+	{
+		ArrayList<Integer> mins = new ArrayList();
+		mins.add(0);
+		double value = rCost.get(0).get(0) / I.get(rCost.get(0).get(1)-1).size() ;
+		 
+		for(int i=1; i<rCost.size(); i++)
+		{
+			double value2 = rCost.get(i).get(0) / I.get(rCost.get(i).get(1)-1).size() ;
+			if(value > value2 )
+			{
+				mins.clear();
+				value = rCost.get(i).get(0);
+				mins.add(i); 
+			}
+			else if(value == rCost.get(i).get(0))
+				mins.add(i);
+		}
+		return mins;
+	}
+	
+	private int getMaxValLoc(ArrayList<Integer>  u)
+	{
+		int location=0;
+		//location = mins.get(0);
+		int value = u.get(0);
+		for(int i=1; i<u.size(); i++)
+		{
+			if( value < u.get(i) )
+			{
+				value = u.get(i);
+				location = i;
+			}
+		}
+		return location;
+	}
+	
+	
+	
+	ArrayList<Integer> getComSet(ArrayList<Integer> Ii, ArrayList<Integer> U)
+	{
+		ArrayList<Integer> comSet = new ArrayList();
+		
+		for(int i=0; i<Ii.size(); i++)
+		{
+			for(int u=0; u<U.size(); u++)
+			{
+				if( Ii.get(i) == U.get(u))
+				{
+					comSet.add(Ii.get(i));
+					break;
+				}//if
+			}
+		}//for
+		return comSet;
+	}//getComSet()
+	
+	
+}
+

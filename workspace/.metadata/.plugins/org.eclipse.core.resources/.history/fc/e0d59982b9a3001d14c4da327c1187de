@@ -1,0 +1,71 @@
+
+//A Simple Java IDL object Client Application
+
+package DETClient;
+import DETServer.* ;
+import DETApp.*;
+import org.omg.CosNaming.*;
+import org.omg.CosNaming.NamingContextPackage.*;
+import org.omg.CORBA.*;
+
+public class Client
+{
+  static DET detImpl;
+  static ImplementationEtraderServer ;
+
+  public static void main(String args[]){
+     try{
+    	 
+    	 String Naminghost="localhost";
+    	 String tradeHost="cyprus";
+    	 String name="DETcpu";
+    	 
+        // create and initialize the ORB
+    	 String arg1[]={"-ORBInitialHost", Naminghost,"-ORBInitialPort", "1234"};
+   	 
+    	 ORB orb = ORB.init(arg1, null);
+
+        // get the root naming context
+        org.omg.CORBA.Object objRef =  orb.resolve_initial_references("NameService");
+        
+        // Use NamingContextExt instead of NamingContext, 
+        // part of the Interoperable naming Service.  
+        NamingContextExt ncRef =  NamingContextExtHelper.narrow(objRef);
+ 
+        // resolve the Object Reference in Naming
+        //String name = "DET";
+        
+        detImpl = DETHelper.narrow(ncRef.resolve_str(name));
+
+    
+        //System.out.println(detImpl.sayHello("Aqib "));        
+      
+        System.out.println(detImpl.buyItem("cpu",5));
+        System.out.println(detImpl.buyItem("ram",2));
+    //    System.out.println(detImpl.buyItem("hdd",2));
+        
+        System.out.println(detImpl.buyItem("cpu",5));
+        System.out.println(detImpl.buyItem("ram",2));
+    //    System.out.println(detImpl.buyItem("hdd",2));
+        
+       
+     
+    
+        
+        System.out.println(detImpl.tradeItems("cpu",1,"ram",3,tradeHost));
+  //      System.out.println(detImpl.tradeItems("ram",1,"cpu",3,tradeHost));
+      
+        
+        System.out.println(detImpl.printReport());
+
+	  } 
+     catch (Exception e) {
+        System.out.println("ERROR : " + e) ;
+	     e.printStackTrace(System.out);
+	  } 
+  } //end main
+
+} // end class
+
+
+

@@ -1,0 +1,98 @@
+package DETServer;
+
+import org.omg.CORBA.ORB;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+
+import DETApp.DET;
+import DETApp.DETHelper;
+import SNMPFunctions.* ;
+
+public class Manager {
+
+    double balance ;
+    static DET detImpl;
+    ContainerManagedItem ct ;
+   
+    public void snmpTrapMessageReceived(double balInfo) {
+	
+	//When the balance will be zero, send trap message to manager.
+		//System.out.println("Manager Received Trap Message from Server/Agent:");
+		double balance = balInfo;
+		//System.out.println("The Trap Message Information is Stated Below:" + balance);
+	 
+		//Call Trap Response message
+		
+		if (( balance == 0) || (balance < 0)) {
+		    Agent_Computer agent = new Agent_Computer();
+			agent.trapResponse("Manager will provide more money in that Server due to Balance became negative:");
+			  Manager m = new Manager();
+			  
+		   	 
+			  
+			     // System.out.println("The new balance is:" + raihan);
+			    // m.snmpSetRequest(4000);
+			  }
+			  
+		}
+	
+    /*
+    public void snmpSetRequest(double bal) {
+	     //synchronized(lockItm) {
+		    ct.setBalance(bal);
+		    Agent_Computer agent = new Agent_Computer();
+		    agent.ResponseSet("The Balance is set to:" + bal);
+		    //String ok = null;
+		    //return ok ;
+	     }
+    */
+    
+    public void MessagePassed(String mess) {
+	
+	String mas = null ;
+	mas = mess ;
+	Agent_Computer agent = new Agent_Computer();
+	agent.ResponseSet(mas);
+	
+    }
+    
+    
+    //Mib module will be here
+    
+    //Manager will call get-request
+    //Manager will call set-request
+    //Manager will call get-next-request
+    
+    public static void main(String args[]) {
+	
+	SNMPMemberFuntions snmpCall = new SNMPMemberFuntions();
+	//Manager will call get-request
+       
+	
+	
+	// I expect the mib will give me a String parameters
+	//Acquiring the last char from the String
+	String value = "1.3.6.1.4.1.9.6" ;
+	
+	snmpCall.getRequest("SNMPV1" , "Public" , 1, value );
+	
+	//Set-Request message to agent
+	String value1 = "1.3.6.1.4.1.9.7" ;
+	snmpCall.setRequest("SNMPV1", "Public", 3,  value1);
+    }
+    
+    
+    
+}
+	    
+   //Need to write set function, that will set the balance parameters
+   /*public void ResponseSet(String trap) {
+           String tp = null ;
+           
+           tp = trap ;
+           
+          System.out.println("The Trap Response:" + tp);
+   } */
+    
+    
+

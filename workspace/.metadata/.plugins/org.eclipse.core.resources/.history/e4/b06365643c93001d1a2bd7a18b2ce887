@@ -1,0 +1,124 @@
+package Client;
+import DETInterface.* ;
+
+import java.rmi.Naming;
+import java.util.Date ;
+import java.util.Vector;
+import EDETServer.* ;
+import java.rmi.*;
+import java.rmi.server.*;
+import java.rmi.registry.*;
+
+/**
+ * 
+ * to run this program first set all three servers name in DETInterface Interface
+ *  for example
+ *  Server1= "host1" 
+ *  Server2= "host2"
+ *  Server3= "host3"
+ * 
+ *  and item information for that e-trader  
+ *  
+ *  like name, quantity, price, balance etc. 
+ *   
+ * 
+ * 
+ * @author m_sk
+ *
+ */
+public class TestClient {
+
+
+	public static void main(String args[]) {
+	
+		ImplementMessageContainer allMessage = new ImplementMessageContainer();
+		String url = " " ;
+		String itm1 = "Computers";
+		String itm2 = "Books" ;
+		String itm3 = "AirlinesTicket";
+		
+	
+		int qty=1;
+		
+		int RMIPort=1399;         
+        String hostName="localhost";
+     
+        url = "rmi://" + hostName+ ":" + RMIPort + "/DET";  
+        try{
+		      		
+		Thread[] t1= new cThread[100];
+	
+		for (int x=0; x<10 ;x++)
+		{		
+				t1[x]=new cThread(url,itm1,qty);
+				t1[x].start();
+				
+				t1[x]=new cThread(url,itm2,qty);
+				t1[x].start();
+				
+				//t1[x]=new cThread(url,itm3,qty);
+				//t1[x].start();
+		}	
+		
+		Thread.sleep(5000);
+		
+		Vector v=new Vector();
+		
+		
+			DETInterface h =  (DETInterface)Naming.lookup(url);
+	    	 
+		
+			h.printReport() ;
+	    	 
+	    
+		}catch(Exception e){
+			System.out.println("Exception exist in testClient: " + e);
+		}
+		
+		
+	}
+}// end class
+
+
+class cThread extends Thread{
+
+	ImplementMessageContainer allMessage = new ImplementMessageContainer();
+	String url;
+	String item ;
+	int quantity ;
+	
+	DETInterface h;
+	static public Object ob=new Object();
+		
+	public cThread(String u,String i, int q){
+		
+		url=u;
+		this.item =i;
+		this.quantity =q;
+		
+	}
+	
+	public  void run(){
+		try {
+	         
+    	  
+	         
+	    	 DETInterface h =  (DETInterface)Naming.lookup(url);
+    	 
+	    	int ret = h.buyItem(item, quantity) ;
+	    	 System.out.println(allMessage.displayMessage(ret));
+	    	
+	    	
+	    		    	 
+	    
+		
+		} // end try 
+		catch (Exception e) {
+        System.out.println("Exception in testClient: " + e);
+        } 
+	}
+	
+	  
+		
+	
+}	//end class

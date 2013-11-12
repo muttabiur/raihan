@@ -1,0 +1,52 @@
+
+import java.rmi.registry.Registry ;
+import java.rmi.registry.LocateRegistry ;
+import java.rmi.RemoteException ;
+import java.rmi.server.UnicastRemoteObject ;
+import java.net.* ;
+import java.io.* ;
+import java.rmi.Naming ;
+
+
+public class Server extends UnicastRemoteObject implements Hello {
+	//public Server() {}
+	
+	
+  public String sayHello()
+  {
+	  return "Hello, World" ;
+	 
+  }
+	
+  public static void main(String args[])
+  {
+	   try
+	   {
+		   Server obj = new Server() ;
+		   //get stub for hello interface by server object
+		   Hello stub = (Hello) UnicastRemoteObject.exportObject(obj, 0);
+		   //Need to bind that stub in the java rmi registry
+		   //Client can look for this stub in the rmi registry first
+		   //Each stub has a name 
+		   //Server pass the reference for this remote object to client
+		   //Now client is ready to call any method from this remote object
+		   
+		   //Get the registry first
+		   Registry registry = LocateRegistry.getRegistry() ;
+		   //Now save that stub in the registry
+		   registry.bind("Hello", stub);
+		   
+		   System.out.println("Server Ready");
+	   }
+	   
+	   catch(Exception e)
+	   {
+		    System.out.println("Server exception:" + e.toString());
+		    e.printStackTrace();	    
+	   }
+  }
+  
+  
+  
+  
+}

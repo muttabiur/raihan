@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="243" key="DIALOG_WIDTH"/>
+		<item value="318" key="DIALOG_Y_ORIGIN"/>
+		<item value="355" key="DIALOG_HEIGHT"/>
+		<item value="783" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Tahoma|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Tahoma" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="wrap"/>
+		<item value="false" key="isRegEx"/>
+		<item value="true" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="&#x09;try {&#x0D;&#x0A;&#x09;    Pattern linePattern = Pattern.compile(&quot;^(\\d+)\\s*\\:\\s*(\\w+)$&quot;);&#x0D;&#x0A;&#x0D;&#x0A;&#x09;    BufferedReader inputS = new BufferedReader(new FileReader(&quot;system1.txt&quot;));&#x0D;&#x0A;&#x0D;&#x0A;&#x09;    String line1 = null;&#x0D;&#x0A;&#x0D;&#x0A;&#x09;// loop through the lines&#x0D;&#x0A;&#x09;while ((line1 = inputS.readLine() ) != null) {&#x0D;&#x0A;&#x0D;&#x0A;&#x09;&#x09;   // setup the regex matcher&#x0D;&#x0A;&#x09;&#x09;   Matcher matcher = linePattern.matcher(line1);&#x0D;&#x0A;&#x09;&#x09;   String index = null, value = null;&#x0D;&#x0A;&#x0D;&#x0A;&#x09;&#x09;   // check if pattern matches and extract values&#x0D;&#x0A;&#x09;&#x09;   if (matcher.matches()) {&#x0D;&#x0A;&#x09;&#x09;&#x09;index = matcher.group(1);&#x0D;&#x0A;&#x09;&#x09;&#x09;value = matcher.group(2);&#x0D;&#x0A;&#x09;&#x09;&#x09;&#x0D;&#x0A;&#x09;&#x09;&#x09;// return value if found&#x0D;&#x0A;&#x09;&#x09;&#x09;if (indexNum.equals(index)) {&#x0D;&#x0A;&#x09;&#x09;&#x09;return value; &#x0D;&#x0A;&#x09;&#x09;    }&#x0D;&#x0A;&#x09;&#x09;}&#x0D;&#x0A;&#x09;    }&#x0D;&#x0A;&#x09;    inputS.close();&#x0D;&#x0A;&#x09;}&#x0D;&#x0A;&#x0D;&#x0A;" key="selection"/>
+		<list key="findhistory">
+			<item value="&#x09;try {"/>
+			<item value="UDP"/>
+			<item value="HOST-RESOURCES-MIB.my"/>
+			<item value="Socket Information:"/>
+			<item value="print"/>
+			<item value="hrDeviceStatus"/>
+			<item value="hostname"/>
+			<item value="ip address"/>
+		</list>
+		<list key="replacehistory">
+			<item value="DETComputer"/>
+			<item value="DETImpl"/>
+			<item value="ImplementationEtraderServer"/>
+			<item value="MessageContainer allMessag"/>
+			<item value="sName"/>
+			<item value="lockBalance"/>
+			<item value="lockQty"/>
+			<item value="lockPrice"/>
+		</list>
+	</section>
+</section>

@@ -1,0 +1,109 @@
+package snmpcorba.mib;
+
+import DETServer.* ;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MIBTest {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+
+	//Hi Pawel, I need the following things, 
+	// 1. Let's consider that i will send one request at a time.For Instance, requests.add("1.3.6.1.5.1");
+	// 2. So I need the location as a String return value.
+	//3. So please write a function that will take a single request->("1.3.6.1.5.1") and return location as String as a return value.
+	//4. What ever, u have done, all are correct, however i need the above stated form.
+	//5. The location is the index for my flat file. 
+	//6. We will have this-> "List<String> requests = new ArrayList<String>();" when we want to use setNextRequest()
+	//7. Let me know if you need anything.
+	//8. Once you are done please send me that function.
+	//9. Thanks a lot. Raihan
+	// test the MIB
+	List<String> requests = new ArrayList<String>();
+	requests.add("1.3.6.1.5.1");
+	requests.add("1.3.6.1.5.1.INDEX_OF_OBJ");
+
+	// setup test database
+	File dataFile = writeTestData();
+
+	try {
+	    System.out.println("-------------------------- TREE CREATED --------------------------");
+	    MIBTree tree = new MIBTree(dataFile);
+	    for (String request : requests) {
+		System.out.println("-------------------------- TESTING GET " + request + " --------------------------");
+		String location = tree.getAttributeReference(request);
+		
+		//Raihan was checking the location value.
+		System.out.println("The localtion is:" + location);
+		
+		//End of checkLocation
+		System.out.println("Requesting " + request + ": " + location);
+	    }
+	    System.out.println("-------------------------- TESTING DONE --------------------------");
+
+	} catch (Throwable t) {
+	    System.out.print("Exception [" + t.getClass().getSimpleName() + "] caught with message: " + t.getMessage());
+	    t.printStackTrace();
+	}
+
+	// cleanTestData();
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////// helper methods ///////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static File writeTestData() {
+	// declare and check the file
+	File outFile = new File("testMIB");
+	if (outFile.exists()) {
+	    outFile.delete();
+	}
+	try {
+	    System.out.println("Writing test data to: " + outFile.getAbsolutePath());
+
+	    BufferedWriter writer = new BufferedWriter(new FileWriter(new File("testMIB")));
+
+	    writer.write("internet[1].org[3].dod[6].application.test1 = 1\n");
+	    writer.write("internet[1].org[3].dod[6].application.test2 = 2\n");
+	    writer.write("internet[1].org[3].dod[6].application.test3 = 3\n");
+	    writer.write("internet[1].org[3].dod[6].application.test4 = 4\n");
+	    writer.write("internet[1].org[3].dod[6].application.data.abc = 5\n");
+	    writer.write("internet[1].org[3].dod[6].application.data.def = 6\n");
+
+	    writer.close();
+
+	} catch (Throwable t) {
+	    System.out.print("Exception [" + t.getClass().getSimpleName() + "] caught with message: " + t.getMessage());
+	    t.printStackTrace();
+	}
+	return outFile;
+    }
+
+    private static void cleanTestData() {
+	// declare and check the file
+	File outFile = new File("testMIB");
+	if (outFile.exists()) {
+	    outFile.delete();
+	}
+	try {
+	    if (outFile.exists()) {
+		outFile.delete();
+	    }
+	} catch (Throwable t) {
+	    System.out.print("Exception [" + t.getClass().getSimpleName() + "] caught with message: " + t.getMessage());
+	    t.printStackTrace();
+	}
+    }
+
+}

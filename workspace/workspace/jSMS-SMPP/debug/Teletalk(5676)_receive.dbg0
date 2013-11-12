@@ -1,0 +1,219 @@
+2011-09-13 04:16:26.254    Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:16:26.265    Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:16:26.269    Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:16:26.281    Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:16:26.285    Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:16:26.291    Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:16:47.314    Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:16:47.318    Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:16:47.322       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:16:47.335       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:16:57.342          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:16:57.346          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:16:57.35          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:16:57.354          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:16:57.358          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:16:57.363          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:17:18.375          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:18.38          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:17:18.384       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:17:18.389       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:17:18.402       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:17:28.412          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:17:28.416          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:17:28.421          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:17:28.425          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:17:28.429          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:17:28.434          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:17:49.459          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:49.463          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:17:49.467       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:17:49.472       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:17:49.486       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:17:59.496          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:17:59.5          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:17:59.504          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:17:59.509          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:17:59.513          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:17:59.519          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:18:20.528          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:18:20.533          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:18:20.546       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:18:20.55       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:18:20.565       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:18:30.576          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:18:30.581          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:18:30.586          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:18:30.59          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:18:30.594          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:18:30.599          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:18:51.811          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:18:51.815          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:18:51.82       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:18:51.824       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:18:51.84       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 5
+2011-09-13 04:19:02.044          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:19:02.048          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:19:02.053          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:19:02.058          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:19:02.062          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:19:02.067          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:19:23.511          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:23.516          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:19:23.52       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:19:23.525       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:19:23.541       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 6
+2011-09-13 04:19:33.742          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:19:33.747          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:19:33.751          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:19:33.756          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:19:33.76          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:19:33.765          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:19:54.984          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:54.989          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:19:54.993       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:19:54.998       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:19:55.015       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 7
+2011-09-13 04:20:05.026          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:20:05.031          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:20:05.036          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:20:05.04          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:20:05.045          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:20:05.051          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:20:26.262          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:26.266          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:20:26.271       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:20:26.276       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:20:26.294       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 8
+2011-09-13 04:20:36.501          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:20:36.505          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:20:36.51          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:20:36.515          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:20:36.52          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:20:36.524          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:20:57.546          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:57.551          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:20:57.555       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:20:57.56       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:20:57.577       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 9
+2011-09-13 04:21:07.589          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:21:07.594          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:21:07.599          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:21:07.603          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:21:07.608          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:21:07.615          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:21:28.642          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:21:28.647          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:21:28.651       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:21:28.656       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:21:28.674       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 10
+2011-09-13 04:21:28.686       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Try Count Exceeded: 10
+Going for sleep for about 30sec
+2011-09-13 04:21:58.691          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:21:58.696          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:21:58.701          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:21:58.706          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:21:58.711          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:21:58.715          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:22:19.921          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:22:19.926          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:22:19.931       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:22:19.936       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:22:19.954       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:22:30.156          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:22:30.16          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:22:30.165          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:22:30.17          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:22:30.175          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:22:30.18          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:22:51.196          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:22:51.201          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:22:51.206       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:22:51.21       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:22:51.229       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:23:01.242          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:23:01.247          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:23:01.252          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:23:01.257          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:23:01.262          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:23:01.267          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:23:22.483          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:23:22.488          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:23:22.493       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:23:22.497       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:23:22.516       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:23:32.721          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:23:32.732          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:23:32.738          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:23:32.743          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:23:32.749          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:23:32.755          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:23:53.792          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:23:53.799          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:23:53.803       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:23:53.807       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:23:53.824       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:24:04.027          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:24:04.033          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:24:04.039          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:24:04.043          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:24:04.048          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:24:04.053          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 
+2011-09-13 04:24:25.268          Thread-1: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:24:25.272          Thread-1: Receiver.Receiver.bind() exited
+2011-09-13 04:24:25.275       Thread-1: Receiver.Receiver.receive() exited
+2011-09-13 04:24:25.279       Thread-1: Receiver.Receiver.receive() entered
+2011-09-13 04:24:25.295       Thread-1: Receiver.Receiver.receive() Name: Teletalk(5676) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 5
+2011-09-13 04:24:35.497          Thread-1: Receiver.Receiver.bind() entered
+2011-09-13 04:24:35.502          Thread-1: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:24:35.507          Thread-1: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:24:35.511          Thread-1: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:24:35.518          Thread-1: Receiver.Receiver.bind() set all values done
+2011-09-13 04:24:35.523          Thread-1: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) DIGITAl-1 ia#dig*  52 (addrrang: 1 1 192.168.99.3) ) 

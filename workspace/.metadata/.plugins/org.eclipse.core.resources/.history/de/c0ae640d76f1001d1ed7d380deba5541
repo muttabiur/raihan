@@ -1,0 +1,20 @@
+
+public class MainTest {
+
+	public static void main(String[] agrs) {
+		
+		snmpinform sm = new snmpinform();
+		
+		
+		
+		mibparser mib = new mibparser ();
+		
+		mib.parseFileNames("parse.txt");
+		
+		sm.printOptions();
+	   
+		
+		
+	}
+	
+}

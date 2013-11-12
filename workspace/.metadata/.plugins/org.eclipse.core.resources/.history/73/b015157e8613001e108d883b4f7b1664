@@ -1,0 +1,247 @@
+package DETServer;
+
+//import java.io.BufferedWriter;
+//import java.io.File;
+//import java.io.FileWriter;
+//import java.util.ArrayList;
+//import java.util.List;
+import snmpcorba.mib.*;
+
+//import org.omg.CORBA.ORB;
+//import org.omg.CosNaming.NamingContextExt;
+//import org.omg.CosNaming.NamingContextExtHelper;
+
+import DETApp.DET;
+//import DETApp.DETHelper;
+import SNMPFunctions.* ;
+
+/**
+ * @author m_sk
+ */
+
+public class Manager {
+
+    double balance ;
+    static DET detImpl;
+    ContainerManagedItem ct ;
+    String value = null ;
+
+    public void snmpTrapMessageReceived(double balInfo) {
+
+	//When the balance will be zero, send trap message to manager.
+	//System.out.println("Manager Received Trap Message from Server/Agent:");
+	double balance = balInfo;
+	//System.out.println("The Trap Message Information is Stated Below:" + balance);
+
+	//Call Trap Response message
+
+	if (( balance == 0) || (balance < 0)) {
+	    Agent_Computer agent = new Agent_Computer();
+	    agent.trapResponseforBalance("Manager will provide more money in that Server due to Balance became negative:");
+	    //Manager m = new Manager();
+
+
+
+	    // System.out.println("The new balance is:" + raihan);
+	    // m.snmpSetRequest(4000);
+	}
+
+    }
+
+    public void snmpTrapMessageReceivedForQuantity(int qtityInfo) {
+
+	//When the balance will be zero, send trap message to manager.
+	//System.out.println("Manager Received Trap Message from Server/Agent:");
+	int quantity = qtityInfo;
+	//System.out.println("The Trap Message Information is Stated Below:" + balance);
+
+	//Call Trap Response message
+
+	if (( quantity == 0) || (quantity < 0)) {
+	    Agent_Computer agent = new Agent_Computer();
+	    agent.trapResponseforQuantity("Manager will provide Enough Quantity in that Server due to Quantity became negative:");
+	    //Manager m = new Manager();
+
+
+
+	    // System.out.println("The new balance is:" + raihan);
+	    // m.snmpSetRequest(4000);
+	}
+
+    }
+    /*
+    public void snmpSetRequest(double bal) {
+	     //synchronized(lockItm) {
+		    ct.setBalance(bal);
+		    Agent_Computer agent = new Agent_Computer();
+		    agent.ResponseSet("The Balance is set to:" + bal);
+		    //String ok = null;
+		    //return ok ;
+	     }
+     */
+
+    public void MessagePassed(String mess) {
+
+	String mas = null ;
+	mas = mess ;
+	Agent_Computer agent = new Agent_Computer();
+	agent.ResponseSet(mas);
+
+    }
+
+
+   public void setLocation(String location) {
+    
+       this.value = location ;
+   }
+
+   public String getLocation() {
+       return this.value ;
+   }
+
+    //Mib module will be here
+
+    //Manager will call get-request
+    //Manager will call set-request
+    //Manager will call get-next-request
+
+    public static void main(String args[]) {
+
+	SNMPMemberFuntions snmpCall = new SNMPMemberFuntions();
+	//Manager will call get-request
+
+	//Manager ma = new Manager();
+
+	// I expect the mib will give me a String parameters
+	//Acquiring the last char from the String
+	//String value = "1.3.6.1.4.1.9.6" ;
+	//value will act as a index for text file.
+	
+
+	//snmpCall.getRequest("SNMPV1" , "Public" , 1, value );
+
+	snmpCall.getRequest("SNMPV1" , "Public" , 1, "1.3.6.1.5.2" );
+	//Set-Request message to agent
+	//String value1 = "1.3.6.1.4.1.9.7" ;
+	//snmpCall.setRequestForBalance("SNMPV1", "Public", 3,  "6");
+	
+	//Set up for Quantity
+	//snmpCall.setRequestForQuantity("SNMPV1", "Public", 5, "5");
+
+
+
+    }
+    }
+
+/*
+    public static void main(String[] args) {
+	    
+	    //Manager ma = new Manager();
+	    SNMPMemberFuntions snmpCall = new SNMPMemberFuntions();
+		//Manager will call get-request
+
+		
+		// test the MIB
+		List<String> requests = new ArrayList<String>();
+		requests.add("1.3.6.1.5.1");
+		requests.add("1.3.6.1.5.1.INDEX_OF_OBJ");
+
+		// setup test database
+		File dataFile = writeTestData();
+
+		try {
+		    Manager ma = new Manager();
+			System.out.println("-------------------------- TREE CREATED --------------------------");
+			MIBTree tree = new MIBTree(dataFile);
+			for (String request : requests) {
+				System.out.println("-------------------------- TESTING GET " + request + " --------------------------");
+				String location = tree.getAttributeReference(request);
+				ma.setLocation(location);
+				Manager mi = new Manager();
+				 String loc = mi.getLocation();
+				 System.out.println("The Location is:" + loc);
+				//snmpCall.getRequest("SNMPV1" , "Public" , 1, loc );
+				//System.out.println("Requesting " + request + ": " + location);
+			}
+			System.out.println("-------------------------- TESTING DONE --------------------------");
+			
+		} catch (Throwable t) {
+			System.out.print("Exception [" + t.getClass().getSimpleName() + "] caught with message: " + t.getMessage());
+			t.printStackTrace();
+		}
+		 //Manager mi = new Manager();
+		 //String loc = mi.getLocation();
+		 //System.out.println("The Location is:" + loc);
+		//snmpCall.getRequest("SNMPV1" , "Public" , 1, loc );
+		// cleanTestData();
+	}
+    
+
+	
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////// helper methods ///////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private static File writeTestData() {
+		// declare and check the file
+		File outFile = new File("testMIB");
+		if (outFile.exists()) {
+			outFile.delete();
+		}
+		try {
+			System.out.println("Writing test data to: " + outFile.getAbsolutePath());
+			
+			BufferedWriter writer = new BufferedWriter(new FileWriter(new File("testMIB")));
+			
+			writer.write("internet[1].org[3].dod[6].application.test1 = 1\n");
+			writer.write("internet[1].org[3].dod[6].application.test2 = 2\n");
+			writer.write("internet[1].org[3].dod[6].application.test3 = 3\n");
+			writer.write("internet[1].org[3].dod[6].application.test4 = 4\n");
+			writer.write("internet[1].org[3].dod[6].application.data.abc = 5\n");
+			writer.write("internet[1].org[3].dod[6].application.data.def = 6\n");
+			
+			writer.close();
+		
+		} catch (Throwable t) {
+			System.out.print("Exception [" + t.getClass().getSimpleName() + "] caught with message: " + t.getMessage());
+			t.printStackTrace();
+		}
+		return outFile;
+	}
+
+	private static void cleanTestData() {
+		// declare and check the file
+		File outFile = new File("testMIB");
+		if (outFile.exists()) {
+			outFile.delete();
+		}
+		try {
+			if (outFile.exists()) {
+				outFile.delete();
+			}
+		} catch (Throwable t) {
+			System.out.print("Exception [" + t.getClass().getSimpleName() + "] caught with message: " + t.getMessage());
+			t.printStackTrace();
+		}
+	}
+
+}
+*/
+
+
+
+
+//Need to write set function, that will set the balance parameters
+/*public void ResponseSet(String trap) {
+           String tp = null ;
+
+           tp = trap ;
+
+          System.out.println("The Trap Response:" + tp);
+   } */
+
+
+

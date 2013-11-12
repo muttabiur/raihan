@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;DETServer.ImplementaionEtraderServer.java&apos; to &apos;ImplementationEtraderServer.java&apos;&#x0D;&#x0A;- Original project: &apos;FinalDist&apos;&#x0D;&#x0A;- Original element: &apos;DETServer.ImplementaionEtraderServer.java&apos;&#x0D;&#x0A;- Renamed element: &apos;DETServer.ImplementationEtraderServer.java&apos;" description="Rename compilation unit &apos;ImplementaionEtraderServer.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/&lt;DETServer{ImplementaionEtraderServer.java" name="ImplementationEtraderServer.java" references="false" stamp="1224128280488" version="1.0"/>
+</session>

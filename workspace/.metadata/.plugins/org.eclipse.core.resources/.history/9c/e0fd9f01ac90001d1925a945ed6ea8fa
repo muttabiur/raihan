@@ -1,0 +1,38 @@
+package DETInterface;
+
+import java.rmi.* ;
+import java.io.* ;
+import java.util.ArrayList ;
+
+
+
+public interface DETInterface extends Remote{
+	
+	public double buyItem(String item, int quantity) throws RemoteException ;
+	public double sellItem(String item, int quantity ) throws RemoteException ;
+	public String printReport() throws RemoteException ;
+	
+	
+	//Create two servers or E-trader that can hold the item with corresponding with its own server.
+	//Create Hash map
+	//Define servers and items
+	ArrayList<String> alist = new ArrayList<String>();
+	alist.add("Concordia");
+	alist.add("Mcgill");
+	
+	
+	
+	
+    
+	//public static final String s1 = "ConcordiaServer" ;
+	//public static final String s2 = "McgillServer" ;
+	
+	//public static final String item1 = "books" ;
+	//public static final String item2 = "computer" ;
+	
+	//Hashtable servers = new Hashtable();
+	
+	
+	
+
+} //End of Interface

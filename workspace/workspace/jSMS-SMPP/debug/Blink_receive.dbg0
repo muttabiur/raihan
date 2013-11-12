@@ -1,0 +1,205 @@
+2011-09-13 04:16:46.007    Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:16:46.018    Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:16:46.023    Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:16:46.028    Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:16:46.033    Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:16:46.038    Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:17:07.054    Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:07.058    Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:17:07.063       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:17:07.079       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:17:17.088          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:17:17.091          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:17:17.1          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:17:17.104          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:17:17.11          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:17:17.115          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:17:38.127          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:38.132          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:17:38.144       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:17:38.149       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:17:38.166       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:17:48.176          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:17:48.18          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:17:48.184          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:17:48.189          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:17:48.196          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:17:48.201          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:18:09.231          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:18:09.236          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:18:09.24       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:18:09.245       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:18:09.259       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:18:19.27          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:18:19.274          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:18:19.278          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:18:19.283          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:18:19.288          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:18:19.293          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:18:40.314          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:18:40.319          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:18:40.323       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:18:40.335       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:18:40.349       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:18:50.36          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:18:50.364          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:18:50.369          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:18:50.374          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:18:50.378          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:18:50.383          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:19:11.401          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:11.406          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:19:11.41       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:19:11.415       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:19:11.43       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 5
+2011-09-13 04:19:21.441          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:19:21.445          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:19:21.45          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:19:21.454          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:19:21.459          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:19:21.463          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:19:42.479          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:42.483          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:19:42.488       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:19:42.492       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:19:42.506       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 6
+2011-09-13 04:19:52.516          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:19:52.521          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:19:52.527          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:19:52.532          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:19:52.539          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:19:52.544          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:20:13.556          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:13.562          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:20:13.566       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:20:13.571       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:20:13.585       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 7
+2011-09-13 04:20:23.596          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:20:23.601          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:20:23.607          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:20:23.611          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:20:23.616          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:20:23.621          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:20:44.638          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:44.643          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:20:44.647       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:20:44.653       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:20:44.667       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 8
+2011-09-13 04:20:54.87          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:20:54.875          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:20:54.881          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:20:54.886          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:20:54.891          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:20:54.897          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:21:15.913          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:21:15.919          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:21:15.926       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:21:15.931       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:21:15.949       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 9
+2011-09-13 04:21:25.961          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:21:25.966          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:21:25.971          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:21:25.976          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:21:25.981          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:21:25.986          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:21:47.13          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:21:47.135          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:21:47.139       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:21:47.144       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:21:47.159       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 10
+2011-09-13 04:21:47.169       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Try Count Exceeded: 10
+Going for sleep for about 30sec
+2011-09-13 04:22:17.175          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:22:17.181          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:22:17.186          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:22:17.192          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:22:17.198          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:22:17.205          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:22:38.223          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:22:38.229          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:22:38.234       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:22:38.239       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:22:38.254       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:22:48.459          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:22:48.465          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:22:48.47          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:22:48.48          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:22:48.486          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:22:48.492          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:23:09.51          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:23:09.515          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:23:09.522       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:23:09.527       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:23:09.543       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:23:19.551          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:23:19.556          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:23:19.561          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:23:19.565          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:23:19.57          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:23:19.575          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:23:40.59          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:23:40.595          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:23:40.599       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:23:40.604       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:23:40.621       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:23:50.632          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:23:50.636          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:23:50.641          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:23:50.645          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:23:50.65          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:23:50.655          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 
+2011-09-13 04:24:11.669          Thread-3: Receiver.Receiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:24:11.674          Thread-3: Receiver.Receiver.bind() exited
+2011-09-13 04:24:11.679       Thread-3: Receiver.Receiver.receive() exited
+2011-09-13 04:24:11.683       Thread-3: Receiver.Receiver.receive() entered
+2011-09-13 04:24:11.7       Thread-3: Receiver.Receiver.receive() Name: Blink IP: 202.22.194.87
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:24:21.71          Thread-3: Receiver.Receiver.bind() entered
+2011-09-13 04:24:21.715          Thread-3: Receiver.Receiver.bind() new BindReceiver()
+2011-09-13 04:24:21.719          Thread-3: Receiver.Receiver.bind() TCPIPConnection
+2011-09-13 04:24:21.724          Thread-3: Receiver.Receiver.bind() new Session(connection)
+2011-09-13 04:24:21.729          Thread-3: Receiver.Receiver.bind() set all values done
+2011-09-13 04:24:21.734          Thread-3: Receiver.Receiver.bind() Bind request (bindreq: (pdu: 0 1 0 [1]) maia maia  52 (addrrang: 1 1 202.22.194.87) ) 

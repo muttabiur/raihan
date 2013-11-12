@@ -1,0 +1,242 @@
+package AliLowerUpper;
+
+import java.util.ArrayList;
+//import AliLowerUpper.Orthogonal_List;
+ 
+public class Bound {
+
+	Orthogonal_List oList = null;
+	ArrayList< ArrayList<Integer> > J = new ArrayList();
+	ArrayList< ArrayList<Integer> > I = new ArrayList();
+	
+	public Bound(String fn)
+	{
+		oList = new Orthogonal_List();
+		oList.buildList(fn);
+	}
+	
+	
+	public double lowerBound()
+	{
+	//Orthogonal_List a = new Orthogonal_List();
+	 //ArrayList<ArrayList<Integer>> subjectCons = new ArrayList<ArrayList<Integer>>();
+	//Define an arrayList of arraylist
+		
+		
+		
+
+	System.out.println("OrthogonalList.size();= "+ oList.OrthogonalList.size());
+	
+	ArrayList<Integer> u = new ArrayList();
+	
+	for(int i = 0 ; i < oList.OrthogonalList.size(); i++) {
+		u.add(0); 
+	}
+	     
+      // initialization of I
+      for(int row=0; row<oList.OrthogonalList.size(); row++)
+      {
+    	  	ArrayList<Element> testrow1 = oList.OrthogonalList.get(row);
+    	  	ArrayList<Integer> row2 = new ArrayList();
+    	  	for(int c=0; c<testrow1.size(); c++)
+    		  row2.add( (Integer) testrow1.get(c).getColumn() );
+    	  	J.add(row2);
+      }
+      
+      for(int cols=0; cols<oList.costs.size(); cols++)
+      {
+    	  ArrayList<Integer> iRow = new ArrayList();
+    	  for(int rows=0; rows<oList.OrthogonalList.size(); rows++)
+    	  {
+    		  ArrayList<Element> row1 = oList.OrthogonalList.get(rows);
+    		  
+    		  		for(int col=0; col<row1.size(); col++)
+    		  			if(row1.get(col).getColumn() == cols+1)
+    		  			{
+    		  				iRow.add(rows+1);
+    		  				break;
+    		  			}
+    	  }
+    	  I.add(iRow);
+      }
+    	  
+      
+      
+      //print u
+      System.out.println("u");
+      	for(int j = 0 ; j < u.size(); j++) 
+      		System.out.print(u.get(j) + "\t" );
+      	System.out.println();
+      
+      
+     //pring J
+      System.out.println("J");
+     for(int k=0; k<J.size(); k++)
+     {
+    	 ArrayList<Integer> a = new ArrayList();
+    	 a = J.get(k);
+    	 for(int m=0; m<a.size(); m++)
+    		 System.out.print(a.get(m)+"\t");
+    	 System.out.println();
+     }
+    	  
+     System.out.println("I");
+     for(int k=0; k<I.size(); k++)
+     {
+    	 ArrayList<Integer> a = new ArrayList();
+    	 a = I.get(k);
+    	 for(int m=0; m<a.size(); m++)
+    		 System.out.print(a.get(m)+"\t");
+    	 System.out.println();
+     }	 
+     
+     
+     
+     
+     int counter = 0;
+     ArrayList<Integer> Iofu = new ArrayList();
+     do{ 
+     //Calculate the delta
+     ArrayList< ArrayList<Integer> > redCost = new ArrayList();
+     ArrayList< ArrayList<Integer> > delta = new ArrayList();
+     
+     for(int j=0; j<J.size(); j++)
+     {
+    	 ArrayList<Integer> a = new ArrayList();
+    	 ArrayList<Integer> rCost = new ArrayList();
+    	 a = J.get(j);
+    	 for(int k=0; k<a.size(); k++)
+    	 {
+    		 //int col = a.get(k)-1;
+    		 
+    		 int col = a.get(k)+1;
+    		 int cost = oList.costs.get(col);
+    		 ArrayList<Integer> iRow = new ArrayList( I.get (col) );
+    		 for(int m=0; m<iRow.size(); m++)
+    		 {
+    			 //System.out.println("iRow.get(m)" + iRow.get(m));
+    			 cost -= u.get( iRow.get(m)-1 );
+    			// cost -= u.get( iRow.get(m)+1 );
+    		 }
+    		 rCost.add(cost);
+    		 rCost.add(a.get(k));
+    		 
+    		 redCost.add(rCost);
+    		 
+    		 //System.out.println("redCost"+a.get(k)+ "=" + cost);
+    		 
+    	 }
+    	 delta.add( getMin(redCost) );
+    	 
+    	 System.out.println("delta" + (j+1) + " = " + delta.get(j).get(0));
+     }
+     
+     
+     
+     for(int d=0; d<delta.size(); d++)
+    	 if( delta.get(d).get(0) > 0)
+    		 Iofu.add(d+1);
+     
+    
+    System.out.println("I(u)");
+   	for(int j = 0 ; j < Iofu.size(); j++) 
+   		System.out.print(Iofu.get(j) + "\t" );
+   	System.out.println();
+   
+     
+     
+    	 ArrayList<Integer> mins = getMinsLen(Iofu);
+    	 int iEstrik, maxValLoc; 
+    	 if(mins.size() == 1)
+    		iEstrik = mins.get(0);
+    	 else
+    	 {
+    		 maxValLoc = getMaxValLoc(delta, mins);
+    		 iEstrik = maxValLoc;
+    	 }
+    	 u.set(iEstrik, u.get(iEstrik)+delta.get(iEstrik).get(0));
+    	// u.set(iEstrik, u.get(iEstrik)+delta.get(iEstrik).get(1));
+    	 
+    	System.out.println("u");
+       	for(int j = 0 ; j < u.size(); j++) 
+       		System.out.print(u.get(j) + "\t" );
+       	System.out.println();
+       
+    	 
+    	 
+    	 
+    	 
+     } while(Iofu.size() > 0 && counter++<5);
+     
+     int lowerBound = 0;
+     for(int i=0; i<oList.OrthogonalList.size(); i++)
+    	 lowerBound += u.get(i);
+    	 
+    	 
+      return lowerBound;
+	}//lowerBound()
+	
+	
+	
+	
+	
+	
+	
+	int getMaxValLoc(ArrayList< ArrayList<Integer> >delta, ArrayList<Integer>mins)
+	{
+		int location=0;
+		//location = mins.get(0);
+		int value = delta.get(mins.get(0)).get(0);
+		for(int i=1; i<mins.size(); i++)
+		{
+			int loc = mins.get(i)-1;
+			if(value < ( delta.get(loc).get(0) ) )
+			{
+				value = delta.get( mins.get(i)).get(0);
+				location = i;
+			}
+		}
+		return location;
+	}
+	
+	
+	ArrayList<Integer> getMinsLen(ArrayList<Integer> Iofu)
+	{
+		ArrayList<Integer> mins =  new ArrayList();
+			mins.add(Iofu.get(0));
+			int minValue = J.get(Iofu.get(0)).size();
+			for(int i=1; i<Iofu.size(); i++)
+			{
+				if(minValue > J.get(Iofu.get(0)).size())
+				{
+					mins.clear();
+					mins.add( Iofu.get(i));
+					minValue = J.get(Iofu.get(0)).size();
+				}
+				else if(minValue == J.get(Iofu.get(0)).size())
+					mins.add( Iofu.get(i));
+			}		
+		return mins;
+	}
+	
+	
+	ArrayList<Integer> getMin(ArrayList< ArrayList<Integer> > redCost)
+	{
+		
+		ArrayList<Integer> min = new ArrayList();
+			min.add(redCost.get(0).get(0));
+			min.add(redCost.get(0).get(1));
+			for( int i=1; i< redCost.size(); i++)
+				if(min.get(0) > redCost.get(i).get(0))
+					
+				{	
+					min.set(0, redCost.get(i).get(0));
+					min.set(1, redCost.get(i).get(1));
+				}	
+		return min;
+	}
+	
+	
+	
+	
+}

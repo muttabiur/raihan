@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 1 element(s) from project &apos;Heap_Min_Max_Heap&apos;&#x0D;&#x0A;- Original project: &apos;Heap_Min_Max_Heap&apos;&#x0D;&#x0A;- Original element: &apos;Heap_Min_Max_Heap/src/Min_Max_Heap_Interface&apos;" description="Delete element" element1="/src&lt;Min_Max_Heap_Interface" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1222723542563" subPackages="false" version="1.0"/>
+</session>

@@ -1,0 +1,44 @@
+package simpleclient;
+
+
+import javax.xml.ws.WebServiceRef;
+ import helloservice.endpoint.HelloService;
+
+ import helloservice.endpoint.Hello;
+ 
+ public class HelloClient{
+ 
+	 @WebServiceRef(wsdlLocation="http://localhost:8080/helloservice/hello?wsdl")
+
+	 static HelloServiceservice;
+
+	 public static void main(String[] args) {
+
+		 try {
+
+			 HelloClientclient = new HelloClient();
+
+			 client.doTest(args);
+
+		 } catch(Exceptione) {
+
+			 e.printStackTrace();
+}
+}
+	 
+	 public void doTest(String[] args) {
+		 try {
+		 System.out.println("Retrievingthe port from the following service: " +
+		 service);
+		 Hello port = service.getHelloPort();
+		 System.out.println("Invokingthe sayHellooperation on the port.");
+		 String name;
+		 if (args.length> 0) {
+		 name = args[0];
+		 } else {
+		 name = "No Name";
+		 }
+		 String response = port.sayHello(name);
+		 System.out.println(response);
+		 } catch(Exceptione) {
+		 e.printStackTrace();}}}

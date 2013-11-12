@@ -1,0 +1,55 @@
+package Interface ;
+
+import java.rmi.*;
+import java.util.Vector;
+
+
+/**
+ * @author m_sk
+ */
+
+
+public interface ETrader_Interface extends Remote {
+	
+   public int buyItem(String item, int qty) throws java.rmi.RemoteException;
+
+  
+   
+   public Vector sellItem(String item, int qty) throws java.rmi.RemoteException;
+
+  
+   
+   public Vector printReport() throws java.rmi.RemoteException;
+   
+
+   /*
+    * Define list of servers/hosts
+    * Define a local server and few remote servers
+    */
+   public static final String Server1 = "localhost";
+   public static final String Server2 = "cukor.encs.concordia.ca";
+   //public static final String Server3 = "forman.encs.concordia.ca";
+   
+   /*
+    * Define list of items that belongs to each server. I assume that each server
+    * contains only one item at time.
+    */
+   public static final String item1 = "computer";
+   public static final String item2 = "shoe";
+   //public static final String item3 = "watch";
+
+   
+   /*
+    * Assign value to the each item.
+    */
+   
+   public static final String ITEM ="computer";
+   public static final double PRICE=200;
+   public static final int QTY=241;
+   public static final double BALANCE=12456;
+   
+   
+   
+   
+   
+} // End of Interface design

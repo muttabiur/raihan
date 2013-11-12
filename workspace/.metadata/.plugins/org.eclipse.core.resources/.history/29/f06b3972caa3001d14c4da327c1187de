@@ -1,0 +1,38 @@
+package DETServer;
+
+
+import DETApp.*;
+
+import org.omg.CosNaming.*;
+import org.omg.CosNaming.NamingContextPackage.*;
+import org.omg.CORBA.*;
+import org.omg.PortableServer.*;
+
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.Vector;
+import java.io.IOException;
+import java.lang.Object;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.*;
+
+import DETServer.ContainerManagedItem;
+import Interface.DisplayMessage;
+import Interface.* ;
+
+class ImplementationEtraderServer extends DETPOA {
+	
+}

@@ -1,0 +1,9 @@
+2011-09-13 04:16:24.947    Thread-3: Transmitter.bind() entered
+2011-09-13 04:16:24.957    Thread-3: Transmitter.bind() b4 req
+2011-09-13 04:16:24.961    Thread-3: Transmitter.bind() after req
+2011-09-13 04:16:24.965    Thread-3: Transmitter.bind() after tcpip
+2011-09-13 04:16:24.969    Thread-3: Transmitter.bind() after conn
+2011-09-13 04:16:24.972    Thread-3: Transmitter.bind() after session
+2011-09-13 04:16:24.976    Thread-3: Transmitter.bind() b4 bind req
+2011-09-13 04:16:46.0    Thread-3: Transmitter.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:16:46.005    Thread-3: Transmitter.bind() exited

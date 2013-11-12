@@ -1,0 +1,15 @@
+package Client;
+import java.util.Iterator;
+import java.util.ArrayList;
+public class DETClient {
+
+	
+
+	//...
+
+	ArrayList a = new ArrayList( 100 );
+	a.add( "broccoli" );
+	a.add( "cauliflower" );
+	a.add( "carrots" );
+	a.add( "peas" );
+}

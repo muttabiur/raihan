@@ -1,0 +1,466 @@
+2011-09-13 04:16:56.0 
+2011-09-13 04:16:56.015 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.Connect(TransReceiver.java:145)
+	at com.jhorotek.smpp.SMPPClass.Connect(SMPPClass.java:97)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:71)
+
+2011-09-13 04:16:56.031 Exception: Receiving failed.
+2011-09-13 04:16:56.035 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:16:56.043 Receiving failed. Trying for new Connection
+2011-09-13 04:17:27.088 
+2011-09-13 04:17:27.092 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:17:27.123 Exception: Receiving failed.
+2011-09-13 04:17:27.128 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:17:27.141 Receiving failed. Trying for new Connection
+2011-09-13 04:17:58.179 
+2011-09-13 04:17:58.184 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:17:58.214 Exception: Receiving failed.
+2011-09-13 04:17:58.219 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:17:58.228 Receiving failed. Trying for new Connection
+2011-09-13 04:18:29.258 
+2011-09-13 04:18:29.262 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:18:29.289 Exception: Receiving failed.
+2011-09-13 04:18:29.294 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:18:29.304 Receiving failed. Trying for new Connection
+2011-09-13 04:19:00.348 
+2011-09-13 04:19:00.353 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:19:00.373 Exception: Receiving failed.
+2011-09-13 04:19:00.377 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:19:00.385 Receiving failed. Trying for new Connection
+2011-09-13 04:19:31.426 
+2011-09-13 04:19:31.431 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:19:31.461 Exception: Receiving failed.
+2011-09-13 04:19:31.466 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:19:31.476 Receiving failed. Trying for new Connection
+2011-09-13 04:20:02.514 
+2011-09-13 04:20:02.519 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:20:02.543 Exception: Receiving failed.
+2011-09-13 04:20:02.547 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:20:02.557 Receiving failed. Trying for new Connection
+2011-09-13 04:20:33.605 
+2011-09-13 04:20:33.61 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:20:33.637 Exception: Receiving failed.
+2011-09-13 04:20:33.642 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:20:33.653 Receiving failed. Trying for new Connection
+2011-09-13 04:21:04.691 
+2011-09-13 04:21:04.696 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:21:04.72 Exception: Receiving failed.
+2011-09-13 04:21:04.725 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:21:04.735 Receiving failed. Trying for new Connection
+2011-09-13 04:21:35.778 
+2011-09-13 04:21:35.783 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:21:35.813 Exception: Receiving failed.
+2011-09-13 04:21:35.818 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:21:35.828 Name: Aktel IP: 192.168.51.5
+Receiving failed. Try Count Exceeded
+2011-09-13 04:22:26.867 
+2011-09-13 04:22:26.872 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:589)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:22:26.896 Exception: Receiving failed.
+2011-09-13 04:22:26.901 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:22:26.911 Receiving failed. Trying for new Connection
+2011-09-13 04:22:58.147 
+2011-09-13 04:22:58.152 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:22:58.181 Exception: Receiving failed.
+2011-09-13 04:22:58.185 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:22:58.195 Receiving failed. Trying for new Connection
+2011-09-13 04:23:29.244 
+2011-09-13 04:23:29.248 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:23:29.274 Exception: Receiving failed.
+2011-09-13 04:23:29.279 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:23:29.288 Receiving failed. Trying for new Connection
+2011-09-13 04:24:00.329 
+2011-09-13 04:24:00.334 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:24:00.361 Exception: Receiving failed.
+2011-09-13 04:24:00.365 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:24:00.375 Receiving failed. Trying for new Connection
+2011-09-13 04:24:31.426 
+2011-09-13 04:24:31.431 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.logica.smpp.Session.bind(Session.java:386)
+	at com.jhorotek.smpp.TransReceiver.bind(TransReceiver.java:209)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:576)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:24:31.46 Exception: Receiving failed.
+2011-09-13 04:24:31.465 Exception: java.lang.NullPointerException
+	at com.logica.smpp.Session.send(Session.java:993)
+	at com.logica.smpp.Session.send(Session.java:1048)
+	at com.logica.smpp.Session.enquireLink(Session.java:789)
+	at com.logica.smpp.Session.enquireLink(Session.java:817)
+	at com.jhorotek.smpp.TransReceiver.receive(TransReceiver.java:513)
+	at com.jhorotek.smpp.SMPPClass.RequestListener(SMPPClass.java:68)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:79)
+
+2011-09-13 04:24:31.477 Receiving failed. Trying for new Connection

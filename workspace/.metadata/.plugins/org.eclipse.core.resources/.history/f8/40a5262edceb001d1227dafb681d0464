@@ -1,0 +1,182 @@
+/* ----------------------------------------------------------------------------
+ Copyright (c) 2003 jSNMP Enterprises, All Rights Reserved Worldwide
+ ------------------------------------------------------------------------------
+
+   Disclaimer: This software is provided AS IS, and without any warranty
+               other than those which may be provided in a separate
+               writing specifically referencing the software contained
+               herein.  All other warranties, except those which may be
+               provided separately in writing, are expressly disclaimed.
+               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+               PURPOSE which is given with respect to this software or the
+               operability thereof.
+
+   ------------------------------------------------------------------------
+ */
+
+
+// ------------------------------ Package -------------------------------------
+
+// ------------------------------ Imports -------------------------------------
+import com.outbackinc.services.protocol.snmp.*;
+import com.outbackinc.services.protocol.snmp.corba.*;
+import java.net.*;
+import java.io.*;
+
+/**
+ * Sample which illustrates how to use the SnmpService to place
+ * inspection orders.
+ */
+public class CORBAModTest
+    implements SnmpCustomer
+{
+    // ------------------------------ Constants ---------------------------------
+
+    // ------------------------------ Class variables ---------------------------
+
+    // ------------------------------ Member (instance) variables ---------------
+
+    private SnmpService m_cSnmpService;
+    private String[] m_szLastOID;
+    private InetAddress m_cInetAddressHost;
+    private String m_szCommunity;
+    private int m_iNumRetrieved;
+
+    // ------------------------------ Methods -----------------------------------
+
+    /**
+     * Constructor
+     */
+    public CORBAModTest(SnmpService cSnmpService, InetAddress cInetAddressHost, String szCommunity)
+        throws SocketException
+    {
+        //Sets the initial OID to something which should be before the table
+        m_szLastOID = new String[1];
+        m_szLastOID[0] = "1.3.6";
+        m_cInetAddressHost = cInetAddressHost;
+        m_szCommunity = szCommunity;
+
+        //Initializes the Snmp Service
+        m_cSnmpService = cSnmpService;
+    }
+
+    /**
+     * Main method to start execution
+     *
+     * @param szArgs contains cmdline args, first of which must be the host
+     *
+     */
+    public static void main(String[] szArgs)
+    {
+        try
+        {
+            if (szArgs.length < 4)
+            {
+                usage();
+                return;
+            }
+
+            //Read IORs
+            RandomAccessFile cRandomAccessFileFactory = new RandomAccessFile(szArgs[0], "r");
+            String szFactoryIOR = cRandomAccessFileFactory.readLine();
+            cRandomAccessFileFactory.close();
+
+            RandomAccessFile cRandomAccessFileService = new RandomAccessFile(szArgs[1], "r");
+            String szServiceIOR = cRandomAccessFileService.readLine();
+            cRandomAccessFileService.close();
+
+            //Connect the CORBA communications
+            CORBASnmpClient cCORBASnmpClient = new CORBASnmpClient(szFactoryIOR,szServiceIOR);
+            InetAddress iaHost = InetAddress.getByName(szArgs[2]);
+            String szWriteCommunity = szArgs[3];
+            System.out.println("Setting sysLocation.0 on " + iaHost + " with " + szWriteCommunity);
+
+            CORBAModTest test = new CORBAModTest(cCORBASnmpClient.getService(), iaHost, szWriteCommunity);
+            test.testMod();
+
+            while (true)
+            {
+                Thread.currentThread().sleep(10000);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * Displays correct usage
+     */
+    public static void usage()
+    {
+        System.out.println("Usage : java CORBAModTest <factoryIORfile> <serviceIORfile> <hostname> <writecommunity>");
+        System.out.println("\tfactoryIORfile : file from which to read the IOR of the SnmpTrapProfileFactory");
+        System.out.println("\tserviceIORfile : file from which to read the IOR of the SnmpService");
+        System.out.println("\thostname : host on which agent resides");
+        System.out.println("\twritecommunity : write community on host on which agent resides");
+    }
+
+
+    //SnmpCustomer Implementation
+
+    /**
+     * callback for delivering successes.  In this case the implementation
+     * is to print out the Object ID received and then use it for the basis
+     * for the get-next request
+     */
+    public void deliverSuccessfulOrder(int iOrderNum,
+                                       SnmpVarBind cSnmpVarBind)
+    {
+        System.out.println("deliverSuccessfulOrder(" + cSnmpVarBind.getName() + ": " + cSnmpVarBind.getStringValue() + ")");
+        m_cSnmpService.stop();
+        System.exit(0);
+    }
+
+    /**
+     * callback for failures.  In this case if a failure is received,
+     * stop
+     */
+    public void deliverFailedOrder(int iOrderNum, int iErrorStatus)
+    {
+        System.out.println("deliveredFailedOrder(" + iOrderNum + "," + iErrorStatus + ")");
+        m_cSnmpService.stop();
+        System.exit(1);
+    }
+
+    /**
+     * Demonstrates
+     * placing orders with the snmp service
+     */
+    public void testMod()
+    {
+        String[] objs = new String[1];
+        objs[0] = "1.3.6.1.2.1.1.4.0";
+        //objs[0] = "sysLocation.0";
+        byte[] types = new byte[1];
+        types[0] = SnmpConstants.ASN_OCTSTR;
+
+        //String[] values = new String[1];
+        //values[0] = ("jSNMPTester" +
+        //             Integer.toString((int)System.currentTimeMillis()));
+
+        Object[] values = new Object[1];
+        values[0] = ("jSNMPTester" + Integer.toString((int)System.currentTimeMillis())).getBytes();
+
+
+        m_cSnmpService.placeModificationOrder(m_cInetAddressHost,         //host
+                                         161,            //port
+                                         3,              //retries
+                                         20,             //timeout
+                                         m_szCommunity,  //write community
+                                         true,           //atomic
+                                         objs,           //String[] szOIDs,
+                                         types,          //byte[] bTypes,
+                                         values,         //Object[] objValues,
+                                         this,           //SnmpCustomer customer,
+                                         ++m_iNumRetrieved); //int iOrderNumStart);
+        
+    }
+}

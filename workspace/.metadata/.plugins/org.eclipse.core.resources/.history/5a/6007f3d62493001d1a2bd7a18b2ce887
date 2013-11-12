@@ -1,0 +1,79 @@
+package EDETServer;
+import DETInterface.DETInterface;
+import EDETServer.*;
+import java.rmi.*;
+import java.rmi.server.*;
+import java.rmi.registry.*;
+import java.io.* ;
+import java.net.*;
+import java.rmi.Naming;
+import java.util.Date ;
+public class DETServer {
+   
+	public static void main(String args[]){
+		
+		String registryOfURL ;
+		int RMIPort = 1234 ;
+		
+		/*
+		 * Initialize the corresponding value to the itemContainers constructor
+		 */
+		
+		double balance = DETInterface.BALANCE ;
+		String item = DETInterface.ITEM ;
+		double price = DETInterface.PRICE ;
+		int quantity = DETInterface.QTY ;
+		
+
+	      try
+		  {              
+	         startRegistry(RMIPort);
+	         // name,price,qty,bal
+	         DETServerImplementation exportedObj = new DETServerImplementation(item,quantity, price, balance);
+	         
+	         registryOfURL = "rmi://localhost:" + RMIPort+ "/DET";
+	         
+	         Naming.rebind(registryOfURL, exportedObj);
+	         
+	    
+	         System.out.println("Server ready.");
+	      }// end try
+	      catch (Exception re) {
+	         System.out.println("Exception in Server.main: " + re);
+	      } // end catch
+	      
+	      
+	      
+	     
+	      
+	  } // end main
+
+
+
+
+	   // This method starts a RMI registry on the local host, if it
+	   // does not already exists at the specified port number.
+	   private static void startRegistry(int RMIPort)
+	      throws RemoteException{
+	      try {
+	         Registry registry = LocateRegistry.getRegistry(RMIPort);
+	         registry.list( );  // This call will throw an exception
+	                            // if the registry does not already exist
+	      }
+	      catch (RemoteException e) { 
+	        
+	/**/     System.out.println
+	/**/        ("RMI registry cannot be located at port " 
+	/**/        + RMIPort);
+	         Registry registry = 
+	            LocateRegistry.createRegistry(RMIPort);
+	/**/        System.out.println(
+	/**/           "RMI registry created at port " + RMIPort);
+	      }
+	   } // end startRegistry
+	     
+	 // end class
+		
+	}
+	  
+

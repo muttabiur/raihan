@@ -1,0 +1,13 @@
+import com.adventnet.snmp.snmp2.SnmpBits;
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		SnmpBits s = new snmpbulk();
+	}
+	
+	
+}

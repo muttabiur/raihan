@@ -1,0 +1,54 @@
+package DETClient;
+
+import java.rmi.Naming;
+import Interface.ETrader_Interface;
+import Interface.MessageContainer;
+
+/**
+ * @author m_sk
+ */
+
+class NewThread extends Thread{
+
+
+	String url;
+	String itm;
+	int qty;
+	
+	//Define ETrader_Interface Object
+	
+	ETrader_Interface h;
+	
+	static public Object ob=new Object();
+		
+	public NewThread(String u,String i, int q){
+		
+		this.url=u;
+		this.itm=i;
+		this.qty=q;
+		
+	}
+	
+	public  void run(){
+		
+		try {
+	             
+			ETrader_Interface h =  (ETrader_Interface)Naming.lookup(url);
+    	 
+	    	 int ret = h.buyItem(itm,qty);
+	    	          
+	    	 System.out.println(MessageContainer.showMsg(ret));
+		
+		} 
+		
+		catch (Exception e) {
+			
+        System.out.println("Exception is in testClient: " + e);
+        
+        } 
+	}
+	
+	  
+		
+	
+}	

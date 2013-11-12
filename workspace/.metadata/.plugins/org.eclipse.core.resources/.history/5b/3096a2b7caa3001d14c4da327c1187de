@@ -1,0 +1,88 @@
+package DETServer;
+
+
+import DETApp.*;
+
+import org.omg.CosNaming.*;
+import org.omg.CosNaming.NamingContextPackage.*;
+import org.omg.CORBA.*;
+import org.omg.PortableServer.*;
+
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.Vector;
+import java.io.IOException;
+import java.lang.Object;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.*;
+
+import DETServer.ContainerManagedItem;
+import Interface.DisplayMessage;
+import Interface.* ;
+
+class ImplementationEtraderServer extends DETPOA {
+	
+	//*********************************************************
+	/**
+	    *  Define all Server name and Items 
+	    *  server1 deal with item1
+	    *  server2 deal with item2
+	    *  server3 deal with item3
+	    */
+	   // Server one 
+	   public static final String NamingServer = "swaziland";
+	   public static final String NamingObj = "DETcpu";
+	   
+	   public static final String NamingObj1 = "DETcpu";
+	   public static final String NamingObj2 = "DETram";
+	   public static final String NamingObj3 = "DEThdd";
+	   
+	   
+	   public static final String item1 = "cpu";
+	   public static final String item2 = "ram";
+	   public static final String item3 = "hdd";
+	    
+	   	   
+	   /**
+	    *  Item details for this e-trader
+	    * 
+	    */
+	   
+	   		   
+	   public static final String ITEM ="cpu";
+	   public static final double PRICE=100;
+	   public static final int QTY=200;
+	   public static final double BALANCE=5000;
+	 // *************************************************************************************  
+
+
+static public Object accTrade=new Object();
+static public Object accCanTrade=new Object();
+
+static public Object lockItm = new Object();
+static public Object lockSell = new Object();
+static public Object lockBuy =  new Object();
+
+Format df = new DecimalFormat("####.00");
+Hashtable servers;  // Hashtable is Serializable 
+Hashtable itemList;  // Hashtable is Serializable
+Vector otherItems;
+ 
+ContainerManagedItem itm ;
+Vector itemDetail;
+	
+	
+}

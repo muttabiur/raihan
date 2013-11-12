@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="ItemContainer-i" id="EDETServer" metadata="uml2-1.0" initialized="true" tag="10" key="32303037303632392052616968616E4469737472696275746564">
+  <children xsi:type="editmodel:ClassEditModel" name="ItemContainer" location="325,70" size="149,335" id="EDETServer/ItemContainer" runTimeClassModel="f,ItemContainer(Ljava.lang.String;IDD),setBalance(D),accBalance,getQuantity(),getPrice(),qty,setQuantity(I),accPrice,balance,time,price,changePricePolicy(),name,getBalance(),accQuantity">
+    <children xsi:type="editmodel:CompartmentEditModel" size="87,162">
+      <children xsi:type="editmodel:AttributeEditModel" name="accBalance" id="EDETServer/ItemContainer#accBalance"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="accPrice" id="EDETServer/ItemContainer#accPrice"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="accQuantity" id="EDETServer/ItemContainer#accQuantity"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="balance" id="EDETServer/ItemContainer#balance"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="f" id="EDETServer/ItemContainer#f"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="EDETServer/ItemContainer#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="price" id="EDETServer/ItemContainer#price"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="qty" id="EDETServer/ItemContainer#qty"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="time" id="EDETServer/ItemContainer#time"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="128,126">
+      <children xsi:type="editmodel:MethodEditModel" name="ItemContainer" id="EDETServer/ItemContainer#ItemContainer(Ljava.lang.String;IDD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="changePricePolicy" id="EDETServer/ItemContainer#changePricePolicy()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getBalance" id="EDETServer/ItemContainer#getBalance()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPrice" id="EDETServer/ItemContainer#getPrice()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getQuantity" id="EDETServer/ItemContainer#getQuantity()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setBalance" id="EDETServer/ItemContainer#setBalance(D)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setQuantity" id="EDETServer/ItemContainer#setQuantity(I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" properties="open=EDETServer/ItemContainer;wireOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true"/>
+</editmodel:ClassDiagramEditModel>

@@ -1,0 +1,18 @@
+
+/*
+   Define Remote Interface that contains remote methods to be called.
+   Written By: Raihan
+
+*/
+
+import java.rmi.Remote;
+import java.rmi.RemoteException; 
+import java.net.* ;
+import java.io.* ;
+import java.rmi.Naming ;
+
+public interface Hello extends Remote {
+
+	   //Remote method
+	 public  String sayHello()throws RemoteException ;
+}

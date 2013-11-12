@@ -1,0 +1,32 @@
+package DETInterface;
+import java.rmi.Naming;
+import java.util.Date ;
+public class ImplementMessageContainer implements MessageContainer{
+
+	public static String displayMessage(int codeNumber){
+		switch(codeNumber)
+		  {
+		  	case INSUFFICIENT_BALANCE :	
+		  		return "InsufficientBalance" ;
+		  		
+		  	
+		  	case SUCCESS:	
+		  		return "SuccessfulTranscation" ;
+		  	
+		  	case INSUFFICIENTQUANTITY:	
+		  		return "InsufficientQuantity" ;
+		  	
+		  	case PRODUCTNOTFOUND:	
+		  		return "ProductNotFound" ;
+		  	
+		  	case INSUFFICIENTFUNDS:	
+		  		return "InsufficientFunds " ;
+		  	
+		  	case  SERVERNOTFOUND:	
+		  		return "Server Can not Be Located " ;
+		  		
+		  	
+		  	default: return null;
+		  }
+	}
+}

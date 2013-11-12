@@ -1,0 +1,69 @@
+package AliLowerUpper;
+
+import java.util.ArrayList;
+//import AliLowerUpper.Orthogonal_List;
+ 
+public class Bound {
+
+	Orthogonal_List oList = null;
+	public Bound(String fn)
+	{
+		oList = new Orthogonal_List();
+		oList.buildList(fn);
+	}
+	
+	
+	public double lowerBound()
+	{
+	//Orthogonal_List a = new Orthogonal_List();
+	 //ArrayList<ArrayList<Integer>> subjectCons = new ArrayList<ArrayList<Integer>>();
+
+	System.out.println("OrthogonalList.size();= "+ oList.OrthogonalList.size());
+	
+	ArrayList<Integer> u = new ArrayList();
+	
+	for(int i = 0 ; i < oList.OrthogonalList.size(); i++) {
+		u.add(0); 
+	}
+	
+      for(int j = 0 ; j < u.size(); j++) {
+    	  System.out.println("item " +  u.get(j) );
+      }
+	
+      
+      System.out.println("rows");
+      String output = "";
+      
+      for(int k=0; k<oList.OrthogonalList.size(); k++)
+      {
+    	  //get the row element
+    	  ArrayList<Element> testrow1 = oList.OrthogonalList.get(k);
+    	  
+    	  
+    	  
+    	  System.out.println("rows size" + testrow1.size());
+			for (int i = 0; i < testrow1.size(); ++i) {
+				output = output + Integer.toString(testrow1.get(i).getColumn())
+						+ ' ';
+				//System.out.println(output);
+			}
+			//System.out.println(output);
+      }
+     
+      System.out.println(output);
+      //Define an arraylist of arraylist and store all the value
+      
+    
+
+    	  
+    	 
+      
+      return 12.2;
+	}//lowerBound()
+	
+	
+	
+	
+	
+	
+}

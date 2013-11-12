@@ -1,0 +1,74 @@
+
+	import java.awt.*;
+	import javax.swing.*;
+	import java.util.ArrayList;
+	import java.util.Random;
+	public class GUI extends JFrame {
+		
+		//class FlowAp extends Frame{
+		public static void main(String argv[]){
+		            GUI fa=new GUI();
+		            //Change from BorderLayout default
+		            //fa.setLayout(new BorderLayout());
+		            fa.setSize(600,400);
+		            fa.setVisible(true);
+		    }
+		    GUI(){
+		    			setLayout(new BorderLayout());
+		    			int min=15, max=30;
+		    			ArrayList<Integer> list = new ArrayList<Integer>();
+						list = getRandomList(min,max);
+		    			Min_Max_Heap_Interface h = new Min_Max_Heap(list);
+		    			list = h.getHeap();
+		    			//if(list.size() > 0);
+		    			//{
+		    			String heap[]= new String[100];
+		    			for(int i=0; i<list.size(); i++)
+		    				heap[i]= (list.get(i)).toString();
+		    			
+		    			JList jlstHeap = new JList(heap);
+		    			//jlstHeap.setVisibleRowCount(10);
+		    			JScrollPane listScroller = new JScrollPane(120, 40));
+		    			//JScrollPane scrollpane= new ScrolePane(jlstHeap);
+		    			Dimension dim = new Dimension(200,100);
+		    			listScroller.setPreferredSize(dim); // Dimension(JScrollPane(dim));
+		    			listScroller.getViewport().setView(jlstHeap);
+		    			jlstHeap.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		    			jlstHeap.setLayoutOrientation(JList.VERTICAL);
+		    			jlstHeap.setVisibleRowCount(-1);
+
+
+		    			add(jlstHeap, BorderLayout.CENTER);
+		    			
+		    			//}
+		    			
+		    			JPanel panButton=new JPanel();
+		    			panButton.setLayout(new GridLayout(2,3));
+		    			JButton butCreate = new JButton("Create Heap");
+		                panButton.add(butCreate);
+		                JButton butInsert = new JButton("Insert Item in heap"); 
+		                panButton.add(butInsert);
+		                JButton butDeleteMin = new JButton("Delete item from Min Level"); 
+		                panButton.add(butDeleteMin);
+		                JButton butDeleteMax = new JButton("Delete item from Max Level"); 
+		                panButton.add(butDeleteMax);
+		                panButton.add(new JButton("Clear Heap"));
+		                panButton.add(new JButton("Close"));
+		                
+		                add(panButton, BorderLayout.WEST);
+		        }//End of constructor
+		    
+		    
+			public static ArrayList<Integer> getRandomList(int min, int max)
+			{
+				ArrayList<Integer> list = new ArrayList<Integer>();
+				Random generator = new Random(19580427);
+				int size = generator.nextInt(max-min)+min;
+				//System.out.println("size in getRandomList " + size);
+				Random generator2 = new Random(19580427);
+				for(int i=0; i<size; i++)
+					list.add(generator2.nextInt(100)+1);
+				return list;
+			}
+		}//End of Application
+		

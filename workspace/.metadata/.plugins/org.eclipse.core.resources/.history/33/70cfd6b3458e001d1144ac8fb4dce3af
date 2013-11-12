@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Random;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//Min_Max_Heap h = new Min_Max_Heap();
+		
+		
+		int min=15, max=30;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list = getRandomList(min,max);
+		//System.out.println("list size is " + list.size());
+		//for(int i=0; i<list.size(); i++)
+			//h.insert(list.get(i));
+		
+		Min_Max_Heap_Interface h = new Min_Max_Heap(list);
+		Scanner keyboard = new Scanner(System.in);
+		int next;
+		/*
+		
+		System.out.print("enter numbers and finish it with -1");
+		next  = keyboard.nextInt();
+		while(next != -1)
+		{
+			h.insert(next);
+			next=keyboard.nextInt();
+		}
+		*/
+		//h.insert(-1);
+		
+		
+		System.out.print("This is the heap ");
+		
+		//for (int i=0;i<(h.heap).size();i++)
+			//System.out.print((h.heap).get(i)+"  ");
+		
+		h.showHeap();
+		
+		System.out.print("enter one number to insert: ");
+		next  = keyboard.nextInt();
+		
+	    h.insert(next);
+	    //h.BubbleUp(h.heap.size()-1);
+	    
+        System.out.print("This is the NEW heap after insertion ");
+		
+		//for (int i=0;i<(h.heap).size();i++)
+		//	System.out.print((h.heap).get(i)+"  ");
+	    	
+	}//main
+
+	
+	public static ArrayList<Integer> getRandomList(int min, int max)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		Random generator = new Random(19580427);
+		int size = generator.nextInt(max-min)+min;
+		//System.out.println("size in getRandomList " + size);
+		Random generator2 = new Random(19580427);
+		for(int i=0; i<size; i++)
+			list.add(generator2.nextInt(100)+1);
+		return list;
+	}
+	
+}//Main

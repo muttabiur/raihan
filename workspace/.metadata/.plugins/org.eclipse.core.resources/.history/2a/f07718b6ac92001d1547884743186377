@@ -1,0 +1,36 @@
+package DETInterface;
+
+import java.rmi.* ;
+import java.io.* ;
+import java.util.ArrayList ;
+import java.util.Hashtable;
+import java.util.Vector;
+import java.util.ArrayList;
+
+
+public interface DETInterface extends Remote{
+	
+
+
+	public int buyItem(String item, int quantity) throws RemoteException ;
+	public Vector sellItem(String item, int quantity ) throws RemoteException ;
+	//public String printReport() throws RemoteException ;
+	
+	
+	
+    public void createServer();
+      
+    public void createItem();
+      
+ 
+	
+    
+    
+	
+	
+	
+	
+	
+	
+
+} //End of Interface

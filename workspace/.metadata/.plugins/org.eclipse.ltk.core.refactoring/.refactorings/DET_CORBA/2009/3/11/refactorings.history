@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;s&apos; in &apos;DETServer.SearchObject.searchObject(...)&apos; to &apos;searchItem&apos;&#x0D;&#x0A;- Original project: &apos;DET_CORBA&apos;&#x0D;&#x0A;- Original element: &apos;DETServer.SearchObject.searchObject(String).s&apos;&#x0D;&#x0A;- Renamed element: &apos;s&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;s&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/&lt;DETServer{SearchObject.java[SearchObject~searchObject~QString;@s!606!613!613!613!QString;" name="searchItem" references="true" stamp="1236532804873" version="1.0"/>
+</session>

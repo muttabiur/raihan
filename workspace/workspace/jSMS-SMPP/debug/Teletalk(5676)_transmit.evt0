@@ -1,0 +1,19 @@
+2011-09-13 04:16:26.232 
+2011-09-13 04:16:26.243 Exception: java.net.ConnectException: Connection timed out: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at com.logica.smpp.TCPIPConnection.open(TCPIPConnection.java:258)
+	at com.logica.smpp.Session.open(Session.java:295)
+	at com.logica.smpp.Session.bind(Session.java:428)
+	at com.jhorotek.smpp.Transmitter.bind(Transmitter.java:212)
+	at com.jhorotek.smpp.Transmitter.Connect(Transmitter.java:150)
+	at com.jhorotek.smpp.SMPPClass.Connect(SMPPClass.java:100)
+	at com.jhorotek.smpp.SMPPController.run(SMPPController.java:71)
+

@@ -1,0 +1,50 @@
+package AliLowerUpper;
+
+import java.io.*;
+import java.util.*;
+
+public class Element {
+	protected int cost;
+	protected int row, column;
+	protected Element right, left, top, bottom; //the four pointers
+
+	//Constructor that creates an element with given fields
+	public Element(int c, int col, Element l, Element r, Element t, Element b) {
+		cost = c;
+		column = col;
+		left = l;
+		right = r;
+		top = t;
+		bottom = b;
+
+	}
+	//Returns the cost of this element
+	public int getCost(){return cost;}
+	//Returns the column number of this element
+	public int getColumn(){return column;}
+	//Returns the the row number of this element
+	public int getRow(){return row;}
+	//Returns the element on the right side of this element
+	public Element getRight(){return right;}
+	//Returns the element on the left side of this element
+	public Element getLeft(){return left;}
+	//Returns the element on the top of this element
+	public Element getTop(){return top;}
+	//Returns the element on the bottom of this element
+	public Element getBottom(){return bottom;}
+	
+	//sets the cost of this element
+	public void setCost(int c){cost = c;}	
+	//Sets the column number of this element
+	public void setColumn(int col){column = col;}
+	//Sets the row number of this element
+	public void setRow(int r){row = r;}
+	//Sets the node on the right of this element
+	public void setRight(Element newRight){right = newRight;}
+	//Sets the node on the left of this element
+	public void setLeft(Element newLeft){left = newLeft;}
+	//Sets the node on the top of this element
+	public void setTop(Element newTop){top = newTop;}
+	//Sets the node on the bottom of this element
+	public void setBottom(Element newBottom){bottom = newBottom;}
+}

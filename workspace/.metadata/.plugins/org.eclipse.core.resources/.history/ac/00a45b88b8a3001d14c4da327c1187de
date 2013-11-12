@@ -1,0 +1,83 @@
+package DETClient;
+
+import java.rmi.Naming;
+import java.util.Vector;
+import java.rmi.registry.*;
+import java.rmi.server.*;
+import java.rmi.*;
+import Interface.MessageContainer;
+import Interface.ETrader_Interface; 
+
+/**
+ * @author m_sk
+ */
+
+public class  Client{
+   
+	MessageContainer allMessage=new MessageContainer();
+	
+	/**
+	 * Design By Contract
+	 * Precondition: This function expects no input from the user
+	 * PostCondition: This function will create URl address for server and bind with RNI naming service. 
+	 * 
+	 */
+   public static void main(String args[]) {
+	   
+	   //Create ETrader Interface object
+	   
+	   ETrader_Interface e;
+	   
+       int RMIPort=1399;   
+       
+       String hostName="localhost";
+      
+       String registryURL = "rmi://" + hostName+ ":" + RMIPort + "/Raihan";  
+       
+       try {
+         
+    	  e =  (ETrader_Interface)Naming.lookup(registryURL);
+    	  
+    	 
+    	 int ret1 = e.buyItem("computer",2);
+    	 
+         int ret2 = e.buyItem("shoe",2);
+    	 int ret3 = e.buyItem("watch",2);
+    	 
+    	 
+    	 System.out.println(MessageContainer.showMsg(ret1));
+    	 
+    //	 System.out.println(AllMessage.showMsg(ret2));
+    //	 System.out.println(AllMessage.showMsg(ret3));
+    	
+      } 
+      catch (Exception c) {
+    	  
+           System.out.println("Exception in Client: " + c);
+      } 
+      
+    	 try{
+    	 
+    	 // print report
+    	 Vector v=new Vector();
+    	 
+    	 e =  (ETrader_Interface)Naming.lookup(registryURL);
+	  
+	    	 
+	     for (int x=0;x<v.size();x++)
+	 		System.out.println(v.elementAt(x)); 
+      } 
+    	 
+        catch (Exception c) {
+            
+        	System.out.println("Exception in HelloClient: " + c);
+      } 
+    
+         
+      
+   }
+   
+   
+      
+   
+}//end of class 

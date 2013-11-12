@@ -1,0 +1,2 @@
+java DETServer.DETServer
+pause

@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,com.google.gdt.eclipse.core,2.3.3.r36v201107211953,"com.google.gdt.eclipse.core",1349735808053
+started,bundle,com.google.gdt.eclipse.designer,2.3.2.r36x201107161302,"com.google.gdt.eclipse.designer",1349735808062
+started,bundle,com.google.gdt.eclipse.designer.UiBinder,2.3.2.r36x201107161302,"com.google.gdt.eclipse.designer.UiBinder",1349735808078
+started,bundle,com.google.gdt.eclipse.designer.hosted,2.3.2.r36x201107161253,"com.google.gdt.eclipse.designer.hosted",1349735808078
+started,bundle,com.google.gdt.eclipse.login,2.3.3.r36v201107211953,"com.google.gdt.eclipse.login",1349735808079
+started,bundle,com.google.gdt.eclipse.managedapis,2.3.3.r36v201107211953,"com.google.gdt.eclipse.managedapis",1349735808080
+started,bundle,com.google.gdt.eclipse.platform.e36,2.3.3.r36v201107211953,"com.google.gdt.eclipse.platform.e36",1349735808080
+started,bundle,com.google.gdt.eclipse.platform.shared,2.3.3.r36v201107211953,"com.google.gdt.eclipse.platform.shared",1349735808081
+started,bundle,com.google.gwt.eclipse.core,2.3.3.r36v201107211953,"com.google.gwt.eclipse.core",1349735808100
+started,bundle,org.eclipse.epp.usagedata.gathering,1.3.1.R201102081640,"org.eclipse.epp.usagedata.gathering",1349735808101
+started,bundle,org.eclipse.epp.usagedata.recording,1.3.1.R201102081640,"org.eclipse.epp.usagedata.recording",1349735808101
+started,bundle,org.eclipse.mylyn.commons.ui,3.6.1.v20110720-0100,"org.eclipse.mylyn.commons.ui",1349735808103
+started,bundle,org.eclipse.wb.core,1.1.0.r36x201107161214,"org.eclipse.wb.core",1349735808112
+started,bundle,org.eclipse.wb.core.lib,1.1.0.r36x201107161214,"org.eclipse.wb.core.lib",1349735808138
+os,sysinfo,,,"win32",1349735808142
+arch,sysinfo,,,"x86",1349735808142
+ws,sysinfo,,,"win32",1349735808142
+locale,sysinfo,,,"en_CA",1349735808143
+processors,sysinfo,,,"2",1349735808143
+java.runtime.name,sysinfo,,,"Java(TM) SE Runtime Environment",1349735808143
+java.runtime.version,sysinfo,,,"1.6.0_22-b04",1349735808143
+java.specification.name,sysinfo,,,"Java Platform API Specification",1349735808143
+java.specification.vendor,sysinfo,,,"Sun Microsystems Inc.",1349735808143
+java.specification.version,sysinfo,,,"1.6",1349735808143
+java.vendor,sysinfo,,,"Sun Microsystems Inc.",1349735808143

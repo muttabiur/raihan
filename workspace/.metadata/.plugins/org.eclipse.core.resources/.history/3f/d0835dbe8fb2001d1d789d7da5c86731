@@ -1,0 +1,5 @@
+package simpleclient;
+
+public class HelloClient {
+
+}

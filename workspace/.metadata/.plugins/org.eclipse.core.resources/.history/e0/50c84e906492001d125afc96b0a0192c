@@ -1,0 +1,65 @@
+package EDETServer;
+
+import java.io.Serializable ;
+import java.util.* ;
+
+public class ItemContainer implements Serializable {
+      
+	  private String itemName ;
+	  private int quantity ;
+	  private double itemPrice ;
+	  private double balance ;
+	  
+
+	  static public Object Price=new Object();
+	  static public Object Quantity=new Object();
+	  static public Object Balance=new Object();
+
+public ItemContainer( String i, int q, double p, double bal)
+{
+	this.itemName = i ;
+	this.quantity = q ;
+	this.itemPrice = p ;
+	this.balance = bal ;
+}
+
+public void setPrice(){
+	//Write code for +-10% change price
+}
+
+public double getPrice(){
+	//Synchronize the getPrice object
+	synchronized(Price){ ;
+	     return itemPrice ;
+	}
+
+}
+
+public void setQuantity(int q){
+	
+	synchronized(Quantity){
+		   this.quantity = q ;
+	}
+}
+
+
+public int getQuantity(){
+	
+	synchronized(Quantity){
+		   return this.quantity ;
+	}
+}
+
+public void setBalance(double bal){
+	 synchronized(Balance){
+		 this.balance = bal ;
+	 }
+}
+
+public double getBalance(){
+	 synchronized(Balance){
+		 return this.balance ;
+	 }
+}
+
+}

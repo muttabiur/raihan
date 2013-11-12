@@ -1,0 +1,329 @@
+package EDETServer;
+
+import DETInterface.* ;
+
+import java.util.* ;
+import java.rmi.server.*;
+import java.rmi.* ;
+import java.util.concurrent.Semaphore ;
+import java.util.Vector ;
+import java.text.Format ;
+import java.text.DecimalFormat ;
+import java.rmi.server.UnicastRemoteObject;
+
+public class DETServerImplementation extends UnicastRemoteObject implements DETInterface{
+	
+	//Define hash map for servers belongs to its corresponding item
+	Hashtable<String, String> servers = new Hashtable();
+	
+	ItemContainer itm ;
+	  
+
+    
+	 /*
+	   * Define Data Structure for servers
+	   */
+	        static ArrayList<String> s = new ArrayList<String>();
+	
+	/*
+	 * Define the items that are sold by each server
+	 */
+	        static ArrayList<String> items = new ArrayList<String>();
+	
+
+	 /*
+	  *Define Semaphore lock for each object
+	  *Create Semaphore Object
+	*/
+	         
+	        
+      Semaphore	accItm = new Semaphore(1, true);
+      Semaphore	accSell = new Semaphore(1, true);
+      Semaphore	accBuy = new Semaphore(1, true);
+	
+    //Define a Vector
+	  Vector otherDetail ; 
+	  
+	  Format f = new DecimalFormat("####.00");
+	  
+	  ImplementMessageContainer allMessage = new ImplementMessageContainer();
+	  
+	  
+	public DETServerImplementation(String NameOfItem, int q, double p, double b) throws RemoteException {
+	      super( );
+	      
+	  itm = new ItemContainer( NameOfItem, q, p, b);
+	  
+	  otherDetail = new Vector();
+	  
+	 
+	  
+	  
+	
+	   
+	   createServer();
+	   createItem() ;
+		
+/*		for(Iterator<String> it = items.iterator(); it.hasNext();){
+			 String itemString = it.next();
+		
+			    for(Iterator<String> itn = s.iterator(); itn.hasNext();){
+				    String serverString = itn.next();
+				    
+				      servers.put(itemString, serverString);   	    
+			 }
+			
+		}*/
+		//for(Iterator<String> it = items.iterator(),Iterator<String> itn = s.iterator();it.hasNext();){
+			
+			//servers.put(it.next(), itn.next());
+		//}
+	   servers.put("Computers", "localhost");
+	   servers.put("Books","fletcher.encs.concordia.ca");
+		
+	}//End of method
+	
+	public void createServer(){
+		  
+		s.add("localhost");
+		s.add("fletcher.encs.concordia.ca");
+		//s.add("CornellServer");
+		
+	}
+	
+	public void createItem(){
+		
+		items.add("Computers");
+		items.add("Books");
+		//items.add("AirlinesTicket");
+	}
+	
+	
+	public int buyItem(String item, int quantity) throws RemoteException{
+		 
+		String serverName ;
+		
+		if(itm.name.equalsIgnoreCase(item))  // local product
+		{  
+			        accItm.acquireUninterruptibly();
+	               //synchronized(accItm){
+	            	   if(itm.getQuantity()>= quantity)
+	            	   {
+	            		   itm.setQuantity(itm.getQuantity() - quantity);
+	            		   itm.setBalance(itm.getBalance() + itm.getPrice() * quantity);
+	            		   System.out.println("SERVER LOG: BUY LOCAL : ITEM ("+item+") QTY ("+ quantity +") PRICE (" + itm.getPrice() + ") BAL("+ itm.getBalance() +")");
+	            	   }
+	            	   else
+	            		   return allMessage.INSUFFICIENTQUANTITY ;
+	            	   
+	            	    accItm.release();
+		}
+		
+		//Find item in different servers
+		else 
+		{ 
+			String ser = (String)servers.get(item);
+			
+			if(ser !=null)
+			{
+				accBuy.acquireUninterruptibly();
+					
+					try{
+						 serverName = ser ;
+						 //Call that server to get the item. Call server implements sell item.
+						// callServer method call remote server and its sellItem method
+							Vector res=(Vector) callServer(serverName,item,quantity,itm.getBalance());
+							Integer i = (Integer) res.elementAt(0);
+							int resultInt = i.intValue();
+							int success = 0 ;
+							if(resultInt == allMessage.SUCCESS) //if sell item is sucessful
+							{
+								Double p = (Double)res.elementAt(1);
+								//Now i should get that item, because the selling operation was successful
+								//get the lock for that item
+								accItm.acquireUninterruptibly();
+								double bal = itm.getBalance();
+									double newBalance = bal - quantity * p.doubleValue();
+									itm.setBalance(newBalance);
+									String logMessage = item+ "\t" + quantity +"\t" +res.elementAt(1).toString()+ "\t" + serverName;
+									otherDetail.add(new String(logMessage));
+									System.out.println("SERVER LOG: BUY FROM ("+ serverName +") : ITEM ("+  item +") QTY ("+ quantity +")  PRICE (" + p + ") BAL("+ itm.getBalance() +")");
+                                   									
+								 accItm.release() ;
+								  return resultInt ;
+							}  
+								
+								else{
+	
+									return resultInt ;
+								}
+							
+							
+					}catch(Exception e){
+						System.out.println("Buy item Error" + e);
+					}
+				 accBuy.release() ;
+			} else
+			{
+				//System.out.println("Product Not Found");
+				return allMessage.PRODUCTNOTFOUND ;
+			}
+								
+		}	
+			//return success ;		
+		//System.out.println("Successful");
+		return allMessage.SUCCESS;
+	}
+							
+							
+						    
+	
+	
+	public Vector sellItem(String item, int quantity ) throws RemoteException{
+		System.out.println("ME in sell");
+		 //Define a Vector
+		Vector sellVector = new Vector();
+		System.out.println("int sell : "+item);
+		if(itm.name.equalsIgnoreCase(item))  
+		{
+		  //get sell lock
+		   accSell.acquireUninterruptibly();
+			double sellPrice = itm.getPrice() ;
+			  //Check buyer has enough money to buy that item
+			 double bal = itm.getBalance();
+			   if( bal > sellPrice){
+				  //Acquire lock for that item
+				  
+				  accItm.acquireUninterruptibly();
+				  //Check that i have enough quantity to sell
+				   int q = itm.getQuantity();
+				        if (q >= quantity)
+				          {
+				    	    //I have enough quantity to sell
+				    	      //I will reduce my current quantity and update my balance
+				    	        int nQuantity =  itm.getQuantity() - quantity ;
+				    	          itm.setQuantity(nQuantity);
+				    	           double balance = itm.getBalance();   
+				    	    	    double  acquiredMoney = sellPrice * quantity ;
+				    	    	      itm.setBalance(balance-acquiredMoney);
+				    	    	      
+				    	    	      //System.out.println("Selling Operation Sucessful");
+				    	    	         sellVector.add(new Integer(allMessage.SUCCESS));
+				    	    	         sellVector.add(sellPrice);
+				    	    	       
+				    	    	         System.out.println("SERVER LOG:		SELL   : ITEM ("+  item +") QTY ("+ nQuantity +") PRICE (" + sellPrice + ")   BAL("+ itm.getBalance() +")");
+				    	    	        //accItm.release();
+				    	    	         accSell.release() ;
+				    	    	         return sellVector ;
+				          }
+				    	    	         else
+				    	    	         {
+				    	    	        	// System.out.println("Selling Operation is not Sucessful");
+				    	    	             sellVector.add(new Integer(allMessage.INSUFFICIENTQUANTITY));
+				    	    	             //accItm.release();
+				    	    	             return sellVector ;
+				    	    	         }
+				            //Release Lock
+			    
+			    
+			   }
+			   
+				          else{
+				        	  sellVector.add(new Integer(allMessage.INSUFFICIENTFUNDS));
+				        	  //accSell.release(); 
+				        	  return sellVector ;
+				          } 
+			     
+		}
+			else 
+			    {
+				  sellVector.add(new Integer(allMessage.PRODUCTNOTFOUND));
+				  
+				  return sellVector ;
+			      }
+
+			    	    	        	 
+			
+	}
+
+	
+	/**
+	 *  this method call remote server to sell this item
+	 * @param hostName : String containing houst name 
+	 * @param item : String containing item name
+	 * @param q : int containing quantity
+	 * @param bal : double containing balanace
+	 * @return
+	 */
+  
+	public Vector callServer(String hostName,String item,int q,double bal){
+						
+		try {
+	         int RMIPort=1399;         
+		     
+	         String registryURL =   "rmi://" + hostName+ ":" + RMIPort + "/DET";
+	         
+	         // find the remote object and cast it to an interface object
+	         DETInterface h = (DETInterface)Naming.lookup(registryURL);
+	       	 //  call remote method sellItem         
+	         Vector res = (Vector) h.sellItem(item, q); 
+	         	         
+	         return res;
+	         
+	      } // end try 
+	      catch (Exception e) {
+	         System.out.println("Call Server Error: "+hostName+"   "+e);
+	         
+	         Vector vEr= new Vector();
+	        vEr.add(new Integer(allMessage.SERVERNOTFOUND));
+	         vEr.add(new String(hostName));
+	         vEr.add(new String(item));
+	         
+	         return vEr;
+	         
+	      } 
+		
+	}
+	
+	public Vector printReport() throws RemoteException {
+		//Print report in the server side
+		Vector<String> v = new Vector<String>();
+		
+		accItm.acquireUninterruptibly();
+			String p = f.format(Double.valueOf(itm.getPrice()));
+			String b = f.format(Double.valueOf(itm.getBalance()));
+			v.add("");
+			v.add("**********PrintReport*************");
+			v.add("");
+			v.add("NameOfItem:" + itm.name + "    Quantity:" + itm.getQuantity()+ "        Price:" + p + "     Balance:" + b);
+			v.add("");
+			v.add("**********PrintReport*************");
+			
+			v.add("");
+			v.add("NameOfItem:" + itm.name + "    Quantity:" + itm.getQuantity()+ "        Price:" + p + "     Balance:" + b);
+	
+			v.add("**********End Of Report***********");
+			v.add("");
+			
+		
+		
+		 accItm.release() ;
+			
+			System.out.println("Display\t Item\t Quantity\t Price\t Server\t Information ");
+			System.out.println("");
+			
+			/*for(int j = 0; j < otherDetail.size(); j++)
+				System.out.println(otherDetail.elementAt(j));
+			
+			System.out.println("");
+			*/
+			return v ;
+			
+			
+			
+			
+			
+		}
+		
+	
+}//End of class Implementation of all the methods

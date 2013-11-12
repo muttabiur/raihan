@@ -1,0 +1,21 @@
+package Interface;
+
+import java.util.* ;
+
+/**
+ * @author m_sk
+ */
+
+public interface DisplayMessage {
+	
+	public static final int INVALID_ACCOUNT = 1;
+	public static final int NOT_ENOUGH_BALANCE = 2;
+	public static final int SUCCESS = 3;
+	public static final int NOT_ENOUGH_QUANTITY = 4;
+	public static final int PRODUCT_NOT_FOUND = 5;
+	public static final int NOT_ENOUGH_FUNDS = 6;
+	public static final int SERVER_NOT_FOUND = 7;
+
+
+}
+

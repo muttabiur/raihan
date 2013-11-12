@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>AdventNet SNMP API 4 README</title>
+  <meta name="GENERATOR" content="OpenOffice.org 2.4  (Linux)">
+  <meta name="CREATED" content="0;0">
+  <meta name="CHANGED" content="20090124;12501300">
+  <meta name="ProgId" content="FrontPage.Editor.Document">
+  <meta http-equiv="Content-Language" content="en-us">
+</head>
+<body dir="ltr" lang="en-US">
+<table style="page-break-before: always;" width="100%" bgcolor="#33ccff"
+ border="0" cellpadding="5" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="50%" bgcolor="#808080">
+      <p align="left"><font color="#ffffff"><font face="Arial"><font
+ size="4"><b>README</b></font></font></font></p>
+      </td>
+      <td width="50%" bgcolor="#808080">
+      <p align="right"><font color="#ffffff"><font face="Arial"><font
+ size="4"><b>AdventNet SNMP API 4</b></font></font></font></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%" bgcolor="#c0c0c0">
+      <p><font face="Arial"><font size="2"><b>&lt;AdventNet/SNMPAPI/examples/low_level_api_examples/snmpapps&gt;</b></font></font></p>
+      </td>
+      <td width="50%" bgcolor="#c0c0c0">
+      <p align="right"><font face="Arial"><font size="1"><b>Release
+4.0.5</b></font></font></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" width="100%" bgcolor="#ffffff">
+      <p><font face="Arial"><font size="2">This directory contains
+examples of using the low-level APIs. Refer the setenv.bat or setenv.sh
+file for help on setting up your environment to run the
+examples.Command line examples are given below.&nbsp;</font></font> </p>
+      <p><font face="Arial"><font size="2">For using v3 features, the
+values for the command-line parameters are as follows.</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>-u</b> : The
+principal or user name on whose behalf the request is to be sent.&nbsp;<br>
+        <b>-a</b> : This is the authentication method to be used. The
+values are MD5 for the HMAC-MD5 authentication SHA for the HMAC-SHA
+authentication&nbsp;<br>
+        <b>-pp</b> : privProtocol(DES/AES-128/AES-192/AES-256/3DES)<b><br>
+-w</b> : The password used for authentication. This is the
+non-localized password.&nbsp;<br>
+        <b>-s</b> : The password used for encryption or privacy. This
+is the again the non-localized password.&nbsp;<br>
+        <b>-i </b>: The context Name to be used for the pdu.&nbsp;</font></font></blockquote>
+      <p><font face="Arial"><font size="2">Please note that the
+requests could fail, if sent with any other security parameters apart
+from the ones configured on the agent. Moreover, the authentication
+scheme (-a) must be prvided when the auth password(-w) is specified.
+All the v3 examples below use the case of a user initial2, using MD5
+authentication, and an authentication passphrase of initial2Pass.&nbsp;</font></font>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="100%" bgcolor="#c0c0c0">
+      <p><font face="Arial"><font size="2"><b>Bundled Examples</b></font></font></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%">
+      <p><font face="Courier New"><font size="2"><b>1. snmpget</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Arial"><font size="2">-
+Get one or more SNMP variables.</font></font> </p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+snmpget [-d] [-v version(v1,v2,v3)] [-c community] [-p port] [-r
+retries] [-t timeout] [-u user] [-a auth_protocol] [-w auth_password] </font></font><font
+ face="Arial"><font size="2"><span style="font-style: normal;">[-pp
+privProtocol(DES/AES-128/AES-192/AES-256/3DES)]</span></font></font> <font
+ face="Arial"><font size="2">[-s priv_password] [-i context_id] host
+OID [OID] ...&nbsp;<br>
+        </font></font><font face="Arial"><font size="2"><b>Example</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+java snmpget 10.3.2.120 1.2.0&nbsp;<br>
+java snmpget -v v3 -u initial2 -w initial2Pass -a MD5 10.3.2.120
+1.2.0&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>2. snmpgetnext</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Arial"><font size="2">-
+Perform a getnext on one or more SNMP variables.</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+snmpgetnext [-d] [-v version(v1,v2,v3)] [-c community] [-p port] [-r
+retries] [-t timeout] [-u user] [-a auth_protocol] [-w auth_password] </font></font><font
+ face="Arial"><font size="2"><span style="font-style: normal;">[-pp
+privProtocol(DES/AES-128/AES-192/AES-256/3DES)]</span></font></font> <font
+ face="Arial"><font size="2">[-s priv_password] [-i context_id] host
+OID [OID] ...&nbsp;<br>
+        </font></font><font face="Arial"><font size="2"><b>Example</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+java snmpgetnext 10.3.2.120 1.2.0&nbsp;<br>
+java snmpgetnext -v v3 -u initial2 -w initial2Pass -a MD5 10.3.2.120
+1.2.0&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>3. snmpset</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Courier New"><font
+ size="2"><b>- </b></font></font><font face="Arial"><font size="2">Perform
+
+an SNMP set on one or more SNMP variables.</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+snmpset [-d] [-v version(v1,v2,v3)] [-c community] [-p port] [-r
+retries] [-t timeout] [-u user] [-a auth_protocol] [-w auth_password] </font></font><font
+ face="Arial"><font size="2"><span style="font-style: normal;">[-pp
+privProtocol(DES/AES-128/AES-192/AES-256/3DES)]</span></font></font> <font
+ face="Arial"><font size="2">[-s priv_password] [-i context_id] host
+[OID {INTEGER | STRING | GAUGE | TIMETICKS | OPAQUE | IPADDRESS |
+COUNTER | OID } value] ...&nbsp;<br>
+        </font></font><font face="Arial"><font size="2"><b>Example</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+java snmpset 10.3.2.120 1.5.0 STRING whatever&nbsp;<br>
+java snmpset -v v3 -u initial2 -w initial2Pass -a MD5 10.3.2.120 1.5.0
+STRING whatever&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>4. snmpbulk</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Arial"><font size="2">-
+Perform a getbulk operation. The agent must support atleast v2c .&nbsp;</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+snmpbulk [-d] [-v version(v2,v3)] [-c community] [-p port] [-r retries]
+[-t timeout] [-u user] [-a auth_protocol] [-w auth_password] </font></font><font
+ face="Arial"><font size="2"><span style="font-style: normal;">[-pp
+privProtocol(DES/AES-128/AES-192/AES-256/3DES)]</span></font></font> <font
+ face="Arial"><font size="2">[-s priv_password] [-i context_id] host
+OID [OID] ... nonRepeaters maxRepetions&nbsp;<br>
+        </font></font><font face="Arial"><font size="2"><b>Example</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+java snmpbulk 10.3.2.120 1.1.0 0 20&nbsp;<br>
+java snmpbulk -v v3 -u initial2 -w initial2Pass -a MD5 10.3.2.120 1.1.0
+0 20</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>5. snmpwalk</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Arial"><font size="2">-
+Perform an SNMP walk with one or more OIDs.</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+snmpwalk [-d] [-v version(v1,v2,v3)] [-c community] [-p port] [-r
+retries] [-t timeout] [-u user] [-a auth_protocol] [-w auth_password] </font></font><font
+ face="Arial"><font size="2"><span style="font-style: normal;">[-pp
+privProtocol(DES/AES-128/AES-192/AES-256/3DES)]</span></font></font> <font
+ face="Arial"><font size="2">[-s priv_password] [-i context_id] host
+OID&nbsp;<br>
+        </font></font><font face="Arial"><font size="2"><b>Example</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+java snmpwalk 10.3.2.120 .1.3&nbsp;<br>
+java snmpwalk -v v3 -u initial2 -w initial2Pass -a MD5 10.3.2.120
+.1.3&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>6. snmpv1trap.java</b></font></font>
+      <font face="Arial"><font size="2">- Send an SNMPv1 trap PDU.</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b>:&nbsp;<br>
+snmpv1trap [-d] [-c community] [-p port] host enterprise agent-addr
+generic-trap specific-trap timeticks [OID {INTEGER | STRING | GAUGE |
+TIMETICKS | OPAQUE | IPADDRESS | COUNTER} value] ...&nbsp;<br>
+        <b>Example</b>:&nbsp;<br>
+java snmpv1trap 10.3.2.120 .1.3.6.1.4.1.2162.1000.2 10.3.2.118 6 12
+16352 .1.3.6.1.4.1.2162.1001.21.0 STRING TrapTest&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>7. snmpv2ctrap</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Arial"><font size="2">-
+Send an SNMPV2c trap notification PDU.</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b>:&nbsp;<br>
+snmpv2ctrap [-d] [-c community] [-p port] host TimeTicksvalue OIDvalue
+[OID {INTEGER | STRING | GAUGE | TIMETICKS | OPAQUE | IPADDRESS |
+COUNTER | COUNTER64 | UNSIGNED32} value] ...&nbsp;<br>
+        <b>Example</b>:&nbsp;<br>
+java snmpv2ctrap 10.3.2.120 16352 .1.3.6.1.4.1.2162.1000.2
+.1.3.6.1.4.1.2162.1001.21.0 STRING TrapTest&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>8. snmpv3trap</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Arial"><font size="2">-
+Send an SNMPv2c trap notification PDU using the SNMPV3 protocol.</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+snmpv3trap [-d] [-p port] [-e engineID(0x....)] [-u user] [-a
+auth_protocol] [-w auth_password] </font></font><font face="Arial"><font
+ size="2"><span style="font-style: normal;">[-pp
+privProtocol(DES/AES-128/AES-192/AES-256/3DES)]</span></font></font> <font
+ face="Arial"><font size="2">[-s priv_password] [-i context_id] host
+TimeTicksvalue OIDvalue [OID {INTEGER | STRING | GAUGE | TIMETICKS |
+OPAQUE | IPADDRESS | COUNTER | COUNTER64 | UNSIGNED32} value] ...&nbsp;<br>
+        </font></font><font face="Arial"><font size="2"><b>Example</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+java snmpv3trap -e 0x000012141516171819202121 -u intial2 -a MD5 -w
+initial2Pass -i initial 10.3.2.120 16352 .1.3.6.1.4.1.2162.1000.2
+.1.3.6.1.4.1.2162.1001.21.0 STRING TrapTest&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>9. snmptrapd</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java</b></font></font> <font face="Arial"><font size="2">-
+Start the trap daemon&nbsp;</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b>:&nbsp;<br>
+snmptrapd [-d] [-p port][-c community]&nbsp;<br>
+        <b>Example</b>:&nbsp;<br>
+java snmptrapd&nbsp;</font></font></blockquote>
+      <p><font face="Courier New"><font size="2"><b>10. snmpv3trapd</b></font></font><font
+ face="Arial"><font size="2">.</font></font><font face="Courier New"><font
+ size="2"><b>java - </b></font></font><font face="Arial"><font size="2">Start
+the trap daemon for v3.&nbsp;</font></font></p>
+      <blockquote><font face="Arial"><font size="2"><b>Usage</b></font></font><font
+ face="Arial"><font size="2">:<br>
+snmpv3trapd [-d][-p port][-c community] [-u user] [-e engineID] [-a
+authProtocol] [-w auth_password] </font></font><font face="Arial"><font
+ size="2"><span style="font-style: normal;">[-pp
+privProtocol(DES/AES-128/AES-192/AES-256/3DES)]</span></font></font> <font
+ face="Arial"><font size="2">[-s priv_password]&nbsp;<br>
+        </font></font><font face="Arial"><font size="2"><b>Example</b></font></font><font
+ face="Arial"><font size="2">:&nbsp;<br>
+java snmpv3trapd -u initial2 -e 0x000012141516171819202121 -a MD5 -w
+initial2Pass&nbsp;</font></font> </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table width="100%" border="0" cellpadding="5" cellspacing="2">
+  <tbody>
+    <tr>
+      <td width="33%" bgcolor="#c0c0c0">
+      <p align="center"><font face="Arial"><font size="2"><b>Support</b></font></font></p>
+      </td>
+      <td width="33%" bgcolor="#c0c0c0">
+      <p align="center"><font face="Arial"><font size="2"><b>Feedback</b></font></font></p>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td width="33%">
+      <p><font face="Arial"><font size="2">For those with support
+contracts, AdventNet provides priority support through email with a
+reply usually provided within 24 hours.</font></font> </p>
+      <p><font face="Arial"><font size="2">While sending your support
+questions or bug report, please specify the SNMP package release
+version, the JDK version , the platform, and the browser you use .</font></font>
+      </p>
+      <p><font face="Arial"><font size="2">Send your support queries
+to:&nbsp;<a href="mailto:snmp-support@adventnet.com">snmp-support@adventnet.com</a></font></font>
+      </p>
+      </td>
+      <td width="33%">
+      <p><font face="Arial"><font size="2">We welcome your feedback
+that will help us improve the APIs and provide future enhancements.</font></font>
+      </p>
+      <p><font face="Arial"><font size="2">Send in your feedback
+to:&nbsp;<a href="mailto:snmp-support@adventnet.com">snmp-support@adventnet.com</a></font></font>
+      </p>
+      <p>&nbsp;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table width="100%" border="0" cellpadding="5" cellspacing="2">
+  <tbody>
+    <tr>
+      <td width="100%" bgcolor="#c0c0c0">
+      <p align="left"><font face="Arial"><font size="2"><b>Copyright
+and License</b></font></font></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%">
+      <p><font face="Arial"><font size="2">Please refer <a
+ href="../../../COPYRIGHT">COPYRIGHT</a> and <a
+ href="../../../LICENSE_AGREEMENT">LICENSE </a>before using the
+package.</font></font></p>
+      </td>
+    </tr>
+    <tr>
+      <td width="100%">
+      <p><img src="../../../images/logo.jpg" name="graphics1"
+ width="387" align="bottom" border="0" height="86"> </p>
+      <p><font face="Arial"><font size="1"><b>AdventNet, Inc.</b></font></font><font
+ face="Arial"><font size="1"><br>
+Web : <a href="http://www.adventnet.com/">http://www.adventnet.com</a><br>
+Email: <a href="mailto:info@adventnet.com">info@adventnet.com</a></font></font></p>
+      <hr color="#000000" size="1">
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><br>
+<br>
+</p>
+</body>
+</html>

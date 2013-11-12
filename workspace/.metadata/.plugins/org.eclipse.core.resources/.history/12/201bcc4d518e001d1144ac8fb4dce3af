@@ -1,0 +1,505 @@
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.lang.Math;
+
+/**
+ * 
+ * @author Comp-6651 Group No. 3, Fall-2008
+ * Concordia University Montreal, Canada
+ *
+ *<code> Min_Max_Heap </code> create, update, and maintains min max heap
+ */
+public class Min_Max_Heap implements Min_Max_Heap_Interface {
+
+	
+	/**
+	 * heap to store the elements of the heap
+	 */
+	private ArrayList<Integer> heap = new ArrayList<Integer>();
+	
+	/**
+	 * get heap as Array List
+	 * @return the heap of the element as ArrayList<Integer>
+	 */
+	public ArrayList<Integer> getHeap()
+	{
+		return heap;
+	}
+	
+	/**
+	 * the constructor receives an unsorted array and build the heap 
+	 * @param inputItems
+	 */
+	public Min_Max_Heap(ArrayList<Integer> inputItems)
+	{
+		for(int i=0;i<inputItems.size();i++)
+			heap.add(inputItems.get(i));
+		
+		for(int i=0;i<heap.size();i++)
+			trickleDown(i);		
+	}
+	
+	/**
+	 * returns the highest element from the heap
+	 */
+	public int getMaximum()
+	{
+		//maximum is in heap[1] or heap[2]
+		if(heap.get(1)>heap.get(2))
+			return heap.get(1);
+		else
+			return heap.get(2);
+		
+	}
+	
+	/**
+	 * return the lowest element from the heap
+	 */
+	public int getMinimum()
+	{
+		//the min is the first element of the heap
+		return heap.get(0);
+	}
+	
+	
+	/**
+	 * insert the element in the heap
+	 * @param a to be inserted 
+	 */
+	public void insert (int a)
+	{
+		heap.add(a);
+		BubbleUp(heap.size()-1);		
+	}
+	
+	/**
+	 * delete highest element from the heap and rearrange the heap
+	 */
+	public void removeMaximum()
+	{
+		//remove the last element and replace the max with it
+		int temp = heap.get(heap.size()-1);
+		heap.remove(heap.size()-1);
+		
+		if(heap.get(1)>heap.get(2))
+			heap.set(1, temp);
+		else
+			heap.set(2, temp);
+		
+		for(int i=0;i<heap.size();i++)
+			trickleDown(i);		
+		
+	}
+	
+	/**
+	 * delete lowest element from the heap and rearrange the heap
+	 */
+	public void removeMinimum()
+	{
+		int temp = heap.get(heap.size()-1);
+		heap.remove(heap.size()-1);
+		heap.set(0, temp);
+		for(int i=0;i<heap.size();i++)
+			trickleDown(i);		
+	}
+	
+	
+	/**
+	 * display heap on the cosole
+	 */
+	public void showHeap()
+	{
+		for (int i=0;i<heap.size();i++)
+			System.out.print(heap.get(i)+"  ");
+		System.out.println("");
+	}
+//--private methods-------------------------------------------------------------------------
+
+	
+	/**
+	 * take the position of the element and return level of the element of the heap tree
+	 * @param position, takes the position of the element
+	 * @return the level of the element
+	 */
+	private int getLevel(int position)
+	{	
+		if (position == 0 )return 0;
+		double level = Math.floor(Math.log10(position+1)/Math.log10(2));
+		return ((int)level);
+
+	}
+	
+	
+	/**
+	 * determine the level (either min or max level) of the given elements location
+	 * @param position, the location of the element
+	 * @return level of the element, either min or max level, true indicates min level and false 
+	 * indicates max level
+	 */
+	private boolean isMinLevel(int position)
+	{
+		if (getLevel(position)%2 == 0)
+			return true;
+		else 
+			return false;		
+	}
+	
+	
+	
+	/**
+	 * determine the number of children of the given element location
+	 * @param position, location of the element
+	 * @return number of children (either 0 or 1 or 2)
+	 */
+	private int hasChildren(int position )
+	{
+		int numOfChild = 0;
+		if ((position+1)*2-1 <=  heap.size()-1)
+		    numOfChild++;
+		if ((position+1)*2 <=  heap.size()-1)
+			numOfChild++;		
+	
+		return numOfChild;			
+	}
+	
+	/**
+	 * determine that the given elements location has any grand children or not
+	 * @param position of the element 
+	 * @return true if it has any grand children, otherwise false
+	 */
+	private boolean hasGrandChildren(int position )
+	{
+		if ((position+1)*4-1 <=  heap.size()-1)
+			return true;
+		return false;
+		
+	}
+	
+	/**
+	 * get the location(s) of the children 
+	 * @param position, the location of the given element 
+	 * @return the locations of the children (either 0 or 1 or 2)
+	 */
+	private ArrayList<Integer> getChildren(int position)
+	{
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		
+		if(hasChildren(position)==1)
+			children.add((position+1)*2-1);
+		if(hasChildren(position)==2)
+		{
+			children.add((position+1)*2-1);
+			children.add((position+1)*2);
+		}
+		
+		return children;				
+	}
+	
+	/**
+	 * determine the grand children
+	 * @param position, the element position
+	 * @return true indicates it has children and false indicates no children
+	 */
+	private ArrayList<Integer> getGrandChildren(int position)
+	{
+		ArrayList<Integer> grandChildren = new ArrayList<Integer>();
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		children = getChildren(position);
+		
+		for(int i=0; i <children.size();i++)
+		{
+			ArrayList<Integer> temp = new ArrayList<Integer>();
+			temp =getChildren(children.get(i));
+			for (int j=0;j<temp.size();j++)
+			{
+				grandChildren.add(temp.get(j));
+			}			
+			
+		}
+		return grandChildren;
+		
+	}
+	
+	
+	/**
+	 * rearrange the position of the given element
+	 * @param position of the element to rearrange
+	 */
+	private void trickleDown(int position)
+	{
+		if(isMinLevel(position))
+		   trickleDownMin(position);
+		else
+			trickleDownMax(position);
+	}
+	
+	/**
+	 * rearrange the position of the min level element
+	 * @param position, the location of the element
+	 */
+	private void trickleDownMin(int position)
+	{
+		if(hasChildren(position)>0)
+		{
+			int m = getSmallestChildren(position);
+			// if m is a grand child
+			if(((m+1)/4)-1 == position)
+			{
+				if(heap.get(m)<heap.get(position))
+				{
+					swap(m,position);
+					if(heap.get(m)>heap.get(((m+1)/2)-1))
+					{
+						swap(m,((m+1)/2)-1);
+					}
+					trickleDownMin(m);
+				}				
+			}
+			else // m is the child
+			{
+				if(heap.get(m)<heap.get(position))
+				{
+					swap(m,position);
+				}				
+			}			
+		}		
+	}
+	
+	/**
+	 * rearrange the location of the max level element
+	 * @param position, the location of the element
+	 */
+	private void trickleDownMax(int position)
+	{
+		if(hasChildren(position)>0)
+		{
+			int m = getBiggestChildren(position);
+			// if m is a grand child
+			if(((m+1)/4)-1 == position)
+			{
+				if(heap.get(m)>heap.get(position))
+				{
+					swap(m,position);
+					if(heap.get(m)<heap.get(((m+1)/2)-1))
+					{
+						swap(m,((m+1)/2)-1);
+					}
+					trickleDownMin(m);
+				}				
+			}
+			else // m is the child
+			{
+				if(heap.get(m)>heap.get(position))
+				{
+					swap(m,position);
+				}				
+			}			
+		}				
+	}
+	
+	/**
+	 * swap two integer elements of the heap
+	 * @param m location of one of the two elements
+	 * @param position another location of one of the two elements
+	 */
+	private void swap(int m, int position)
+	{
+		int temp = heap.get(m);
+		heap.set(m, heap.get(position));
+		heap.set(position, temp);
+	}
+	
+	/**
+	 * get the smallest children of the given elements position
+	 * @param position, the location of the parent 
+	 * @return smallest element location
+	 */
+	private int getSmallestChildren(int position)
+	{
+		ArrayList<Integer> child_grand = new ArrayList<Integer>();
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		ArrayList<Integer> grandChildren = new ArrayList<Integer>();
+		
+		//children		
+	
+		
+		children = getChildren(position);
+		for(int i=0; i <children.size();i++)
+		{	
+				child_grand.add(children.get(i));			
+		}
+		//grand children
+		grandChildren = getGrandChildren(position);
+		for(int i=0; i <grandChildren.size();i++)
+		{	
+				child_grand.add(grandChildren.get(i));			
+		}
+		
+		int min_position = child_grand.get(0);
+		int min_value = heap.get(min_position);
+		for (int i=0;i<child_grand.size();i++)
+		{
+			if(heap.get(child_grand.get(i))<min_value)
+			{
+				min_position = child_grand.get(i);
+				min_value=heap.get(child_grand.get(i));				
+			}			
+		}
+		return min_position;		
+		
+	}
+	
+	/**
+	 * determine the child location with highest value of the given parent 
+	 * @param position, location of the parent
+	 * @return the location of child with highest value
+	 */
+	private int getBiggestChildren(int position)
+	{
+		ArrayList<Integer> child_grand = new ArrayList<Integer>();
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		ArrayList<Integer> grandChildren = new ArrayList<Integer>();
+		
+		//children				
+		children = getChildren(position);
+		for(int i=0; i <children.size();i++)
+		{	
+				child_grand.add(children.get(i));			
+		}
+		//grand children
+		grandChildren = getGrandChildren(position);
+		for(int i=0; i <grandChildren.size();i++)
+		{	
+				child_grand.add(grandChildren.get(i));			
+		}
+		
+		int max_position = child_grand.get(0);
+		int max_value = heap.get(max_position);
+		for (int i=0;i<child_grand.size();i++)
+		{
+			if(heap.get(child_grand.get(i))>max_value)
+			{
+				max_position = child_grand.get(i);
+				max_value=heap.get(child_grand.get(i));				
+			}			
+		}
+		return max_position;		
+		
+	}
+	
+	/**
+	 * exchange the min level element to their grand parent  
+	 * @param i
+	 */
+	private void BubbleUpMin(int i)
+	{
+		//if heap[i] has grand parent
+		if(((i+1)/4)-1 >=0)
+		{
+			if(heap.get(i)<heap.get(((i+1)/4)-1))
+			{
+				swap(i,((i+1)/4)-1);
+				BubbleUpMin(((i+1)/4)-1);
+			}			
+		}		
+	}
+	
+	/**
+	 * exchangethe max level element to their grand parent
+	 * @param i
+	 */
+	private void BubbleUpMax(int i)
+	{
+		//if heap[i] has grand parent
+		if(((i+1)/4)-1 >=0)
+		{
+			if(heap.get(i)>heap.get(((i+1)/4)-1))
+			{
+				swap(i,((i+1)/4)-1);
+				BubbleUpMax(((i+1)/4)-1);
+			}			
+		}		
+	}
+	
+	
+	/**
+	 * exchange the position of child to grand parent
+	 * @param i
+	 */
+	private void BubbleUp(int i)
+	{
+		if(isMinLevel(i)) //i is in min level
+		{
+			if(((i-1)/2 >=0)&&(heap.get(i)>heap.get((i-1)/2))) //if i has a parent and ...
+			{
+				swap(i,(i-1)/2);
+				BubbleUpMax((i-1)/2);
+			}
+			else
+				BubbleUpMin(i);			
+		}
+		else // i is in max level
+		{
+			if(((i-1)/2 >=0)&&(heap.get(i)<heap.get((i-1)/2))) //if i has a parent and ...
+			{
+				swap(i,(i-1)/2);
+				BubbleUpMin((i-1)/2);
+			}
+			else
+				BubbleUpMax(i);			
+		}		
+	}
+	
+/*	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub		
+			
+        System.out.println("enter numbers and end it with -1");
+		
+		Scanner keyboard = new Scanner(System.in);
+		int next  = keyboard.nextInt();
+		ArrayList<Integer> inputItems = new ArrayList<Integer>();
+		while(next != -1)
+		{
+			inputItems.add(next);
+			next=keyboard.nextInt();			
+		}
+		
+		Min_Max_Heap_Interface heap = new Min_Max_Heap(inputItems);
+				
+		System.out.println("This is the heap ");
+		
+		heap.showHeap();
+		
+		System.out.println("this is the maximum: "+heap.getMaximum());
+		System.out.println("this is the minimum: "+heap.getMinimum());
+		
+		System.out.println("this is the heap after removing the min: ");
+		heap.removeMinimum();
+		heap.showHeap();
+		
+		System.out.println("this is the heap after removing the max: ");
+		heap.removeMaximum();
+		heap.showHeap();
+		
+		
+		System.out.println("enter one number to insert: ");
+		next  = keyboard.nextInt();
+		
+		heap.insert(next);
+	   
+	    
+        System.out.println("This is the NEW heap after insertion: ");
+		
+		heap.showHeap();	
+	
+	}
+*/
+}
+
+	
+	
+
+
+

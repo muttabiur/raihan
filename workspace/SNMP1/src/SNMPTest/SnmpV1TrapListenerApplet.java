@@ -1,0 +1,631 @@
+/* ----------------------------------------------------------------------------
+ Copyright (c) 2003 jSNMP Enterprises, All Rights Reserved Worldwide
+ ------------------------------------------------------------------------------
+
+   Disclaimer: This software is provided AS IS, and without any warranty
+               other than those which may be provided in a separate
+               writing specifically referencing the software contained
+               herein.  All other warranties, except those which may be
+               provided separately in writing, are expressly disclaimed.
+               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+               PURPOSE which is given with respect to this software or the
+               operability thereof.
+
+   ------------------------------------------------------------------------
+ */
+
+
+// ------------------------------ Package -------------------------------------
+
+// ------------------------------ Imports -------------------------------------
+package SNMPTest ;
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+import java.net.*;
+import java.util.*;
+import java.io.UnsupportedEncodingException;
+
+import com.outbackinc.services.protocol.snmp.*;
+import com.outbackinc.services.protocol.snmp.CSM.*;
+
+/**
+ * Sample which illustrates how to use the jSNMP within a browser.
+ * Note: A fully JDK 1.1-compliant browser is required for this
+ * example.  <p>
+ *
+ *
+ * Here's an example HTML file with an applet tag: <p>
+ * <p>
+ * <pre>
+ *   &lt;html>&lt;body>
+ *   &lt;applet code="SnmpV1TrapListenerApplet" height=400 width=500>
+ *   &lt;/applet>
+ *   &lt;/body>&lt;/html>
+ * </pre>
+ * <p>
+ *
+ * Note: The CLASSPATH must be initialized correctly before
+ * starting the browser.
+ */
+public class SnmpV1TrapListenerApplet
+extends Applet
+implements SnmpTrapListener, ActionListener
+{
+    // ------------------------------ Constants ---------------------------------
+
+    // ------------------------------ Class variables ---------------------------
+
+    // ------------------------------ Member (instance) variables ---------------
+
+    private SnmpService                             m_service;
+    private SnmpServiceConfiguration                m_serviceConfiguration;
+    private SnmpAuthoritativeSession                m_cSnmpRemoteAuthoritativeSession;
+    private String                                  m_szTrapHost = null;
+    private SnmpTrapProfile                         m_trapProfile;
+
+    private TextArea                                m_textArea = null;
+    private TextArea                                m_trapOutput = null;
+
+    private Button                                  m_addTrap = null;
+    private Button                                  m_removeTrap = null;
+    private Button                                  m_listTraps = null;
+    private TextField                               m_hostField = null;
+
+    private TextField                               m_OIDField = null;
+    private TextField                               m_trapNumField = null;
+    private Button                                  m_addOID = null;
+    private Button                                  m_removeOID = null;
+    private Button                                  m_removeAllOIDs = null;
+    private Button                                  m_listOIDs = null;
+    
+    // ------------------------------ Methods -----------------------------------
+
+    /**
+     *
+     */
+    public SnmpV1TrapListenerApplet()
+    {
+    }
+
+
+    /**
+     *
+     */
+    public void init()
+    {
+        // Create the ui...
+        initUI();
+
+        // Initialize the jSNMP core...
+        try 
+        {
+            initService();
+        }
+        catch (Exception e) 
+        {
+            String szOutString = new String("Service initialization error: " + e.getMessage());
+            System.out.println(szOutString);
+            updateText(szOutString);
+            e.printStackTrace();
+        }
+    }
+
+    private void initUI()
+    {
+        setBackground(Color.lightGray);
+
+        m_hostField = new TextField(10);
+        m_addTrap = new Button("Add Host");
+        m_removeTrap = new Button("Remove Host");
+        m_listTraps = new Button("List Hosts");
+
+        m_OIDField = new TextField(10);
+        m_trapNumField = new TextField(5);
+        m_addOID = new Button("Add Trap");
+        m_removeOID = new Button("Remove Trap");
+        m_removeAllOIDs = new Button("Remove All Traps");
+        m_listOIDs = new Button("List Traps");
+    
+        m_hostField.addActionListener(this);
+        m_addTrap.addActionListener(this);
+        m_removeTrap.addActionListener(this);
+        m_listTraps.addActionListener(this);
+        
+        m_OIDField.addActionListener(this);
+        m_trapNumField.addActionListener(this);
+        m_addOID.addActionListener(this);
+        m_removeOID.addActionListener(this);
+        m_removeAllOIDs.addActionListener(this);
+        m_listOIDs.addActionListener(this);
+
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        setLayout(gridbag);
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        Label label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = 1;
+
+        label = new Label("SNMP Agent Host: ", Label.RIGHT);
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        gridbag.setConstraints(m_hostField, c);
+        add(m_hostField);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_addTrap, c);
+        add(m_addTrap);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_removeTrap, c);
+        add(m_removeTrap);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_listTraps, c);
+        add(m_listTraps);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = 1;
+        label = new Label("Enterprise OID: ", Label.RIGHT);
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_OIDField, c);
+        add(m_OIDField);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = 1;
+        label = new Label("Trap Number: ", Label.RIGHT);
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        gridbag.setConstraints(m_trapNumField, c);
+        add(m_trapNumField);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_addOID, c);
+        add(m_addOID);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_removeOID, c);
+        add(m_removeOID);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_removeAllOIDs, c);
+        add(m_removeAllOIDs);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_listOIDs, c);
+        add(m_listOIDs);
+
+         c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.weighty = 3;
+        m_trapOutput = new TextArea();
+        gridbag.setConstraints(m_trapOutput, c);
+        add(m_trapOutput);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.weighty = 1;
+        m_textArea = new TextArea();
+        gridbag.setConstraints(m_textArea, c);
+        add(m_textArea);
+        
+        m_addTrap.setEnabled(true);
+        m_removeTrap.setEnabled(false);
+        m_listTraps.setEnabled(false);
+        m_addOID.setEnabled(true);
+        m_removeOID.setEnabled(false);
+        m_removeAllOIDs.setEnabled(false);
+        m_listOIDs.setEnabled(false);
+    }
+
+
+    private void initService() 
+        throws Exception
+    {
+        m_service = SnmpLocalInterfaces.getService();
+        m_serviceConfiguration = SnmpLocalInterfaces.getServiceConfiguration(m_service);
+        m_serviceConfiguration.setBufferDelay(0);
+
+        m_trapProfile = SnmpLocalInterfaces.getTrapProfileFactory().createSnmpTrapProfile(162);
+        m_service.addTrapListenerProfile(this, m_trapProfile);
+    }
+
+    /* *
+     * Update the UI with a new text string...
+     */
+    private synchronized void updateText(String s)
+    {
+        // Clear the text area periodically...
+        
+        if (m_textArea.getText().length() > 5000)
+        {
+            m_textArea.setText("");
+        }
+
+        // Append the new string to the existing text...
+
+        m_textArea.append(s + "\n");
+    }
+
+
+    /* *
+     * Update the UI with a new text string...
+     */
+    private synchronized void updateTrapText(String s)
+    {
+        // Clear the text area periodically...
+        
+        if (m_trapOutput.getText().length() > 5000)
+        {
+            m_trapOutput.setText("");
+        }
+
+        // Append the new string to the existing text...
+
+        m_trapOutput.append(s + "\n");
+    }
+
+
+    // -- ActionListener interface
+    
+    public synchronized void actionPerformed(ActionEvent event)
+    {
+        if (event.getSource() == m_addTrap)
+        {
+            // Upon a "start signal", clear the display, grab the
+            // managed host from the UI, initialize the walk variables,
+            // and start the run thread.
+        
+            try
+            {
+                m_szTrapHost = m_hostField.getText();
+                if (m_szTrapHost.length() <= 0)
+                {
+                    System.out.println("Empty host");
+                    updateText("Empty host");
+                }
+                else
+                {
+                    CSMSecurityInfo secInfo;
+                    String szCommunity = new String("public");
+                    try
+                    {
+                        secInfo = new CSMSecurityInfo(szCommunity.getBytes("ASCII"), szCommunity.getBytes("ASCII"));
+                    }
+                    catch(UnsupportedEncodingException uee)
+                    {
+                        secInfo = new CSMSecurityInfo(szCommunity.getBytes(), szCommunity.getBytes());
+                    }
+
+                    SnmpAuthoritativeSessionFactory cSnmpAuthoritativeSessionFactory = SnmpLocalInterfaces.getAuthoritativeSessionFactory();
+                    m_cSnmpRemoteAuthoritativeSession = cSnmpAuthoritativeSessionFactory.createRemoteAuthoritativeSession(m_szTrapHost,
+                                                                                     162,
+                                                                                     SnmpConstants.SNMP_VERSION_1,
+                                                                                     secInfo);
+            
+                    if (!m_trapProfile.addTrapSession(m_cSnmpRemoteAuthoritativeSession))
+                    {
+                        String szOutString = new String("Already listening for traps from host: " + m_szTrapHost);
+                        System.out.println(szOutString);
+                        updateText(szOutString);
+                    }
+                    else
+                    {
+                        String szOutString = new String("Added host:" + m_szTrapHost);
+                        System.out.println(szOutString);
+                        updateText(szOutString);
+                        m_removeTrap.setEnabled(true);
+                        m_listTraps.setEnabled(true);
+                    }
+                }
+            }
+            catch(UnknownHostException uhe)
+            {
+                String szOutString = new String("Unknown host: " + m_szTrapHost);
+                System.out.println(szOutString);
+                updateText(szOutString);
+            }
+            catch(SnmpSecurityException sse)
+            {
+                System.out.println("Failed to create CSMSecurityInfo");
+                updateText("Failed to create CSMSecurityInfo");
+            }
+        }
+        else if (event.getSource() == m_removeTrap)
+        {
+            try
+            {
+                m_szTrapHost = m_hostField.getText();
+                if (m_szTrapHost.length() <= 0)
+                {
+                    System.out.println("Empty host");
+                    updateText("Empty host");
+                }
+                else
+                {
+                    CSMSecurityInfo secInfo;
+                    String szCommunity = new String("public");
+                    try
+                    {
+                        secInfo = new CSMSecurityInfo(szCommunity.getBytes("ASCII"), szCommunity.getBytes("ASCII"));
+                    }
+                    catch(UnsupportedEncodingException uee)
+                    {
+                        secInfo = new CSMSecurityInfo(szCommunity.getBytes(), szCommunity.getBytes());
+                    }
+
+                    SnmpAuthoritativeSessionFactory cSnmpAuthoritativeSessionFactory = SnmpLocalInterfaces.getAuthoritativeSessionFactory();
+                    m_cSnmpRemoteAuthoritativeSession = cSnmpAuthoritativeSessionFactory.createRemoteAuthoritativeSession(m_szTrapHost,
+                                                                                       162,
+                                                                                     SnmpConstants.SNMP_VERSION_1,
+                                                                                     secInfo);
+            
+                    if (m_trapProfile.removeTrapSession(m_cSnmpRemoteAuthoritativeSession))
+                    {
+                        m_removeTrap.setEnabled(false);
+                        m_listTraps.setEnabled(false);
+                    }
+
+                    String szOutString = new String("Removed host: " + m_szTrapHost);
+                    System.out.println(szOutString);
+                    updateText(szOutString);
+                }
+            }
+            catch(UnknownHostException uhe)
+            {
+                String szOutString = new String("Unknown host: " + m_szTrapHost);
+                System.out.println(szOutString);
+                updateText(szOutString);
+            }
+            catch(SnmpSecurityException sse)
+            {
+                System.out.println("Failed to create CSMSecurityInfo");
+                updateText("Failed to create CSMSecurityInfo");
+            }
+            catch (NoSuchElementException nsee)
+            {
+                String szOutString = new String("Were not listening for traps from host: " + m_szTrapHost);
+                System.out.println(szOutString);
+                updateText(szOutString);
+            }
+        }
+        else if (event.getSource() == m_listTraps)
+        {
+            SnmpAuthoritativeSession[] sessions = m_trapProfile.listTrapSessions();
+            if (sessions != null)
+            {
+                System.out.println("Waiting for traps from the following hosts:");
+                updateText("Waiting for traps from the following hosts:");
+                
+                for (int i = 0; i < sessions.length; i++)
+                {
+                    String szOutString = new String("\t" + sessions[i].getAgentHostIPAddress());
+                    System.out.println(szOutString);
+                    updateText(szOutString);
+                }
+            }
+            else
+            {
+                System.out.println("Not waiting for traps from any specific hosts");
+                updateText("Not waiting for traps from any specific hosts");
+            }
+        }
+        else if (event.getSource() == m_addOID)
+        {
+            if (m_OIDField.getText().length() <= 0)
+            {
+                System.out.println("Empty enterprise OID");
+                updateText("Empty enterprise OID");
+            }
+            else if (m_trapNumField.getText().length() <= 0)
+            {
+                System.out.println("Empty trap number");
+                updateText("Empty trap number");
+            }
+            else
+            {
+                try
+                {
+                    if (!m_trapProfile.addTrapInform(m_OIDField.getText(), new Integer(m_trapNumField.getText())))
+                    {
+                        String szOutString = new String("Already listening for trap:" + m_OIDField.getText() + "(" + m_trapNumField.getText() + ")");
+                        System.out.println(szOutString);
+                        updateText(szOutString);
+                    }
+                    else
+                    {
+                        String szOutString = new String("Added trap: " + m_OIDField.getText() + "(" + m_trapNumField.getText() + ")");
+                        System.out.println(szOutString);
+                        updateText(szOutString);
+                        m_removeOID.setEnabled(true);
+                        m_removeAllOIDs.setEnabled(true);
+                        m_listOIDs.setEnabled(true);
+                    }
+                }
+                catch (IllegalArgumentException iae)
+                {
+                    String szOutString = new String("Unable to add trap: " + m_OIDField.getText() + "(" + m_trapNumField.getText() + ") ... illegal OID?");
+                    System.out.println(szOutString);
+                    updateText(szOutString);
+                }
+            }
+        }
+        else if (event.getSource() == m_listOIDs)
+        {
+            String[] szEnterpriseOIDs = m_trapProfile.listTrapInformOIDs();
+            if (szEnterpriseOIDs != null)
+            {
+                System.out.println("Waiting for traps with the following enterprise OIDs:");
+                updateText("Waiting for traps with the following enterprise OIDs:");
+                for (int i = 0; i < szEnterpriseOIDs.length; i++)
+                {
+                    StringBuffer szbOutString = new StringBuffer("\t" + szEnterpriseOIDs[i] + " (");
+                    Integer[] igrTrapInformTypes = m_trapProfile.listTrapInformTypes(szEnterpriseOIDs[i]);
+                    if (igrTrapInformTypes != null)
+                    {
+                        for (int j = 0; j < igrTrapInformTypes.length; j++)
+                        {
+                            if (j != 0)
+                            {
+                                szbOutString.append(", ");
+                            }
+                            
+                            szbOutString.append(igrTrapInformTypes[j]);
+                        }
+                    }
+                    
+                    szbOutString.append(")");
+                    System.out.println(szbOutString.toString());
+                    updateText(szbOutString.toString());
+                }
+            }
+            else
+            {
+                System.out.println("Not waiting for traps with specific OIDs.");
+                updateText("Not waiting for traps with specific OIDs.");
+            }
+        }
+        else if (event.getSource() == m_removeAllOIDs)
+        {
+            m_removeAllOIDs.setEnabled(false);
+            m_removeOID.setEnabled(false);
+            m_listOIDs.setEnabled(false);
+            m_trapProfile.removeTrapsInforms();
+        }
+        else if (event.getSource() == m_removeOID)
+        {
+            try
+            {
+                if (m_trapProfile.removeTrapInform(m_OIDField.getText(), new Integer(m_trapNumField.getText())))
+                {
+                    m_listOIDs.setEnabled(false);
+                    m_removeAllOIDs.setEnabled(false);
+                    m_removeOID.setEnabled(false);
+                }
+                
+                String szOutString = new String("Removed trap:" + m_OIDField.getText() + "(" + m_trapNumField.getText() + ")");
+                System.out.println(szOutString);
+                updateText(szOutString);
+            }
+            catch (NoSuchElementException nsee)
+            {
+                String szOutString = new String("Were not listening for trap: " + m_OIDField.getText() + "(" + m_trapNumField.getText() + ")");
+                System.out.println(szOutString);
+                updateText(szOutString);
+            }
+        }
+    }
+    
+    //SnmpTrapListener Implementation
+
+    /**
+     * callback for receiving traps.  This method must be implemented by a class
+     * wishing for trap notification
+     *
+     * @param trap the received trap
+     */
+    public void trapReceived(SnmpTrapEvent trap)
+    {
+        String szTrapType;
+        if (trap.getType() == SnmpConstants.SNMP_TRAP)
+        {
+            szTrapType = new String("a SNMPv1 trap");
+        }
+        else if (trap.getType() == SnmpConstants.SNMP_TRAPV2)
+        {
+            szTrapType = new String("a SNMPv2 trap");
+        }
+        else if (trap.getType() == SnmpConstants.SNMP_INFORM)
+        {
+            szTrapType = new String("a SNMPv2 inform");
+        }
+        else
+        {
+            szTrapType = new String("an unexpected type (" + trap.getType() + " is not a SNMPv1 trap)");
+        }
+                 
+        String szOutString = new String("\nReceived " + szTrapType + " ...\n"
+                                        + "\tPort : " + trap.getPort()
+                                        + "\n\tGenerating Agent : " + trap.getAgentIPAddress()
+                                        + "\n\tSending Agent : " + trap.getSendersIPAddress()
+                                        + "\n\tTime Stamp : " + trap.getTimeStamp()
+                                        + "\n\tEnterprise OID : " + trap.getEnterpriseOID()
+                                        + "\n\tTrap Type : " + trap.getTrapType());
+
+        updateTrapText(szOutString);
+        System.out.println(szOutString);
+        if (trap.getNumberOfVarBinds() > 0)
+        {
+            updateTrapText("\tVarBinds:");
+            System.out.println("\tVarBinds:");
+        }
+        
+        for (int i = 0; i < trap.getNumberOfVarBinds(); i++)
+        {
+            SnmpVarBind vb = trap.getVarBind(i);
+            szOutString = new String("\t\t" + vb.getName() + " (" + vb.getStringValue() + ")");
+            updateTrapText(szOutString);
+            System.out.println(szOutString);
+        }
+    }
+}
+

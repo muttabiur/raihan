@@ -1,0 +1,235 @@
+2011-09-13 04:16:14.917    Thread-2: TransReceiver.bind() entered
+2011-09-13 04:16:14.932    Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:16:14.936    Thread-2: TransReceiver.bind() after req
+2011-09-13 04:16:14.94    Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:16:14.944    Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:16:14.948    Thread-2: TransReceiver.bind() after session
+2011-09-13 04:16:14.956    Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:16:35.976    Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:16:35.979    Thread-2: TransReceiver.bind() exited
+2011-09-13 04:16:35.983       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:16:35.996       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:16:46.006          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:16:46.018          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:16:46.023          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:16:46.028          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:16:46.033          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:16:46.037          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:16:46.042          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:17:07.06          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:07.065          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:17:07.069       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:17:07.074       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:17:07.088       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:17:17.096          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:17:17.1          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:17:17.105          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:17:17.11          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:17:17.115          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:17:17.119          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:17:17.124          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:17:38.149          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:38.154          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:17:38.158       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:17:38.164       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:17:38.18       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:17:48.19          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:17:48.195          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:17:48.2          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:17:48.237          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:17:48.242          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:17:48.246          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:17:48.25          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:18:09.275          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:18:09.279          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:18:09.283       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:18:09.288       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:18:09.302       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:18:19.317          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:18:19.321          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:18:19.325          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:18:19.33          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:18:19.334          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:18:19.339          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:18:19.343          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:18:40.366          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:18:40.371          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:18:40.375       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:18:40.38       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:18:40.396       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 5
+2011-09-13 04:18:50.407          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:18:50.411          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:18:50.416          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:18:50.42          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:18:50.425          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:18:50.429          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:18:50.434          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:19:11.449          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:11.453          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:19:11.458       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:19:11.462       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:19:11.478       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 6
+2011-09-13 04:19:21.489          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:19:21.493          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:19:21.498          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:19:21.502          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:19:21.506          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:19:21.511          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:19:21.516          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:19:42.531          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:42.536          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:19:42.541       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:19:42.545       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:19:42.562       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 7
+2011-09-13 04:19:52.575          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:19:52.579          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:19:52.584          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:19:52.589          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:19:52.594          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:19:52.599          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:19:52.604          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:20:13.632          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:13.637          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:20:13.642       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:20:13.647       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:20:13.666       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 8
+2011-09-13 04:20:23.676          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:20:23.68          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:20:23.685          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:20:23.69          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:20:23.694          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:20:23.698          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:20:23.703          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:20:44.72          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:44.725          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:20:44.729       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:20:44.734       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:20:44.752       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 9
+2011-09-13 04:20:54.875          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:20:54.88          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:20:54.885          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:20:54.89          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:20:54.896          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:20:54.9          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:20:54.905          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:21:15.928          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:21:15.933          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:21:15.938       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:21:15.943       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:21:15.962       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 10
+2011-09-13 04:21:15.973       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Try Count Exceeded: 10
+Going for sleep for about 30sec
+2011-09-13 04:21:45.978          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:21:45.983          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:21:45.999          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:21:46.004          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:21:46.008          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:21:46.013          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:21:46.018          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:22:07.13          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:22:07.135          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:22:07.139       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:22:07.144       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:22:07.16       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:22:17.172          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:22:17.177          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:22:17.182          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:22:17.187          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:22:17.192          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:22:17.198          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:22:17.203          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:22:38.225          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:22:38.231          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:22:38.236       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:22:38.241       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:22:38.264       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:22:48.467          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:22:48.476          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:22:48.486          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:22:48.494          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:22:48.499          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:22:48.503          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:22:48.507          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:23:09.536          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:23:09.542          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:23:09.545       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:23:09.549       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:23:09.566       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:23:19.579          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:23:19.583          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:23:19.588          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:23:19.593          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:23:19.597          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:23:19.603          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:23:19.607          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:23:40.634          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:23:40.639          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:23:40.644       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:23:40.649       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:23:40.668       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:23:50.681          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:23:50.686          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:23:50.69          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:23:50.695          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:23:50.7          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:23:50.704          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:23:50.709          Thread-2: TransReceiver.bind() b4 bind req
+2011-09-13 04:24:11.725          Thread-2: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:24:11.731          Thread-2: TransReceiver.bind() exited
+2011-09-13 04:24:11.736       Thread-2: TransReceiver.receive() exited
+2011-09-13 04:24:11.741       Thread-2: TransReceiver.receive() entered
+2011-09-13 04:24:11.761       Thread-2: TransReceiver.receive() Name: Teletalk(4141) IP: 192.168.99.3
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 5
+2011-09-13 04:24:21.774          Thread-2: TransReceiver.bind() entered
+2011-09-13 04:24:21.779          Thread-2: TransReceiver.bind() b4 req
+2011-09-13 04:24:21.784          Thread-2: TransReceiver.bind() after req
+2011-09-13 04:24:21.788          Thread-2: TransReceiver.bind() after tcpip
+2011-09-13 04:24:21.793          Thread-2: TransReceiver.bind() after conn
+2011-09-13 04:24:21.797          Thread-2: TransReceiver.bind() after session
+2011-09-13 04:24:21.802          Thread-2: TransReceiver.bind() b4 bind req

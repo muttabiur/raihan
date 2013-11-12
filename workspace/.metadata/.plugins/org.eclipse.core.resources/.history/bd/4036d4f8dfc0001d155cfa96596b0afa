@@ -1,0 +1,31 @@
+package monitor.monitorModule;
+//import Stub.*;
+import utility.PropertyHandler;
+
+public class monitorMain {
+public static void main(String[] args) throws Exception{
+	
+	String pri,back;
+	pri=PropertyHandler.getMonitorHostName(args[1], true);
+	back=PropertyHandler.getMonitorHostName(args[1], false);
+	//System.out.println("Primary: "+pri+" Backup: "+back);
+	try{
+		Thread.sleep(2000);
+	}catch(Exception e){System.out.println(e);}
+	Monitor primary=Monitor.getMonitor(args[0],pri,back);
+	System.out.println(args[0]+pri+back);
+	//primary.setHostName(pri,back);
+	primary.setEtraderNumber(args[1]);
+	primary.setFnc();
+	//System.out.println("etrader type in Main: "+args[1]);
+		
+	primary.launchLoader();
+	Runtime primaryServer = Runtime.getRuntime();
+	Process procP=primaryServer.exec("cmd /C start java -cp G:\\etrader2backup\\Project\\Programming\\etrader;G:\\etrader2backup\\Project\\Programming\\etrader\\lib\\castor-1.0.4.jar;G:\\etrader2backup\\Project\\Programming\\etrader\\lib\\commons-logging.jar;G:\\etrader2backup\\Project\\Programming\\etrader\\lib\\log4j-1.2.14.jar;G:\\etrader2backup\\Project\\Programming\\etrader\\lib\\xmlbinding.jar server.EtraderServer "+args[1]+" "+args[2]) ;
+//	Runtime backupServer = Runtime.getRuntime();
+	//Process procB=primaryServer.exec("cmd /C start /max java -cp .;.\\lib\\castor-1.0.4.jar;.\\lib\\commons-logging.jar;.\\lib\\log4j-1.2.14.jar;.\\lib\\xmlbinding.jar server.EtraderServer etrader1 backup") ;
+//	monitorClient backup=new monitorClient("B");
+	//backup.client();
+	//System.out.println("Primary Monitor [main class] done");
+}
+}

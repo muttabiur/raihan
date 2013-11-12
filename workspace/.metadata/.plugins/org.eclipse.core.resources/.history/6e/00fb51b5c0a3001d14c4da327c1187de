@@ -1,0 +1,77 @@
+package DETClient;
+
+
+import java.rmi.Naming;
+import java.util.Vector;
+
+import org.omg.CORBA.ORB;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+
+import DETApp.DET;
+import DETApp.DETHelper;
+import DETServer.AllMessage;
+import Interface.* ;
+
+class NewThread extends Thread{
+
+
+	DET det;
+	String itm;
+	int qty;
+	
+	String itm1;
+	int qty1;
+	String itm2;
+	int qty2;
+	String tradeHost;
+	
+	
+	
+	public NewThread(DET u,String i, int q){
+		
+		det=u;
+		itm=i;
+		qty=q;
+		tradeHost="A";
+				
+	}
+	
+	public NewThread(DET u,String i1, int q1 ,String i2, int q2, String th ){
+		
+		det=u;
+		itm1=i1;
+		qty1=q1;
+		itm2=i2;
+		qty2=q2;
+		tradeHost=th;
+	}
+	
+	
+	public  void run(){
+		try {
+	         
+    	 	
+			if (tradeHost.equalsIgnoreCase("A"))
+			{
+			    int ret =det.buyItem(itm, qty);
+    	 	    System.out.println(AllMessage.showMsg(ret));
+			}
+	    	 else{  //detImpl.tradeItems("cpu",1,"ram",3,tradeHost));
+	    		 
+	    		 System.out.println(itm1+","+ qty1+","+itm2+","+qty2+","+tradeHost);
+	    		 int ret =det.tradeItems(itm1,qty1,itm2,qty2,tradeHost);
+	    	 	 System.out.println(AllMessage.showMsg(ret));
+	    	 }
+	    	 		
+	    
+		} // end try 
+		catch (Exception e) {
+        System.out.println("Exception in testClient: " + e);
+        } 
+	}
+	
+		
+	
+}	//end class
+//}// end class

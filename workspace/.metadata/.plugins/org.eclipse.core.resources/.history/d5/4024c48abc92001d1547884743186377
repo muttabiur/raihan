@@ -1,0 +1,30 @@
+package DETInterface;
+
+public class ImplementMessageContainer {
+
+	public static String displayMessage(int codeNumber){
+		switch(code)
+		  {
+		  	case INSUFFICIENTBALANCE :	
+		  		return "INSUFFICIENTBALANCE E" ;
+		  	
+		  	case SUCCESS:	
+		  		return "Successfull Transaction" ;
+		  	
+		  	case NOT_ENOUGH_QUANTITY:	
+		  		return "NOT ENOUGH QUANTITY" ;
+		  	
+		  	case PRODUCT_NOT_FOUND:	
+		  		return "PORDUCT NOT FOUND" ;
+		  	
+		  	case NOT_ENOUGH_FUNDS:	
+		  		return "NOT ENOUGH FUNDS" ;
+		  	
+		  	case SERVER_NOT_FOUND:	
+		  		return "SERVER NOT FOUND" ;
+		  		
+		  	
+		  	default: return null;
+		  }
+	}
+}

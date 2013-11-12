@@ -1,0 +1,431 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.lang.Math;
+
+public class Min_Max_Heap implements Min_Max_Heap_Interface {
+
+	/**
+	 * @param args
+	 */
+	
+	private ArrayList<Integer> heap = new ArrayList<Integer>();
+	
+	//the constructor receives an unsorted array and build the heap
+	public Min_Max_Heap(ArrayList<Integer> inputItems)
+	{
+		for(int i=0;i<inputItems.size();i++)
+			heap.add(inputItems.get(i));
+		
+		for(int i=0;i<heap.size();i++)
+			trickleDown(i);		
+	}
+	
+	public int getMaximum()
+	{
+		//maximum is in heap[1] or heap[2]
+		if(heap.get(1)>heap.get(2))
+			return heap.get(1);
+		else
+			return heap.get(2);
+		
+	}
+	public int getMinimum()
+	{
+		//the min is the first element of the heap
+		return heap.get(0);
+	}
+	public void insert (int a)
+	{
+		heap.add(a);
+		BubbleUp(heap.size()-1);		
+	}
+	
+	public void removeMaximum()
+	{
+		//remove the last element and replace the max with it
+		int temp = heap.get(heap.size()-1);
+		heap.remove(heap.size()-1);
+		
+		if(heap.get(1)>heap.get(2))
+			heap.set(1, temp);
+		else
+			heap.set(2, temp);
+		
+		for(int i=0;i<heap.size();i++)
+			trickleDown(i);		
+		
+	}
+	public void removeMinimum()
+	{
+		int temp = heap.get(heap.size()-1);
+		heap.remove(heap.size()-1);
+		heap.set(0, temp);
+		for(int i=0;i<heap.size();i++)
+			trickleDown(i);		
+	}
+	
+	public void showHeap()
+	{
+		for (int i=0;i<heap.size();i++)
+			System.out.print(heap.get(i)+"  ");
+		System.out.println("");
+	}
+//--private methods-------------------------------------------------------------------------
+
+	private int getLevel(int position)
+	{	
+		if (position == 0 )return 0;
+		double level = Math.floor(Math.log10(position+1)/Math.log10(2));
+		return ((int)level);
+
+	}
+	private boolean isMinLevel(int position)
+	{
+		if (getLevel(position)%2 == 0)
+			return true;
+		else 
+			return false;		
+	}
+	private int hasChildren(int position )
+	{
+		int numOfChild = 0;
+		if ((position+1)*2-1 <=  heap.size()-1)
+		    numOfChild++;
+		if ((position+1)*2 <=  heap.size()-1)
+			numOfChild++;		
+	
+		return numOfChild;			
+	}
+	private boolean hasGrandChildren(int position )
+	{
+		if ((position+1)*4-1 <=  heap.size()-1)
+			return true;
+		return false;
+		
+	}
+	private ArrayList<Integer> getChildren(int position)
+	{
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		
+		if(hasChildren(position)==1)
+			children.add((position+1)*2-1);
+		if(hasChildren(position)==2)
+		{
+			children.add((position+1)*2-1);
+			children.add((position+1)*2);
+		}
+		
+		return children;				
+	}
+	private ArrayList<Integer> getGrandChildren(int position)
+	{
+		ArrayList<Integer> grandChildren = new ArrayList<Integer>();
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		children = getChildren(position);
+		
+		for(int i=0; i <children.size();i++)
+		{
+			ArrayList<Integer> temp = new ArrayList<Integer>();
+			temp =getChildren(children.get(i));
+			for (int j=0;j<temp.size();j++)
+			{
+				grandChildren.add(temp.get(j));
+			}			
+			
+		}
+		return grandChildren;
+		
+	}
+	
+	private void trickleDown(int position)
+	{
+		if(isMinLevel(position))
+		   trickleDownMin(position);
+		else
+			trickleDownMax(position);
+		
+	}
+	private void trickleDownMin(int position)
+	{
+		if(hasChildren(position)>0)
+		{
+			int m = getSmallestChildren(position);
+			// if m is a grand child
+			if(((m+1)/4)-1 == position)
+			{
+				if(heap.get(m)<heap.get(position))
+				{
+					swap(m,position);
+					if(heap.get(m)>heap.get(((m+1)/2)-1))
+					{
+						swap(m,((m+1)/2)-1);
+					}
+					trickleDownMin(m);
+				}				
+			}
+			else // m is the child
+			{
+				if(heap.get(m)<heap.get(position))
+				{
+					swap(m,position);
+				}				
+			}			
+		}		
+	}
+	private void trickleDownMax(int position)
+	{
+		if(hasChildren(position)>0)
+		{
+			int m = getBiggestChildren(position);
+			// if m is a grand child
+			if(((m+1)/4)-1 == position)
+			{
+				if(heap.get(m)>heap.get(position))
+				{
+					swap(m,position);
+					if(heap.get(m)<heap.get(((m+1)/2)-1))
+					{
+						swap(m,((m+1)/2)-1);
+					}
+					trickleDownMin(m);
+				}				
+			}
+			else // m is the child
+			{
+				if(heap.get(m)>heap.get(position))
+				{
+					swap(m,position);
+				}				
+			}			
+		}				
+	}
+	private void swap(int m, int position)
+	{
+		int temp = heap.get(m);
+		heap.set(m, heap.get(position));
+		heap.set(position, temp);
+	}
+	private int getSmallestChildren(int position)
+	{
+		ArrayList<Integer> child_grand = new ArrayList<Integer>();
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		ArrayList<Integer> grandChildren = new ArrayList<Integer>();
+		
+		//children		
+	
+		
+		children = getChildren(position);
+		for(int i=0; i <children.size();i++)
+		{	
+				child_grand.add(children.get(i));			
+		}
+		//grand children
+		grandChildren = getGrandChildren(position);
+		for(int i=0; i <grandChildren.size();i++)
+		{	
+				child_grand.add(grandChildren.get(i));			
+		}
+		
+		int min_position = child_grand.get(0);
+		int min_value = heap.get(min_position);
+		for (int i=0;i<child_grand.size();i++)
+		{
+			if(heap.get(child_grand.get(i))<min_value)
+			{
+				min_position = child_grand.get(i);
+				min_value=heap.get(child_grand.get(i));				
+			}			
+		}
+		return min_position;		
+		
+	}
+	private int getBiggestChildren(int position)
+	{
+		ArrayList<Integer> child_grand = new ArrayList<Integer>();
+		ArrayList<Integer> children = new ArrayList<Integer>();
+		ArrayList<Integer> grandChildren = new ArrayList<Integer>();
+		
+		//children				
+		children = getChildren(position);
+		for(int i=0; i <children.size();i++)
+		{	
+				child_grand.add(children.get(i));			
+		}
+		//grand children
+		grandChildren = getGrandChildren(position);
+		for(int i=0; i <grandChildren.size();i++)
+		{	
+				child_grand.add(grandChildren.get(i));			
+		}
+		
+		int max_position = child_grand.get(0);
+		int max_value = heap.get(max_position);
+		for (int i=0;i<child_grand.size();i++)
+		{
+			if(heap.get(child_grand.get(i))>max_value)
+			{
+				max_position = child_grand.get(i);
+				max_value=heap.get(child_grand.get(i));				
+			}			
+		}
+		return max_position;		
+		
+	}
+	
+	private void BubbleUpMin(int i)
+	{
+		//if heap[i] has grand parent
+		if(((i+1)/4)-1 >=0)
+		{
+			if(heap.get(i)<heap.get(((i+1)/4)-1))
+			{
+				swap(i,((i+1)/4)-1);
+				BubbleUpMin(((i+1)/4)-1);
+			}			
+		}		
+	}
+	private void BubbleUpMax(int i)
+	{
+		//if heap[i] has grand parent
+		if(((i+1)/4)-1 >=0)
+		{
+			if(heap.get(i)>heap.get(((i+1)/4)-1))
+			{
+				swap(i,((i+1)/4)-1);
+				BubbleUpMax(((i+1)/4)-1);
+			}			
+		}		
+	}
+	
+	private void BubbleUp(int i)
+	{
+		if(isMinLevel(i)) //i is in min level
+		{
+			if(((i-1)/2 >=0)&&(heap.get(i)>heap.get((i-1)/2))) //if i has a parent and ...
+			{
+				swap(i,(i-1)/2);
+				BubbleUpMax((i-1)/2);
+			}
+			else
+				BubbleUpMin(i);			
+		}
+		else // i is in max level
+		{
+			if(((i-1)/2 >=0)&&(heap.get(i)<heap.get((i-1)/2))) //if i has a parent and ...
+			{
+				swap(i,(i-1)/2);
+				BubbleUpMin((i-1)/2);
+			}
+			else
+				BubbleUpMax(i);			
+		}		
+	}
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub		
+			
+		System.out.println("Heap Data Structure will initialize with user input data:") ;
+		System.out.println("");
+        System.out.println("Please enter numbers and end it with -1");
+		
+		Scanner keyboard = new Scanner(System.in);
+		int next  = keyboard.nextInt();
+		ArrayList<Integer> inputItems = new ArrayList<Integer>();
+		while(next != -1)
+		{
+			inputItems.add(next);
+			next=keyboard.nextInt();			
+		}
+		
+		Min_Max_Heap_Interface heap = new Min_Max_Heap(inputItems);
+				
+		System.out.println("This is the Heap Structure: ");
+		
+		heap.showHeap();
+		
+		System.out.println("");
+		
+		System.out.println("Min_Max_Heap Data Structure detail");
+		
+		System.out.println("");
+		
+		
+		do
+		{
+			    System.out.println("The Primary Manu for Mix and Max Heap:");
+			    System.out.println("Please choose one of the following option from the Primary manu:") ;
+			    System.out.println("");
+			
+			    System.out.println("Insert an Item into the Heap Structure-> Press 1");
+			    System.out.println("Delete an Item from the Heap Structure at Min level-> Press 2 ");
+			    System.out.println("Delete an Item from the Heap Structure at Max level-> Press 3");
+			    System.out.println("Get an element from the Heap Structure at Max level-> Press 4");
+			    System.out.println("Get an element from Heap Structure at Min level->Press 5");
+			    System.out.println("Exit from the system-> Press 6");
+		        System.out.println("") ;  
+		        System.out.print("Enter You choice:" );
+		 
+		
+		next  = keyboard.nextInt();
+		switch(next)
+		{
+		case 1: 
+			     System.out.print("Enter Element:");
+			     next = keyboard.nextInt(); 
+			     heap.insert(next);
+			     System.out.println("");
+			     System.out.println("The New Heap Data Structure Contains the following elements:") ;
+		         heap.showHeap();	
+		         break;
+		         
+		case 2: 
+			    heap.removeMinimum(); 
+			    System.out.print("This is the New Heap after removal of element from min level:"); 
+			    System.out.println("");
+			    System.out.println("The Heap Data Structure Contains the following elements:") ;
+			    heap.showHeap(); 
+			    break ;
+		
+		case 3: 
+			   heap.removeMaximum(); 
+			   System.out.print("This is the new heap after removal of element from max level: ");
+			   System.out.println("");
+			   System.out.println("The Heap Data Structure Contains the following elements:") ;
+			   heap.showHeap(); 
+			   break ;
+			   
+		case 4:
+			  System.out.println("Display the element that extracted from Max level:");
+			  int maxVal = heap.getMaximum();
+			  System.out.println(maxVal) ;
+			  System.out.println("");
+			  System.out.println("The Heap Data Structure Contains the following elements:") ;
+			  heap.showHeap();
+			  break ;
+		
+		case 5:
+			 System.out.println("Display the element that extracted from Min level: ");
+			 int minVal = heap.getMinimum();
+			 System.out.println(minVal);
+			 System.out.println("");
+			 System.out.println("The Heap Data Structure Contains the following elements:") ;
+			 heap.showHeap();
+			 break ;
+	
+		case 6: 
+			  System.exit(0);
+			  break ;
+		
+		default:
+			  System.out.println("");
+			  System.out.println("Please choose a number between 1 to 4 only");    
+			
+		}
+		
+		System.out.println("");
+		}while(true); 
+	   
+		
+	}
+}

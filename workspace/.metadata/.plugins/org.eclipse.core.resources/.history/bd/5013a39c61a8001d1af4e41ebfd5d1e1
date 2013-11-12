@@ -1,0 +1,27 @@
+
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+
+		//Scanner keyboard = new Scanner(System.in);
+		//System.out.print("Please enter the file name:");
+		//String fileName = keyboard.next();
+		String fileName = "constraints.txt";
+		//Orthogonal_List orthogonal = new Orthogonal_List();
+		//orthogonal.buildList(fileName);
+		
+		Bound b = new Bound(fileName);
+		System.out.println("lower bound = " + b.lowerBound() );
+		System.out.println("upper bound = " + b.upperBound());
+		
+		
+	}  
+}

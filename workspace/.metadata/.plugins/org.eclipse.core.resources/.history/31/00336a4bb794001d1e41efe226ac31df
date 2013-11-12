@@ -1,0 +1,50 @@
+package DETInterface;
+
+import java.rmi.* ;
+import java.io.* ;
+import java.util.ArrayList ;
+import java.util.Hashtable;
+import java.util.Vector;
+import java.util.ArrayList;
+import java.rmi.Naming;
+import java.util.Date ;
+
+public interface DETInterface extends Remote{
+	
+
+
+	public int buyItem(String item, int quantity) throws RemoteException ;
+	public Vector sellItem(String item, int quantity ) throws RemoteException ;
+	public Vector printReport() throws RemoteException ;
+	
+	
+	
+    //public void createServer();
+      
+    //public void createItem();
+      
+    /**
+     *  Item details for this e-trader
+     * 
+     */
+    
+	public static int counter = 2; 
+	public static String[] items = {"Computers","Books"};
+	public static double[] prices = {100, 200};
+	public static int[] qunatities = {100, 200};
+	public static double[] balances = {50000, 1000};
+	
+	
+    
+    
+	
+    
+    
+	
+	
+	
+	
+	
+	
+
+} //End of Interface

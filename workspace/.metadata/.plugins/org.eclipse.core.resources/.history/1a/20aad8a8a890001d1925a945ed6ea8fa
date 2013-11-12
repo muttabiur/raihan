@@ -1,0 +1,17 @@
+package DETInterface;
+
+import java.rmi.* ;
+import java.io.* ;
+import java.util.* ;
+
+
+
+public interface DETInterface extends Remote{
+	
+	public double buyItem(String item, int quantity) throws RemoteException ;
+	public double sellItem(String item, int quantity ) throws RemoteException ;
+	public String printReport() throws RemoteException ;
+	
+	
+
+} //End of Interface

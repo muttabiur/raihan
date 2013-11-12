@@ -1,0 +1,6 @@
+internet[1].org[3].dod[6].application.test1 = 1
+internet[1].org[3].dod[6].application.test2 = 2
+internet[1].org[3].dod[6].application.test3 = 3
+internet[1].org[3].dod[6].application.test4 = 4
+internet[1].org[3].dod[6].application.data.balance = 5
+internet[1].org[3].dod[6].application.data.def = 6

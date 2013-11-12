@@ -1,0 +1,47 @@
+module DETApp
+{
+  interface DET
+  {
+	long SnmpSetBalance();
+	long buyItem(in string item,in long qty);
+	long printReport();
+	long printReportAfterTransaction();
+	void trapBalance();
+    //long sellItem(int String item, in long qty,in double bal);
+
+	long sellItem(in long qty,in double bal);
+	long tradeItems(in string item1,in long qty1,in string item2,in long qty2,in string etrader);
+	//string snmpSetRequest(in double bal) ;
+
+    void addGenericTrapType(in long genType);
+	void addSpecificTrapType(in long speType);
+
+
+
+
+
+
+
+	boolean snmpSentRequestToServer1(in string item1);
+
+	boolean snmpSentRequestToServer2(in string item2);
+
+	long getPrintReportFromServer1();
+
+	long getPrintReportFromServer2();
+
+	//string snmpGetRequestSysDescription(in string sysDescription, in string item1);
+	string snmpGetRequestSysDescription(in string item2);
+
+    string snmpGetRequestSysContact(in string item2) ;
+
+	string snmpGetRequestSysName(in string item2);
+
+	string snmpGetRequestSysLocation(in string item2);
+
+	string snmpGetRequestSysServiceInfo(in string item2);
+
+
+
+  };
+};

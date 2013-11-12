@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="TestNavigator">
+		<item value="true" key="SHOW_FOLDERS"/>
+		<item value="false" key="LINK_NAVIGATOR_TO_EDITOR"/>
+		<item value="" key="WORKING_SET"/>
+	</section>
+</section>

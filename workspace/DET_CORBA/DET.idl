@@ -1,0 +1,54 @@
+module DETApp
+{
+  interface DET
+  {
+	  void getRequest(in string versionName, in string commName, in long reqID, in string argument);
+	  double SnmpSetBalance();
+	  long SnmpSetQuantity();
+	long buyItem(in string item,in long qty);
+	long printReport();
+	long printReportAfterTransaction();
+	void trapBalance();
+	void trapQuantity();
+    void setRequestForBalance(in string versionName, in string commName, in long reqID, in string argument); 
+	 void setRequestForQuantity(in string versionName, in string commName, in long reqID, in long argument);
+	//string snmpSetRequest(in double bal) ;
+    //long sellItem(int String item, in long qty,in double bal);
+
+	long sellItem(in long qty,in double bal);
+	long tradeItems(in string item1,in long qty1,in string item2,in long qty2,in string etrader);
+
+
+    void addGenericTrapType(in long genType);
+	
+   void signalTrapTypeGeneric( in string trapType);
+   string getTrapNameGeneric(); 
+
+  void addSpecificTrapType(in long speType);
+  void signalTrapTypeSpecific(in string trapType);
+  string getTrapNameSpecific() ;
+
+ /*
+	boolean snmpSentRequestToServer1(in string item1);
+
+	boolean snmpSentRequestToServer2(in string item2);
+
+	long getPrintReportFromServer1();
+
+	long getPrintReportFromServer2();
+
+
+	string snmpGetRequestSysDescription(in string item1);
+	//string snmpGetRequestSysDescription(in string sysDescription, in string item2);
+
+	string snmpGetRequestSysContact( in string item1);
+
+	string snmpGetRequestSysName(in string item1);
+
+	string snmpGetRequestSysLocation(in string item1);
+
+	string snmpGetRequestSysServiceInfo(in string item1);
+
+ */
+  };
+};

@@ -1,0 +1,70 @@
+package Client;
+import DETInterface.* ;
+import DETInterface.MessageContainer;
+import EDETServer.* ;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.rmi.*;
+import java.util.Vector;
+import java.rmi.Naming;
+import java.util.Date ;
+
+public class DETClient {
+	ImplementMessageContainer allMessage = new ImplementMessageContainer();
+	
+	   public static void main(String args[]) {
+		   DETInterface h;
+	         int RMIPort=1399;         
+	         String hostName="localhost";
+	      
+	         String registryOfURL = "rmi://" + hostName+ ":" + RMIPort + "/DET";  
+	         try {
+	         
+	    	  h =  (DETInterface)Naming.lookup(registryOfURL);
+	    	  
+	    	 
+	    	 int ret1 = h.buyItem("Books",2);
+	    //	 int ret2 = h.buyItem("hdd",2);
+	    //	 int ret3 = h.buyItem("ram",2);
+	    	 
+	    	 
+	    	
+	   
+	    //	 System.out.println(allMessage.displayMessage(ret1));
+	    	
+	      } // end try 
+	      catch (Exception e) {
+	         System.out.println("Exception in Client: " + e);
+	         e.printStackTrace();
+	      } 
+	      
+	      
+	    	 try{
+	    	 
+	    	 // print report
+	    	 Vector v=new Vector();
+	    	 
+	    	 h =  (DETInterface)Naming.lookup(registryOfURL);
+	   	  
+	    	 DETInterface f = h =  (DETInterface)Naming.lookup(registryOfURL);
+	    	 
+	    	 f.printReport() ;
+		   
+	         
+	         
+	      } // end try 
+	      catch (Exception e) {
+	         System.out.println("Exception in HelloClient: " + e);
+	      } 
+	      
+	    
+	      
+	   } //end main
+	   
+	   
+	      
+	   
+	}//end class
+
+	
+

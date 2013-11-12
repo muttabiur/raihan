@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<CONFIG>
+	<COMMON>
+		<CP_USERNAME>MAiA</CP_USERNAME>
+		<CP_PASSWORD>alpass</CP_PASSWORD>
+		<REQUEST_RESPONSE_URL>http://localhost:8086/jsms/jsms.php</REQUEST_RESPONSE_URL>
+		<PULL_URL>http://localhost:8086/jsms/pull.php</PULL_URL>
+		<ACK_URL>http://localhost:8086/jsms/pull_status.php</ACK_URL>
+	</COMMON>
+	
+	<CRON>
+		<ACTIVE>true</ACTIVE>
+		<DELAY_TIME>1</DELAY_TIME>
+		<URLS>
+			<URL>http://localhost:8086/jsms/hadis_push/hadis2jsms_push.php</URL>
+			<URL>http://localhost:8086/jsms/subs_push/subs2jsms_push.php</URL>
+			<URL>http://localhost:8086/jsms/http_push/gp_push.php</URL>
+		</URLS>
+	</CRON>
+</CONFIG>

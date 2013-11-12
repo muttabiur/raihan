@@ -1,0 +1,228 @@
+2011-09-13 04:16:34.967    Thread-4: TransReceiver.bind() entered
+2011-09-13 04:16:34.976    Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:16:34.98    Thread-4: TransReceiver.bind() after req
+2011-09-13 04:16:34.983    Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:16:34.988    Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:16:34.992    Thread-4: TransReceiver.bind() after session
+2011-09-13 04:16:34.996    Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:16:56.019    Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:16:56.023    Thread-4: TransReceiver.bind() exited
+2011-09-13 04:16:56.027       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:16:56.039       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:17:06.049          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:17:06.052          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:17:06.056          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:17:06.06          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:17:06.064          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:17:06.068          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:17:06.072          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:17:27.096          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:27.101          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:17:27.104       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:17:27.118       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:17:27.135       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:17:37.146          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:17:37.15          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:17:37.155          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:17:37.159          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:17:37.164          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:17:37.167          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:17:37.172          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:17:58.197          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:17:58.201          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:17:58.205       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:17:58.209       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:17:58.223       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:18:08.232          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:18:08.236          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:18:08.241          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:18:08.245          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:18:08.25          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:18:08.254          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:18:08.259          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:18:29.267          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:18:29.271          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:18:29.275       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:18:29.284       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:18:29.299       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:18:39.313          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:18:39.325          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:18:39.329          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:18:39.334          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:18:39.339          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:18:39.344          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:18:39.349          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:19:00.359          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:00.363          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:19:00.366       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:19:00.369       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:19:00.381       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 5
+2011-09-13 04:19:10.39          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:19:10.394          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:19:10.399          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:19:10.403          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:19:10.408          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:19:10.412          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:19:10.417          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:19:31.435          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:19:31.44          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:19:31.444       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:19:31.456       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:19:31.471       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 6
+2011-09-13 04:19:41.481          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:19:41.486          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:19:41.491          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:19:41.496          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:19:41.501          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:19:41.505          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:19:41.51          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:20:02.524          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:02.528          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:20:02.533       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:20:02.537       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:20:02.552       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 7
+2011-09-13 04:20:12.565          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:20:12.569          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:20:12.574          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:20:12.579          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:20:12.583          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:20:12.588          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:20:12.592          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:20:33.615          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:20:33.619          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:20:33.624       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:20:33.632       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:20:33.647       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 8
+2011-09-13 04:20:43.657          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:20:43.662          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:20:43.666          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:20:43.67          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:20:43.674          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:20:43.679          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:20:43.684          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:21:04.701          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:21:04.706          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:21:04.71       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:21:04.715       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:21:04.729       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 9
+2011-09-13 04:21:14.744          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:21:14.749          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:21:14.754          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:21:14.759          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:21:14.763          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:21:14.768          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:21:14.775          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:21:35.787          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:21:35.792          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:21:35.797       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:21:35.805       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:21:35.823       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 10
+2011-09-13 04:21:35.833       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Try Count Exceeded: 10
+Going for sleep for about 30sec
+2011-09-13 04:22:05.842          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:22:05.846          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:22:05.851          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:22:05.856          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:22:05.86          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:22:05.864          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:22:05.869          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:22:26.877          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:22:26.882          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:22:26.886       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:22:26.891       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:22:26.906       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 1
+2011-09-13 04:22:36.916          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:22:36.921          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:22:37.12          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:22:37.124          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:22:37.129          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:22:37.134          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:22:37.139          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:22:58.157          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:22:58.162          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:22:58.166       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:22:58.175       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:22:58.19       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 2
+2011-09-13 04:23:08.203          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:23:08.207          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:23:08.212          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:23:08.217          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:23:08.221          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:23:08.226          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:23:08.232          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:23:29.253          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:23:29.258          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:23:29.263       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:23:29.269       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:23:29.283       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 3
+2011-09-13 04:23:39.296          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:23:39.3          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:23:39.305          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:23:39.31          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:23:39.315          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:23:39.319          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:23:39.324          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:24:00.338          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:24:00.343          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:24:00.348       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:24:00.356       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:24:00.37       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 4
+2011-09-13 04:24:10.383          Thread-4: TransReceiver.bind() entered
+2011-09-13 04:24:10.388          Thread-4: TransReceiver.bind() b4 req
+2011-09-13 04:24:10.393          Thread-4: TransReceiver.bind() after req
+2011-09-13 04:24:10.397          Thread-4: TransReceiver.bind() after tcpip
+2011-09-13 04:24:10.402          Thread-4: TransReceiver.bind() after conn
+2011-09-13 04:24:10.407          Thread-4: TransReceiver.bind() after session
+2011-09-13 04:24:10.412          Thread-4: TransReceiver.bind() b4 bind req
+2011-09-13 04:24:31.436          Thread-4: TransReceiver.bind() Bind operation failed. java.net.ConnectException: Connection timed out: connect
+2011-09-13 04:24:31.441          Thread-4: TransReceiver.bind() exited
+2011-09-13 04:24:31.446       Thread-4: TransReceiver.receive() exited
+2011-09-13 04:24:31.451       Thread-4: TransReceiver.receive() entered
+2011-09-13 04:24:31.471       Thread-4: TransReceiver.receive() Name: Aktel IP: 192.168.51.5
+Exception: Receiving failed.
+Trying for new connection...
+ Try Num: 5

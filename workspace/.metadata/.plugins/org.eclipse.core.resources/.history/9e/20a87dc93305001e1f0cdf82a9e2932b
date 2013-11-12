@@ -1,0 +1,133 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.io.PrintWriter ;
+import java.io.FileOutputStream ;
+
+public class SearchObject {
+
+	
+	public void searchObject(String s) {
+		
+		ArrayList<String> extractToken = new ArrayList<String>();
+		//look at the flat file and open file
+		try {
+		BufferedReader inputS = new BufferedReader (new FileReader("system.txt"));
+		 
+		      String line1 = inputS.readLine();
+		
+		      while(line1 != null) {
+		    	  
+		    	  //System.out.println("The line is:" + line1);
+		    	  
+		    	  StringTokenizer tokenizer = new StringTokenizer(line1);
+		    	  
+		    	     while(tokenizer.hasMoreTokens()) {
+		    		     String token = tokenizer.nextToken();
+		    		     
+		    		     //add each token to the Arraylist data structure
+		    		     extractToken.add(token);
+		    		     
+		    		     //maybe search function will be here
+		    		     
+		    		     //System.out.println("The Extracted token is :" + token);
+		    		     
+		    		     
+		    	        }
+		    	  
+
+		    	  line1 = inputS.readLine();
+		    	  
+		    	  
+		      }
+		
+		     inputS.close();
+		
+		
+		}
+		
+		    catch(FileNotFoundException e){
+			     System.out.println("The Error is:" + e.getMessage());
+			     System.exit(0);
+		}
+		
+		    catch(IOException e) {
+			     System.out.println("The Input read error is :" + e.getMessage());
+			     System.exit(0);
+		}
+		
+		//System.out.println("Hi");
+		
+		      Iterator<String> it = extractToken.iterator();
+		
+		      while(it.hasNext()) {
+			
+			  System.out.println("The New Extracted Token is :" + it.next());
+			
+			
+		   }
+		
+		    //Write to file
+		
+		   PrintWriter outputStream = null ;
+
+		   try {
+			     outputStream = new PrintWriter(new FileOutputStream("Raihan.txt"));
+			 
+			 
+		   }
+		
+		    catch(FileNotFoundException e) {
+			     System.out.println("The file is not found:" + e.getMessage());
+			     System.exit(0);
+			
+		}
+		
+		
+		     System.out.println("Writing to file:");
+		
+		
+		     Iterator<String> itt = extractToken.iterator();
+		           while(itt.hasNext()) {
+			           //outputStream.write(itt.next());
+			                outputStream.println(itt.next());
+		}
+		
+		                      outputStream.close();
+	     //do search in the arraylist for the particular object and replace 
+		 
+		                  Iterator<String> itFind = extractToken.iterator();
+		   		           while(itFind.hasNext()) {
+		   			             String ra = itFind.next();
+		   			             if ( ra.contentEquals(s)) {
+		   			            	 System.out.println("All are Equal:");
+		   			            	 
+		   			             }
+		   			            /* 
+		   			             else
+		   			             {
+		   			            	 System.out.println("They are not Equal:");
+		   			             } */
+		   		}
+		   		
+	   
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String args[]) {
+		
+		SearchObject s = new SearchObject();
+		
+		s.searchObject("Cisco");
+	}
+}

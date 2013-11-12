@@ -1,0 +1,18 @@
+package EDETServer;
+
+import java.rmi.*;
+import java.rmi.server.*;
+import java.rmi.registry.*;
+import java.io.* ;
+import java.net.*;
+
+public class DETServer {
+   
+	public static void main(String args[]){
+		
+		String registryOfURL ;
+		int RMIPort = 1234 ;
+		
+	}
+	  
+}

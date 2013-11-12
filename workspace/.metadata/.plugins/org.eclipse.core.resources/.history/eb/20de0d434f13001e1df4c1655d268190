@@ -1,0 +1,94 @@
+package DETServer;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+//import java.util.Scanner;
+import java.util.regex.* ;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap ;
+/**
+ * @author m_sk
+ */
+public class SearchObjectRegularExpression {
+
+    public String searchObject(String indexNum) {
+
+	ArrayList<String> tokenString = new ArrayList<String>();
+	HashMap<String, String> hmap = new HashMap<String, String>();
+
+	try {
+	    Pattern linePattern = Pattern.compile("^(\\d+)\\s*\\:\\s*(\\w+)$");
+
+	    BufferedReader inputS = new BufferedReader(new FileReader("system1.txt"));
+
+	    while(true) {
+		if(! inputS.ready())
+		    break ;
+		String line1 = inputS.readLine();
+
+		while (line1 != null) {
+
+		    Matcher matcher = linePattern.matcher(line1);
+		    String acquireString = null ;
+
+		    Pattern pi = Pattern.compile("[:]");
+
+		    while (matcher.find())
+			acquireString = matcher.group();
+
+		    String strs[] =  pi.split(acquireString);
+
+		    for(int i = 0 ; i < strs.length; i++) {
+
+			tokenString.add(strs[i]);
+
+		    }
+		    line1 = inputS.readLine();
+		}
+
+	    }
+	    inputS.close();
+	}
+
+	catch (FileNotFoundException e) {
+	    System.out.println("The Error is:" + e.getMessage());
+	    System.exit(0);
+	}
+
+	catch (IOException e) {
+	    System.out.println("The Input read error is :" + e.getMessage());
+	    System.exit(0);
+	}
+
+	Iterator<String> it = tokenString.iterator();
+
+	while(it.hasNext()) {
+	    String key = it.next();
+	    String value = it.next() ;
+	    hmap.put(key, value);
+
+
+	}
+
+	String mapValue = null ;
+	mapValue = hmap.get(indexNum);
+
+	return  mapValue ;
+
+    }
+/*
+    public static void main(String args[]) {
+
+	SearchObjectRegularExpression search = new SearchObjectRegularExpression();
+
+	Scanner key = new Scanner(System.in);
+	System.out.println("Please Enter the Index Number:");
+	
+	String inputValue = key.nextLine();
+	String indexValue = search.searchObject(inputValue);
+	System.out.println("The ExtractedValue is:" + indexValue);
+    } */
+}

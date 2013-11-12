@@ -1,0 +1,531 @@
+/* ----------------------------------------------------------------------------
+ Copyright (c) 2003 jSNMP Enterprises, All Rights Reserved Worldwide
+ ------------------------------------------------------------------------------
+
+   Disclaimer: This software is provided AS IS, and without any warranty
+               other than those which may be provided in a separate
+               writing specifically referencing the software contained
+               herein.  All other warranties, except those which may be
+               provided separately in writing, are expressly disclaimed.
+               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+               PURPOSE which is given with respect to this software or the
+               operability thereof.
+
+   ------------------------------------------------------------------------
+ */
+
+
+// ------------------------------ Package -------------------------------------
+
+// ------------------------------ Imports -------------------------------------
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+import java.net.*;
+import java.io.UnsupportedEncodingException;
+
+import com.outbackinc.services.protocol.snmp.*;
+import com.outbackinc.services.protocol.snmp.CSM.*;
+import com.outbackinc.services.protocol.snmp.rmi.*;
+
+
+/**
+ * Sample which illustrates how to use the jSNMP within a browser.
+ * Note: A fully JDK 1.1-compliant browser is required for this
+ * example.  <p>
+ *
+ *
+ * Here's an example HTML file with an applet tag: <p>
+ * <p>
+ * <pre>
+ *   &lt;html>&lt;body>
+ *   &lt;applet code="SnmpV2WalkerApplet" height=400 width=500>
+ *   &lt;/applet>
+ *   &lt;/body>&lt;/html>
+ * </pre>
+ * <p>
+ *
+ * Note: The CLASSPATH must be initialized correctly before
+ * starting the browser.
+ */
+public class RmiV2WalkerApplet
+extends Applet
+implements SnmpCustomer, SnmpTrapListener, Runnable, ActionListener
+{
+    // ------------------------------ Constants ---------------------------------
+
+    // ------------------------------ Class variables ---------------------------
+
+    // ------------------------------ Member (instance) variables ---------------
+
+    private RMISnmpClient                           m_cRMISnmpClient = null;
+    private SnmpAuthoritativeSessionFactory         m_cSnmpAuthoritativeSessionFactory = null;
+    private SnmpAuthoritativeSession                m_cSnmpAuthoritativeSession = null;
+    private SnmpService                             m_cSnmpService = null;
+    private SnmpTrapProfile                         m_trapProfile = null;
+    
+    //private SnmpServiceConfiguration                m_serviceConfiguration;
+    private String[]                                m_szLastOID;
+    private int                                     m_iNumRetrieved;
+    private SnmpOrderInfo                           m_cSnmpOrderInfo;
+    private int                                     m_iOrderNumStart = 1;
+    private String                                  m_szRMIHost = null;
+    private String                                  m_szManagedHost = null;
+
+
+    private TextArea                                m_textArea = null;
+    private Thread                                  m_runThread = null;
+    private TextArea                                m_trapOutput = null;
+
+    private Button                                  m_start = null;
+    private Button                                  m_stop = null;
+    private TextField                               m_rmiHostField = null;
+    private TextField                               m_hostField = null;
+    private TextField                               m_communityField = null;
+    private boolean                                 m_bWalking = false;
+
+    
+    // ------------------------------ Methods -----------------------------------
+
+    /**
+     *
+     */
+    public RmiV2WalkerApplet()
+    {
+        m_szLastOID = new String[1];
+        m_szLastOID[0] = "1.3.6";
+    }
+
+
+    /**
+     *
+     */
+    public void init()
+    {
+        // Create the ui...
+        initUI();
+    }
+
+
+    private void initUI()
+    {
+        setBackground(Color.lightGray);
+
+        m_rmiHostField = new TextField(10);
+        m_hostField = new TextField(10);
+        m_communityField = new TextField(10);
+        m_start = new Button("Start");
+        m_stop = new Button("Stop");
+
+        m_stop.setEnabled(false);
+        m_rmiHostField.addActionListener(this);
+        m_hostField.addActionListener(this);
+        m_communityField.addActionListener(this);
+        m_start.addActionListener(this);
+        m_stop.addActionListener(this);
+
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+
+        setLayout(gridbag);
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        Label label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        // hosts and community editbox fields
+        c.gridwidth = 1;
+        label = new Label("jSNMP RMI Server Host:", Label.RIGHT);
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        gridbag.setConstraints(m_rmiHostField, c);
+        add(m_rmiHostField);
+
+        label = new Label("SNMP Agent Host: ", Label.RIGHT);
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_hostField, c);
+        add(m_hostField);
+    
+        label = new Label("Read Community: ", Label.RIGHT);
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        gridbag.setConstraints(m_communityField, c);
+        add(m_communityField);
+    
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        // buttons
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = 1;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        gridbag.setConstraints(m_start, c);
+        add(m_start);
+
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        gridbag.setConstraints(m_stop, c);
+        add(m_stop);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+ 
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        label = new Label(" ");
+        gridbag.setConstraints(label, c);
+        add(label);
+
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.weighty = 3;
+        m_textArea = new TextArea();
+        gridbag.setConstraints(m_textArea, c);
+        add(m_textArea);
+       
+        c.weightx = GridBagConstraints.REMAINDER;
+        c.weighty = 1;
+        m_trapOutput = new TextArea();
+        gridbag.setConstraints(m_trapOutput, c);
+        add(m_trapOutput);      
+    }
+
+
+    private boolean initService() 
+    {
+        String rmiHost = null;
+        try
+        {
+            rmiHost = m_rmiHostField.getText();
+            if (rmiHost.length() > 0)
+            {
+                updateText(" ");
+                if (m_szRMIHost == null
+                    || m_szRMIHost.compareTo(rmiHost) != 0)
+                {
+                    m_cRMISnmpClient = new RMISnmpClient(rmiHost);
+                    m_cSnmpService = m_cRMISnmpClient.getService();
+                    m_cSnmpAuthoritativeSessionFactory = m_cRMISnmpClient.getAuthoritativeSessionFactory();
+
+                    m_trapProfile = m_cRMISnmpClient.getTrapProfileFactory().createSnmpTrapProfile(162);
+                    m_cSnmpService.addTrapListenerProfile(this, m_trapProfile);
+                    
+                    if (m_szRMIHost != null)
+                    {
+                        System.out.println("Disconnected from jSNMP RMI Server " + m_szRMIHost + "; connected to jSNMP RMI Server " + rmiHost);
+                        updateText("Disconnected from jSNMP RMI Server " + m_szRMIHost + "; connected to jSNMP RMI Server " + rmiHost);
+                    }
+                    else
+                    {
+                        updateText("Connected to jSNMP RMI Server " + rmiHost);
+                        System.out.println("Connected to jSNMP RMI Server " + rmiHost);
+                    }
+                    
+                    m_szRMIHost = new String(rmiHost);
+                    m_iOrderNumStart = 1;
+                }
+            }
+            else
+            {
+                if (m_szRMIHost != null)
+                {
+                    updateText("Empty RMI Server Host; disconnected from jSNMP RMI Server " + m_szRMIHost);
+                    System.out.println("Empty RMI Server Host; disconnected from jSNMP RMI Server " + m_szRMIHost);
+                }
+                else
+                {
+                    updateText("Empty RMI Server Host");
+                    System.out.println("Empty RMI Server Host");
+                }
+                    
+                m_szRMIHost = null;
+                m_cRMISnmpClient = null;
+                m_cSnmpService = null;
+                m_cSnmpAuthoritativeSessionFactory = null;
+                m_trapProfile = null;
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            m_szRMIHost = null;
+            m_cRMISnmpClient = null;
+            m_cSnmpService = null;
+            m_cSnmpAuthoritativeSessionFactory = null;
+            m_trapProfile = null;
+            System.out.println("Couldn't connect to jSNMP RMI Server " + rmiHost + " (" + e.toString() + ")");
+            updateText("Couldn't connect to jSNMP RMI Server " + rmiHost + " (" + e.toString() + ")");
+            e.printStackTrace();
+            return false;
+        }
+        catch (Error er)
+        {
+            m_szRMIHost = null;
+            m_cRMISnmpClient = null;
+            m_cSnmpService = null;
+            m_cSnmpAuthoritativeSessionFactory = null;
+            System.out.println("Couldn't connect to jSNMP RMI Server " + rmiHost + " (" + er.toString() + ")");
+            updateText("Couldn't connect to jSNMP RMI Server " + rmiHost + " (" + er.toString() + ")");
+            er.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * The walk begins here...
+     */
+    public void run()
+    {
+        System.out.println("Walking MIB Tree of " + m_szManagedHost);
+        updateText("Walking MIB Tree of " + m_szManagedHost);
+        getNext();
+    }
+
+
+    /* *
+     * Update the UI with a new text string...
+     */
+    private synchronized void updateText(String s)
+    {
+        // Clear the text area periodically...
+        
+        if (m_textArea.getText().length() > 5000)
+        {
+            m_textArea.setText("");
+        }
+
+        // Append the new string to the existing text...
+
+        m_textArea.append(s + "\n");
+    }
+
+    /* *
+     * Update the UI with a new text string...
+     */
+    private synchronized void updateTrapText(String s)
+    {
+        // Clear the text area periodically...
+        
+        if (m_trapOutput.getText().length() > 500)
+        {
+            m_trapOutput.setText("");
+        }
+
+        // Append the new string to the existing text...
+
+        m_trapOutput.append(s + "\n");
+    }
+
+
+    // -- ActionListener interface
+    
+    public synchronized void actionPerformed(ActionEvent event)
+    {
+        if (event.getSource() == m_start)
+        {
+            if (!initService())
+            {
+                return;
+            }
+            
+            // Upon a "start signal", clear the display, grab the
+            // managed host from the UI, initialize the walk variables,
+            // and start the run thread.
+        
+            try
+            {
+                m_szManagedHost = m_hostField.getText();
+                String szCommunity = m_communityField.getText();
+                if (m_szManagedHost.length() <= 0)
+                {
+                    System.out.println("Empty host");
+                    updateText("Empty host");
+                }
+                else if (szCommunity.length() <= 0)
+                {
+                    System.out.println("Empty community");
+                    updateText("Empty community");
+                }
+                else
+                {
+                    m_cSnmpOrderInfo = new SnmpOrderInfo(2, 3, 0);
+                    CSMSecurityInfo secInfo;
+                    try
+                    {
+                        secInfo = new CSMSecurityInfo(szCommunity.getBytes("ASCII"), szCommunity.getBytes("ASCII"));
+                    }
+                    catch(UnsupportedEncodingException uee)
+                    {
+                        secInfo = new CSMSecurityInfo(szCommunity.getBytes(), szCommunity.getBytes());
+                    }
+
+                    m_cSnmpAuthoritativeSession = m_cSnmpAuthoritativeSessionFactory.createRemoteAuthoritativeSession(m_szManagedHost,
+                                                                                  161,
+                                                                                  SnmpConstants.SNMP_VERSION_2,
+                                                                                  secInfo);
+            
+                    m_iNumRetrieved = 0;            
+                    m_szLastOID[0] = "1.3.6";
+                    m_bWalking = true;
+                    m_start.setEnabled(false);
+                    m_stop.setEnabled(true);
+                    m_runThread = new Thread(this);
+                    m_runThread.start();            
+                }
+            }
+            catch(UnknownHostException uhe)
+            {
+                String szOutString = new String("Unknown host: " + m_szManagedHost);
+                System.out.println(szOutString);
+                updateText(szOutString);
+            }
+            catch(SnmpSecurityException sse)
+            {
+                System.out.println("Failed to create CSMSecurityInfo");
+                updateText("Failed to create CSMSecurityInfo");
+            }
+        }
+        else if (event.getSource() == m_stop)
+        {
+            // Stop the walk...
+            
+            m_bWalking = false;
+            m_start.setEnabled(true);
+            m_stop.setEnabled(false);
+        }
+            
+    }
+    
+    // -- SnmpCustomer Implementation
+
+    /**
+     * callback for delivering successes.  In this case the implementation
+     * is to print out the Object ID received and then use it for the basis
+     * for the get-next request
+     */
+    public synchronized void deliverSuccessfulOrder(int iOrderNum,
+                                                    SnmpVarBind vb)
+    {
+        String szOutString = new String(iOrderNum + ": " + vb.getName() + " (" + vb.getStringValue() + ")");
+        System.out.println(szOutString);
+        updateText(szOutString);
+        
+        if (m_szLastOID[0] != vb.getName())
+        {
+            m_szLastOID[0] = vb.getName();
+
+            if (m_bWalking) {
+                getNext();
+            }
+        }
+        else
+        {
+            System.out.println("Finished");
+            updateText("Finished");
+
+            m_start.setEnabled(true);
+            m_stop.setEnabled(false);
+        }
+    }
+
+    /**
+     * callback for failures.  In this case if a failure is received,
+     * stop walking the MIB
+     */
+    public void deliverFailedOrder(int iOrderNum, int iErrorStatus)
+    {
+        String szOutString = new String(iOrderNum + ": order failed (" + SnmpConstants.errorIDToString(iErrorStatus) + ")");
+        System.out.println(szOutString);
+        System.out.println("Ending MIB Walk");
+
+        updateText(szOutString);
+        updateText("Ending MIB Walk");
+
+        m_start.setEnabled(true);
+        m_stop.setEnabled(false);
+    }
+
+    /**
+     * gets the next object from the remote agent.  Demonstrates
+     * placing orders with the snmp service
+     */
+    public void getNext()
+    {
+        m_iOrderNumStart = m_cSnmpService.placeGetNextOrder(m_cSnmpAuthoritativeSession,
+                                                       m_cSnmpOrderInfo,
+                                                       false,
+                                                       m_szLastOID,
+                                                       this,
+                                                       m_iOrderNumStart);
+    }
+
+
+    // -- SnmpTrapListener
+    
+    public void trapReceived(SnmpTrapEvent trap)
+    {
+        //Prints out all the information contained in the trap
+        String szTrapType;
+        if (trap.getType() == SnmpConstants.SNMP_TRAP)
+        {
+            szTrapType = new String("a SNMPv1 trap");
+        }
+        else if (trap.getType() == SnmpConstants.SNMP_TRAPV2)
+        {
+            szTrapType = new String("a SNMPv2 trap");
+        }
+        else if (trap.getType() == SnmpConstants.SNMP_INFORM)
+        {
+            szTrapType = new String("a SNMPv2 inform");
+        }
+        else
+        {
+            szTrapType = new String("an unexpected type (" + trap.getType() + " is not a SNMPv1 trap)");
+        }
+                 
+        String szOutString = new String("\nReceived " + szTrapType + " ...\n"
+                                        + "\tPort : " + trap.getPort()
+                                        + "\n\tGenerating Agent : " + trap.getAgentIPAddress()
+                                        + "\n\tSending Agent : " + trap.getSendersIPAddress()
+                                        + "\n\tTime Stamp : " + trap.getTimeStamp()
+                                        + "\n\tEnterprise OID : " + trap.getEnterpriseOID()
+                                        + "\n\tTrap Type : " + trap.getTrapType());
+        updateTrapText(szOutString);
+                
+        if (trap.getNumberOfVarBinds() > 0)
+        {
+            updateTrapText("\tVarBinds:");
+        }
+        
+        for (int i = 0; i < trap.getNumberOfVarBinds(); i++)
+        {
+            SnmpVarBind vb = trap.getVarBind(i);
+            szOutString = new String("\t\t" + vb.getName() + " (" + vb.getStringValue() + ")");
+            updateTrapText(szOutString);
+        }
+
+    }
+
+
+}
+

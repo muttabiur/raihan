@@ -1,0 +1,118 @@
+package EDETServer;
+
+import java.io.Serializable ;
+import java.util.* ;
+import java.util.concurrent.Semaphore;
+import java.rmi.Naming;
+import java.util.Date ;
+import java.text.DecimalFormat ;
+import java.text.Format ;
+
+
+public class ItemContainer implements Serializable {
+	Format f = new DecimalFormat("###.00");
+	private transient Timer time; 
+      
+	  public String name ;
+	  private int qty ;
+	  private double price ;
+	  private double balance ;
+	  
+
+	  /*
+		  *Define Semaphore lock for each object
+		  *Create Semaphore Object
+		*/
+		         
+	      Semaphore	accPrice = new Semaphore(1, true);
+	      Semaphore	accQuantity = new Semaphore(1, true);
+	      Semaphore	accBalance = new Semaphore(1, true);
+	
+public ItemContainer( String i, int q, double p, double bal)
+{
+	this.name = i ;
+	this.qty = q ;
+	this.price = p ;
+	this.balance = bal ;
+	
+	//Set the interval time
+	int interval = 1 ;
+	time = new Timer(true);
+	
+	/*
+	 * Price changes peroidically
+	 */
+	
+	time.schedule(new TimerTask(){
+		public void run() {
+			changePricePolicy();
+		}
+	}, interval*100, interval*100); //repeat every [interval]m seconds
+
+
+}
+		
+	
+
+
+public void setPrice(){
+	//Write code for +-10% change price
+}
+
+public double getPrice(){
+	//Synchronize the getPrice object
+	synchronized(accPrice){ ;
+	     return price ;
+	}
+
+}
+
+public void setQuantity(int q){
+	
+	synchronized(accQuantity){
+		   this.qty = q ;
+	}
+}
+
+
+public int getQuantity(){
+	
+	synchronized(accQuantity){
+		   return this.qty ;
+	}
+}
+
+public void setBalance(double bal){
+	 synchronized(accBalance){
+		 this.balance = bal ;
+	 }
+}
+
+public double getBalance(){
+	 synchronized(accBalance){
+		 return this.balance ;
+	 }
+}
+
+private void changePricePolicy(){
+	Random r=new Random();
+	double p=price;
+
+	synchronized(accPrice){
+		price=p*(0.9+r.nextDouble()*0.2); //increase or decrease within 10%
+		
+		price = Double.parseDouble(f.format(Double.valueOf(price)));
+	}
+}
+		
+public void setBalance(double bal){
+	
+	synchronized(accBalance){
+		
+		balance=Double.parseDouble(df.format(Double.valueOf(bal)));
+					
+	}
+
+}
+
+

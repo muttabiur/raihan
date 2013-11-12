@@ -1,0 +1,180 @@
+/* ----------------------------------------------------------------------------
+ Copyright (c) 2003 jSNMP Enterprises, All Rights Reserved Worldwide
+ ------------------------------------------------------------------------------
+
+   Disclaimer: This software is provided AS IS, and without any warranty
+               other than those which may be provided in a separate
+               writing specifically referencing the software contained
+               herein.  All other warranties, except those which may be
+               provided separately in writing, are expressly disclaimed.
+               WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, THERE IS
+               NO WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+               PURPOSE which is given with respect to this software or the
+               operability thereof.
+
+   ------------------------------------------------------------------------
+ */
+
+
+// ------------------------------ Package -------------------------------------
+
+// ------------------------------ Imports -------------------------------------
+import java.net.*;
+import java.security.*;
+import java.io.UnsupportedEncodingException;
+
+import com.outbackinc.services.protocol.snmp.*;
+import com.outbackinc.services.protocol.snmp.CSM.*;
+
+/**
+ * Sample which illustrates how to use the SnmpService to place
+ * trap orders.
+ */
+public class SnmpV1TrapSenderTest
+{
+    // ------------------------------ Constants ---------------------------------
+
+    // ------------------------------ Class variables ---------------------------
+
+    // ------------------------------ Member (instance) variables ---------------
+
+    // ------------------------------ Methods -----------------------------------
+
+    /**
+     * Main method to start execution
+     *
+     * @param szArgs contains cmdline args, first of which must be the szHost, second must be read community
+     *
+     */
+    public static void main(String[] szArgs)
+    {
+        if (szArgs.length < 6)
+        {
+            usage();
+            return;
+        }
+            
+        String szHost = szArgs[0];
+        String szFromHost = szArgs[1];
+
+        try
+        {
+            Long lTimeTicks = new Long(szArgs[2]);
+            String szCommunityName = szArgs[3];
+            String szEnterpriseOID = szArgs[4]; 
+            int iTimes = new Integer(szArgs[5]).intValue();
+            
+            String[] szVarbindOIDs = null;
+            byte[] bVarbindTypes = null;
+            Object[] varBindObjValues = null;
+            
+            SnmpService cSnmpService;
+            try
+            {
+                cSnmpService = SnmpLocalInterfaces.getService();
+            }
+            catch (SocketException se)
+            {
+                System.out.println("Unable to initialize the Snmp service (" + se.getMessage() + ").");
+                return;
+            }
+            
+            SnmpServiceConfiguration cSnmpServiceConfiguration = SnmpLocalInterfaces.getServiceConfiguration(cSnmpService);
+            cSnmpServiceConfiguration.setBufferDelay(0);
+            SnmpOrderInfo cSnmpOrderInfo = new SnmpOrderInfo(2, 3, 0);
+            CSMSecurityInfo cCSMSecurityInfo;
+            try
+            {
+                cCSMSecurityInfo = new CSMSecurityInfo(szCommunityName.getBytes("ASCII"), szCommunityName.getBytes("ASCII"));
+            }
+            catch(UnsupportedEncodingException uee)
+            {
+                cCSMSecurityInfo = new CSMSecurityInfo(szCommunityName.getBytes(), szCommunityName.getBytes());
+            }
+
+            SnmpAuthoritativeSessionFactory cSnmpAuthoritativeSessionFactory = SnmpLocalInterfaces.getAuthoritativeSessionFactory();
+            SnmpAuthoritativeSession cSnmpLocalAuthoritativeSession;
+            try
+            {
+                 cSnmpLocalAuthoritativeSession = cSnmpAuthoritativeSessionFactory.createLocalAuthoritativeSession(szHost,
+                                                        162,
+                                                        SnmpConstants.SNMP_VERSION_1,
+                                                        cCSMSecurityInfo);
+            }
+            catch (UnknownHostException uhe)
+            {
+                System.out.println("Unable to create session with remote agent as host (" + szHost + ") is unknown.");
+                cSnmpService.stop();
+                return;
+            }
+            catch (SnmpSecurityException sse)
+            {
+                System.out.println("Unable to create secure session with remote agent " + szHost + " (" + sse.getMessage() + ").");
+                cSnmpService.stop();
+                return;
+            }
+            
+            InetAddress cFromHostInetAddress = null;
+            try
+            {
+                cFromHostInetAddress = java.net.InetAddress.getByName(szFromHost);
+            }
+            catch (UnknownHostException uhe)
+            {
+            }
+            
+            for (int iIndex = 1; iIndex <= iTimes; iIndex++)
+            {
+                boolean bVal = cSnmpService.placeV1TrapOrder(cSnmpLocalAuthoritativeSession,
+                                                             cFromHostInetAddress,
+                                                             lTimeTicks,
+                                                             szEnterpriseOID,
+                                                             iIndex + iTimes - 1,
+                                                             szVarbindOIDs,
+                                                             bVarbindTypes,
+                                                             varBindObjValues);
+                if (!bVal)
+                {
+                    System.out.println("placeTrapOrder(" + szEnterpriseOID + "." + (iIndex + iTimes - 1) + ") failed");
+                }
+                else
+                {
+                    System.out.println("placeTrapOrder(" + szEnterpriseOID + "." + (iIndex + iTimes - 1) + ") succeeded");
+                }
+            }
+            
+            try
+            {
+                Thread.currentThread().sleep(5);
+            }
+            catch (InterruptedException ie)
+            {
+            }
+            
+            cSnmpService.stop();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        
+        return;
+    }
+
+    /**
+     *
+     * Displays correct usage
+     */
+    public static void usage()
+    {
+        System.out.println("Usage : java SnmpV1TrapSenderTest targethostname fromhostname timeticks communityname enterpriseOID trapnumber");
+        System.out.println("\ttargethostname : host to send trap to");
+        System.out.println("\tfromhostname : host trap from");
+        System.out.println("\ttimeticks : time ticks of host trap from");
+        System.out.println("\tcommunityname : community name for trap");
+        System.out.println("\tenterpriseOID : trap enterprise OID");
+        System.out.println("\ttrapnumber : starting trap number for enterprise OID ... trap will be sent this many times with incrementing trap number");
+    }
+}
+
